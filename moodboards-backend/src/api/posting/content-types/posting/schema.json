@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "postings",
+  "info": {
+    "singularName": "posting",
+    "pluralName": "postings",
+    "displayName": "Posting",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 50,
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "tag": {
+      "type": "enumeration",
+      "enum": [
+        "Color",
+        "Font",
+        "Template",
+        "UI-Element",
+        "Icon",
+        "Graphic",
+        "Website-Example",
+        "Other"
+      ],
+      "default": "Other",
+      "required": true
+    }
+  }
+}
