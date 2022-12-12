@@ -33,7 +33,7 @@
       "enum": [
         "Color",
         "Font",
-        "Template",
+        "Wireframe",
         "UI-Element",
         "Icon",
         "Graphic",
@@ -42,6 +42,12 @@
       ],
       "default": "Other",
       "required": true
+    },
+    "posting_creator": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "postings"
     }
   }
 }
