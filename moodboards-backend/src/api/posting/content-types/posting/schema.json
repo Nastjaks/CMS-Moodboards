@@ -48,6 +48,12 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "postings"
+    },
+    "moodboards": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::moodboard.moodboard",
+      "inversedBy": "postings"
     }
   }
 }

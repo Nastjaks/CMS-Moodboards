@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "moodboards",
+  "info": {
+    "singularName": "moodboard",
+    "pluralName": "moodboards",
+    "displayName": "Moodboard"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50
+    },
+    "moodboard_creator": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "moodboards"
+    },
+    "description": {
+      "type": "text"
+    },
+    "postings": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::posting.posting",
+      "inversedBy": "moodboards"
+    },
+    "private": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

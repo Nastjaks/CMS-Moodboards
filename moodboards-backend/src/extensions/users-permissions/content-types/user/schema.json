@@ -71,6 +71,12 @@
     },
     "description": {
       "type": "text"
+    },
+    "moodboards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::moodboard.moodboard",
+      "mappedBy": "moodboard_creator"
     }
   }
 }
