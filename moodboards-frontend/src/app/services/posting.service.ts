@@ -23,7 +23,7 @@ export class PostingService {
         }),
       map((posting: Posting[]) => {
         return posting.map((posting) => {
-          posting.attributes.image.data.attributes.url = this.strapiUrl + posting.attributes.image.data.attributes.url; //  http://localhost:1337 + /uploads/Bilddatei.jpg", -> gibt uns das Bild
+          posting.attributes.image.data.attributes.url = this.strapiUrl + posting.attributes.image.data.attributes.url; //  http://localhost:1337/uploads/Bilddatei.jpg", -> gibt uns das Bild
           return posting;
         })
       }));

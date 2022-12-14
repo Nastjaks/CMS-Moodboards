@@ -4,7 +4,21 @@
 
   <div class="postingCard" *ngFor="let moodboard of moodboard$ | async">
     <div>
-      <img alt="postingImg" [src]="">
+      <div *ngIf="moodboard.attributes.postings.data.length == 1">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+     </div>
+
+      <div *ngIf="moodboard.attributes.postings.data.length == 2">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+      </div>
+
+      <div *ngIf="moodboard.attributes.postings.data.length >= 3">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[2].attributes.image.data.attributes.url">
+      </div>
+
       <div class="postingCardInfo">
         <div>
           <p><b>{{moodboard.attributes.title}}</b></p>

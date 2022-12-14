@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Moodboard} from "../models/moodboard";
 import {map} from "rxjs";
+import {Moodboards} from "../models/posting";
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,21 @@ export class MoodboardService {
   //----------Ohne Authentifizierung----------
   getAllMoodboards(){
     console.log("[MOODBOARD-SERVICE] get all Moodboards function")
-    return this.http.get<Moodboard[]>(this.strapiMoodboardUrl + '?populate=*')
+    return this.http.get<Moodboard[]>(this.strapiMoodboardUrl + '?populate[postings][populate][0]=image')
       .pipe(
         map((res: any) => { //der respons der vom server zurück kommt wird "gemapt", um einfacher an die Infos zu kommen. am anfang vom respone steht dieses "data{...}" und so können wir direkt hineins in das "..." greifen ohne dan das data davor zu denken
+          console.log(res.data);
           return res.data;
+        }),
+        map((moodboard: Moodboard[])=> {
+          return moodboard.map((moodboard) => {
+            moodboard.attributes.postings.data.map((data) =>{
+              data.attributes.image.data.attributes.url = this.strapiUrl + data.attributes.image.data.attributes.url;
+              console.log(data.attributes.image.data.attributes.url);
+              return data.attributes.image.data.attributes.url;
+            })
+            return moodboard;
+          })
         })
       );
   }
