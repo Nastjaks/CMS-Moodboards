@@ -1,3 +1,15 @@
-<div style="background-color: deeppink">
-<p>postings-overview works!</p>
+<div>
+
+  <h1 class="title">POSTINGS</h1>
+  <div class="postingCard" *ngFor="let post of posting$ | async">
+    <div>
+      <img alt="postingImg" [src]="post.attributes.image.data.attributes.url">
+      <div class="postingCardInfo">
+        <p><b>{{post.attributes.title}}</b></p>
+        <p class="postingTagInfo">{{post.attributes.tag}}</p>
+      </div>
+    </div>
+  </div>
+
 </div>
+

@@ -7,6 +7,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { PostingsOverviewComponent } from './components/postings-overview/postings-overview.component';
 import { MoodboardsOverviewComponent } from './components/moodboards-overview/moodboards-overview.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

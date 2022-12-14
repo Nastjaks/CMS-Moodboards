@@ -23,13 +23,15 @@ header ul li a {
   color: #ffffff;
   border-radius: 20px;
   letter-spacing: 0.1em;
+  transition: 0.5s;
+  text-align: center;
 }
 
 header ul li a:hover,
 header ul li a.active {
   background: #ffffff;
   color: #2b1055;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   transition: 0.5s;
 }
 

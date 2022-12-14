@@ -1,4 +1,19 @@
-<div style="background-color: burlywood">
-  <p>moodboards-overview works!</p>
+<div>
+
+  <h1 class="title">MOODBOARDS</h1>
+
+  <div class="postingCard" *ngFor="let moodboard of moodboard$ | async">
+    <div>
+      <img alt="postingImg" [src]="">
+      <div class="postingCardInfo">
+        <div>
+          <p><b>{{moodboard.attributes.title}}</b></p>
+          <p class="postingTagInfo">Contains {{moodboard.attributes.postings.data.length}} Postings</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 

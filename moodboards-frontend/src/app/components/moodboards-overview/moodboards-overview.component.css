@@ -1,0 +1,49 @@
+.title{
+  justify-content: center;
+  display: flex;
+  text-align: center;
+}
+
+.postingCard{
+  margin: 10px;
+  padding: 20px;
+  display: inline-grid;
+  border-radius: 30px;
+  transition: 0.5s;
+}
+
+.postingCard:hover{
+  transform: scale(1.03);
+  transition: 0.5s;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  cursor: pointer;
+}
+
+img {
+  max-height: 500px;
+  border-radius: 20px;
+}
+
+.moodboardSizeInfo{
+  font-size: 14px;
+  color: gray;
+  margin-top: 0;
+
+}
+.postingTagInfo{
+  font-size: 14px;
+  color: gray;
+  margin-top: 0;
+}
+
+.postingCardInfo{
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+p {
+  margin-bottom: 0;
+}
