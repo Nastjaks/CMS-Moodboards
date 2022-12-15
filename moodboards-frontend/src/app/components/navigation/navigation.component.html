@@ -1,9 +1,20 @@
 <header>
-  <a class="logo"  routerLink="/"><div>Moodboards.</div><div class="underLogo">your better design</div></a>
+  <a class="logo" routerLink="/">
+    <div>Moodboards.</div>
+    <div class="underLogo">your better design</div>
+  </a>
   <ul>
     <li><a routerLink="/allPostings">Postings</a></li>
     <li><a routerLink="/allMoodboards">Moodboards</a></li>
+  </ul>
+
+  <ul *ngIf="!isLoggedIn">
     <li><a routerLink="/login">Login</a></li>
-    <li><a routerLink="/regist">Regist</a></li>
+    <li><a routerLink="/register">Register</a></li>
+  </ul>
+
+  <ul *ngIf="isLoggedIn">
+    <li><a routerLink="/profile">Profile</a></li>
+    <li><a href (click)="logout()">Logout</a></li>
   </ul>
 </header>

@@ -1,0 +1,10 @@
+<h1 class="title">PROFILE</h1>
+
+<div class="container" *ngIf="currentUser">
+  <header>
+    <h3>
+       Profile of <strong>{{ currentUser.username }}</strong>
+    </h3>
+  </header>
+  <p><strong>Email:</strong>{{ currentUser.email }}</p>
+</div>

@@ -15,5 +15,4 @@ export class PostingsOverviewComponent {
   constructor(private postingService: PostingService) {
     this.posting$ = this.postingService.getAllPostings();
   }
-
 }

@@ -1,0 +1,29 @@
+<div>
+
+  <h1 class="title">REGISTER</h1>
+
+  <div id="error"></div>
+
+  <div class="registerCard" >
+    <form *ngIf="!isSuccessful" name="form" novalidate [formGroup]="form">
+        <label>Username</label>
+        <input type="text" name="username" formControlName="username" required minlength="3" maxlength="20" />
+        <label>Email</label>
+        <input type="email" name="email" formControlName="email" required email />
+        <label>Password</label>
+        <input type="password" name="password" formControlName="password"  required minlength="6"/>
+
+        <button (click)="register()">Register</button>
+
+      <div class="alert alert-warning" *ngIf="isSignUpFailed">
+        Signup failed!<br />
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Your registration was successful, you can now <a [routerLink]="['/login']">login</a> here!
+    </div>
+  </div>
+
+</div>
+

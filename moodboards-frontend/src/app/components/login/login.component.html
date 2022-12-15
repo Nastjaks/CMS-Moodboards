@@ -1,0 +1,34 @@
+<div>
+
+  <h1 class="title">LOGIN</h1>
+
+  <div id="error"></div>
+
+  <div class="registerCard">
+
+    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <label for="username">Username</label>
+        <input type="text" name="username" [(ngModel)]="form.username" required id="username"/>
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)]="form.password" required minlength="6" id="password"/>
+        <button class="btn btn-primary btn-block">Login</button>
+
+        <div *ngIf="f.submitted && isLoginFailed" role="alert">
+          Login failed
+        </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isLoggedIn">
+      Logged in.
+    </div>
+
+    <form *ngIf="isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <button class="btn btn-primary btn-block">Logout</button>
+
+      <div *ngIf="f.submitted && isLoginFailed" role="alert">
+        Login failed
+      </div>
+    </form>
+  </div>
+
+</div>

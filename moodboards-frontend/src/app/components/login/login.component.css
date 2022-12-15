@@ -1,0 +1,13 @@
+.title{
+  justify-content: center;
+  display: flex;
+  text-align: center;
+}
+
+.registerCard{
+  margin: 10px;
+  padding: 20px;
+  display: inline-grid;
+  border-radius: 30px;
+  transition: 0.5s;
+}
