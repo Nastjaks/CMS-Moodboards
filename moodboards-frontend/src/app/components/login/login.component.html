@@ -18,17 +18,6 @@
         </div>
     </form>
 
-    <div class="alert alert-success" *ngIf="isLoggedIn">
-      Logged in.
-    </div>
-
-    <form *ngIf="isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-      <button class="btn btn-primary btn-block">Logout</button>
-
-      <div *ngIf="f.submitted && isLoginFailed" role="alert">
-        Login failed
-      </div>
-    </form>
   </div>
 
 </div>

@@ -1,10 +1,57 @@
 <h1 class="title">PROFILE</h1>
 
-<div class="container" *ngIf="currentUser">
+<div class="container" *ngIf="currentUser.user">
   <header>
     <h3>
-       Profile of <strong>{{ currentUser.username }}</strong>
+       Profile of <strong>{{ currentUser.user.username }}</strong>
     </h3>
   </header>
-  <p><strong>Email:</strong>{{ currentUser.email }}</p>
-</div>
+  <p><strong>Email: </strong>{{ currentUser.user.email }}</p>
+  <p><strong>ID: </strong>{{ currentUser.user.id }}</p>
+  <p><strong>description: </strong>{{ currentUser.user.description }}</p>
+
+
+  <h1 class="title">Postings</h1>
+    <div class="postingCard" *ngFor="let post of posting$ | async">
+      <div>
+        <img alt="postingImg" [src]="post.attributes.image.data.attributes.url">
+        <div class="postingCardInfo">
+          <p><b>{{post.attributes.title}}</b></p>
+          <p class="postingTagInfo">{{post.attributes.tag}}</p>
+        </div>
+      </div>
+    </div>
+
+
+  <h1 class="title">Moodboards</h1>
+  <div class="postingCard" *ngFor="let moodboard of moodboard$ | async">
+    <div>
+      <div *ngIf="moodboard.attributes.postings.data.length == 1">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+      </div>
+
+      <div *ngIf="moodboard.attributes.postings.data.length == 2">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+      </div>
+
+      <div *ngIf="moodboard.attributes.postings.data.length >= 3">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[2].attributes.image.data.attributes.url">
+      </div>
+
+      <div class="postingCardInfo">
+        <div>
+          <p><b>{{moodboard.attributes.title}}</b></p>
+          <p class="postingTagInfo">Contains {{moodboard.attributes.postings.data.length}} Postings</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  </div>
+
+

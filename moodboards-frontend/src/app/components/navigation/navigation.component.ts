@@ -15,12 +15,6 @@ export class NavigationComponent implements OnInit{
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
-
-    if (this.isLoggedIn) {
-      const user = this.storageService.getUser();
-      console.log("Test: " + user.username)
-      this.username = user.username;
-    }
   }
 
   logout(): void {

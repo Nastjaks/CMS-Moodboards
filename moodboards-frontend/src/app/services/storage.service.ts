@@ -7,6 +7,7 @@ let USER_JWT = 'jwt';
 })
 export class StorageService {
 
+
   constructor() {}
 
   clean(): void {
@@ -15,13 +16,15 @@ export class StorageService {
 
   public saveUser(userData: any): void {
     localStorage.removeItem(USER_JWT);
-    localStorage.setItem(USER_JWT, userData.jwt);
+    localStorage.setItem(USER_JWT, JSON.stringify(userData));
+    console.log("aaa" + userData);
   }
 
   public getUser(): any {
     const userData = localStorage.getItem(USER_JWT);
+    console.log("fffff " + userData);
     if (userData) {
-      return userData;
+      return JSON.parse(userData);
     }
 
     return {};

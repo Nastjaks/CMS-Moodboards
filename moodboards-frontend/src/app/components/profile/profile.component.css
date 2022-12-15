@@ -3,3 +3,41 @@
   display: flex;
   text-align: center;
 }
+
+.postingCard{
+  margin: 10px;
+  padding: 20px;
+  display: inline-grid;
+  border-radius: 30px;
+  transition: 0.5s;
+}
+
+.postingCard:hover{
+  transform: scale(1.03);
+  transition: 0.5s;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  cursor: pointer;
+  margin-left: 30px ;
+  margin-right: 30px ;
+}
+
+img {
+  max-height: 500px;
+  border-radius: 20px;
+}
+
+
+.postingTagInfo{
+  font-size: 14px;
+  color: gray;
+  margin-top: 0;
+}
+
+.postingCardInfo{
+  margin-left: 5px;
+}
+
+p {
+  margin-bottom: 0;
+}
