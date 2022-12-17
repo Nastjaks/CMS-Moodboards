@@ -2,22 +2,28 @@
 
   <h1 class="title">LOGIN</h1>
 
-  <div id="error"></div>
-
   <div class="registerCard">
 
-    <form *ngIf="!isLoggedIn" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-        <label for="username">Username</label>
-        <input type="text" name="username" [(ngModel)]="form.username" required id="username"/>
-        <label for="password">Password</label>
-        <input type="password" name="password" [(ngModel)]="form.password" required minlength="6" id="password"/>
-        <button class="btn btn-primary btn-block">Login</button>
+    <form *ngIf="!isLoggedIn" name="form" novalidate [formGroup]="form">
+      <label>Username*</label>
+      <input type="text" name="username" formControlName="username" required minlength="3" maxlength="20" />
+      <label>Password*</label>
+      <input type="password" name="password" formControlName="password"  required minlength="6"/>
 
-        <div *ngIf="f.submitted && isLoginFailed" role="alert">
-          Login failed
-        </div>
+      <button (click)="login()">Login</button>
+
+      <div class="alert alert-warning" *ngIf="isLoggedIn">
+        Login failed!<br />
+      </div>
+
+      <div class="alert alert-warning" *ngIf="isUsernameFalse">
+        Username must be between 3 and 20 characters. <br />
+      </div>
+
+      <div class="alert alert-warning" *ngIf="isPasswordFalse">
+        Password must have at least 6 characters.<br />
+      </div>
     </form>
-
   </div>
 
 </div>

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   isSignUpFailed = false;
   errorMessage = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
@@ -32,10 +32,17 @@ export class RegisterComponent implements OnInit {
 
     if (username && email && password) {
       this.authService.register(username, email, password)
-        .subscribe( () => {
-          console.log("User is logged in");
-          this.isSuccessful = true;
-          this.isSignUpFailed = false;
+        .subscribe(  {
+          next: data => {
+            console.log("User is logged in");
+            this.isSuccessful = true;
+            this.isSignUpFailed = false;
+            this.router.navigate(['/login']);
+          },
+            error: err => {
+            this.errorMessage = err.error.message;
+            this.isSignUpFailed = true;
+          }
       });
     }
   }

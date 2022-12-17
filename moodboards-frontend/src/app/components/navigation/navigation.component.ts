@@ -11,14 +11,9 @@ export class NavigationComponent implements OnInit{
   isLoggedIn = false;
   username?: string;
 
-  constructor(private storageService: StorageService, private authService: AuthService) { }
+  constructor(private storageService: StorageService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
-  }
-
-  logout(): void {
-    this.storageService.clean();
-    window.location.reload();
   }
 }

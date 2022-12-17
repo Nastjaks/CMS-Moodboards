@@ -13,8 +13,8 @@
     <li  *ngIf="!isLoggedIn"><a routerLink="/register">Register</a></li>
 
     <li *ngIf="isLoggedIn"><a routerLink="/profile">Profile</a></li>
-    <li *ngIf="isLoggedIn"><a href (click)="logout()">Logout</a></li>
+    <li *ngIf="isLoggedIn"><a href (click)="authService.logout()">Logout</a></li>
   </ul>
-  
+
 
 </header>

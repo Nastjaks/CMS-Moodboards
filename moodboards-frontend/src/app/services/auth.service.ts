@@ -51,4 +51,9 @@ export class AuthService {
         )
       );
   };
+
+  logout(): void {
+    this.storageService.clean();
+    window.location.reload();
+  }
 }

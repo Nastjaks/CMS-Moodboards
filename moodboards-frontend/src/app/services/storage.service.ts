@@ -17,12 +17,10 @@ export class StorageService {
   public saveUser(userData: any): void {
     localStorage.removeItem(USER_JWT);
     localStorage.setItem(USER_JWT, JSON.stringify(userData));
-    console.log("aaa" + userData);
   }
 
   public getUser(): any {
     const userData = localStorage.getItem(USER_JWT);
-    console.log("fffff " + userData);
     if (userData) {
       return JSON.parse(userData);
     }

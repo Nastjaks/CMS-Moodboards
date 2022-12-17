@@ -1,26 +1,43 @@
 <h1 class="title">PROFILE</h1>
 
 <div class="container" *ngIf="currentUser.user">
-  <header>
-    <h3>
-       Profile of <strong>{{ currentUser.user.username }}</strong>
-    </h3>
-  </header>
-  <p><strong>Email: </strong>{{ currentUser.user.email }}</p>
-  <p><strong>ID: </strong>{{ currentUser.user.id }}</p>
-  <p><strong>description: </strong>{{ currentUser.user.description }}</p>
+  <div class="postingCard">
+    <header>
+      <h3>
+        Profile of <strong>{{ currentUser.user.username }}</strong>
+      </h3>
+    </header>
+    <p><strong>Email: </strong>{{ currentUser.user.email }}</p>
+    <p><strong>ID: </strong>{{ currentUser.user.id }}</p>
+    <p><strong>Description: </strong>{{ currentUser.user.description }}</p>
+    <p>
+      <button (click)="editUserData()">Edit</button>
+      <button (click)="deleteUserData()" [routerLink]="['/']">Delete Data</button>
+    </p>
+  </div>
+
+  <div *ngIf="isUserEditable">
+    <label>Username</label>
+    <input type="text" name="username" id="username" required minlength="3" maxlength="20"
+           value="{{usernameFieldValue}}"/>
+    <label>Email</label>
+    <input type="email" name="email" id="email" value="{{emailFieldValue}}"/>
+    <label>Description</label>
+    <input type="text" name="description" id="description" value="{{descriptionFieldValue}}"/>
+    <button (click)="save()">Save</button>
+  </div>
 
 
   <h1 class="title">Postings</h1>
-    <div class="postingCard" *ngFor="let post of posting$ | async">
-      <div>
-        <img alt="postingImg" [src]="post.attributes.image.data.attributes.url">
-        <div class="postingCardInfo">
-          <p><b>{{post.attributes.title}}</b></p>
-          <p class="postingTagInfo">{{post.attributes.tag}}</p>
-        </div>
+  <div class="postingCard" *ngFor="let post of posting$ | async">
+    <div>
+      <img alt="postingImg" [src]="post.attributes.image.data.attributes.url">
+      <div class="postingCardInfo">
+        <p><b>{{post.attributes.title}}</b></p>
+        <p class="postingTagInfo">{{post.attributes.tag}}</p>
       </div>
     </div>
+  </div>
 
 
   <h1 class="title">Moodboards</h1>
@@ -52,6 +69,6 @@
   </div>
 
 
-  </div>
+</div>
 
 
