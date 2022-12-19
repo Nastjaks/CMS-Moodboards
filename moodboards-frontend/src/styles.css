@@ -57,15 +57,12 @@ button:hover {
 }
 
 input {
-  border-radius: 30px;
-  border: none;
-  background-color: #f1f1f1;
-  padding: 8px;
+  border-radius: 30px !important;
+  border: none !important;
+  background-color: #f1f1f1 !important;
+  padding: 8px !important;
 }
 
-input:focus {
-
-}
 
 label {
   margin-left: 15px;

@@ -1,25 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AlertComponent } from './alert.component';
+import { CreatePostingComponent } from './create-posting.component';
 
-// @ts-ignore
-describe('AlertComponent', () => {
-  let component: AlertComponent;
-  let fixture: ComponentFixture<AlertComponent>;
-// @ts-ignore
+describe('CreatePostingComponent', () => {
+  let component: CreatePostingComponent;
+  let fixture: ComponentFixture<CreatePostingComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AlertComponent ]
+      declarations: [ CreatePostingComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AlertComponent);
+    fixture = TestBed.createComponent(CreatePostingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-// @ts-ignore
+
   it('should create', () => {
-    // @ts-ignore
     expect(component).toBeTruthy();
   });
 });

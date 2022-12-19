@@ -43,7 +43,7 @@
 
     <div *ngIf="isLoggedIn" class="place">
 
-        <select #moodboards name="pets" id="pet-select">
+        <select #moodboards>
           <option>select</option>
           <option *ngFor="let moodboard of moodboard$ | async" [value]="moodboard.id">{{moodboard.attributes.title}}</option>
         </select>

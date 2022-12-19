@@ -7,12 +7,12 @@
     <form class="displayAsColun" *ngIf="!isLoggedIn" name="form" novalidate [formGroup]="form">
 
       <div class="displayAsColun">
-        <label>Username*</label>
+        <label>Username</label>
         <input type="text" name="username" formControlName="username" required minlength="3" maxlength="20" />
       </div>
 
       <div class="displayAsColun">
-        <label>Password*</label>
+        <label>Password</label>
         <input type="password" name="password" formControlName="password"  required minlength="6"/>
       </div>
 

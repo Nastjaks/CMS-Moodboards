@@ -30,7 +30,7 @@ export class PostingService {
   }
 
 
-  getOnePosting() {
+  getOnePosting(Id: number) {
     console.log("[POSTING-SERVICE] get one Postings function")
   }
 
@@ -49,15 +49,22 @@ export class PostingService {
   }
 
   //----------Mit Authentifizierung----------
+  createPosting(posting: any){
+    console.log("[POSTING-SERVICE] create Postings function: " + posting);
+
+    return this.http.post<any>(this.strapiPostingUrl, posting).subscribe((res:any)=> console.log(res.data));
+
+  }
+
   getAllUsersPostings() {
     console.log("[POSTING-SERVICE] get all Users Postings function")
   }
 
-  updatePosting() {
+  updatePosting(Id: number) {
     console.log("[POSTING-SERVICE] update Postings function")
   }
 
-  deletePosting() {
+  deletePosting(Id: number) {
     console.log("[POSTING-SERVICE] delete Postings function")
   }
 

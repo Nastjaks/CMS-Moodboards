@@ -36,10 +36,10 @@ export class PostingDetailComponent {
     this.currentUser = this.storageService.getUser();
     this.isLoggedIn = this.storageService.isLoggedIn();
 
-    if (this.isLoggedIn){
+    if (this.isLoggedIn) {
       this.moodboard$ = this.userService.getAllUserMoodbards(this.currentUser.user.id);
 
-      if (this.posting.attributes.posting_creator.data.id == this.currentUser.user.id){
+      if (this.posting.attributes.posting_creator.data.id == this.currentUser.user.id) {
         this.isOwner = true;
       }
     }
@@ -49,8 +49,9 @@ export class PostingDetailComponent {
 
 
   addImageToMoodboard(imgId: number, moodboardId: string) {
-    if (moodboardId != "select"){
-      this.moodboardService.addImgToMoodboard(imgId, moodboardId ); //TODO: ADD FUNCTION
+
+    if (moodboardId != "select") {
+      this.moodboardService.addImgToMoodboard(imgId, moodboardId); //TODO: ADD FUNCTION
       this.alert.openAlert('Try to add a image: ' + imgId + ' to moodboard with id: ' + moodboardId);
     } else {
       this.alert.openAlert("You have to select a Moodboard!");
@@ -58,9 +59,6 @@ export class PostingDetailComponent {
 
   }
 
-  closeDialog() {
-    this.dialogRef.close(this.posting);
-  }
 
   deletePosting() {
     this.alert.openAlert("TRY TO DELETE POSTING: " + this.posting.id); //TODO: DELETE FUNCTION

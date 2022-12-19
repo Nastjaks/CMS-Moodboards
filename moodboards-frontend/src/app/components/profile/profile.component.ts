@@ -8,6 +8,9 @@ import {Moodboard} from "../../models/moodboard";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {PostingDetailComponent} from "../posting-detail/posting-detail.component";
+import {MatDialog} from "@angular/material/dialog";
+import {CreatePostingComponent} from "../create-posting/create-posting.component";
 
 @Component({
   selector: 'app-profile',
@@ -31,7 +34,9 @@ export class ProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private storageService: StorageService,
               private userService: UserService,
-              public authService: AuthService) { }
+              public authService: AuthService,
+              public dialogPanal: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
@@ -97,5 +102,14 @@ export class ProfileComponent implements OnInit {
     document.getElementById('moodboardContainer')!.style.setProperty("display", "block");
     document.getElementById('postingNav')!.style.setProperty("border-bottom", "none");
     document.getElementById('moodboardNav')!.style.setProperty("border-bottom", "7px solid #2b1055");
+  }
+
+  createPotingDialog() {
+    this.dialogPanal.open(CreatePostingComponent).
+    afterClosed().subscribe(
+      result => {
+        //this.location.go('/');
+      }
+    );
   }
 }

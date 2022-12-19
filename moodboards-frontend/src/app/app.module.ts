@@ -23,6 +23,7 @@ import {MatButtonModule} from "@angular/material/button";
 import { AlertComponent } from './components/alert/alert.component';
 import { MoodboardDetailComponent } from './components/moodboard-detail/moodboard-detail.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { CreatePostingComponent } from './components/create-posting/create-posting.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     PostingDetailComponent,
     AlertComponent,
     MoodboardDetailComponent,
+    CreatePostingComponent,
   ],
   imports: [
     BrowserModule,
