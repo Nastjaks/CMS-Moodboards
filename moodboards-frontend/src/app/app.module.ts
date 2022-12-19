@@ -11,9 +11,18 @@ import {HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {httpInterceptorProviders} from "./helper/http.interceptor";
+import {ProfileComponent} from './components/profile/profile.component';
+import {SinglePostingCardComponent} from './components/single-posting-card/single-posting-card.component';
+import {SingleMoodboardCardComponent} from './components/single-moodboard-card/single-moodboard-card.component';
+import {PostingDetailComponent} from './components/posting-detail/posting-detail.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from "@angular/material/button";
+import { AlertComponent } from './components/alert/alert.component';
+import { MoodboardDetailComponent } from './components/moodboard-detail/moodboard-detail.component';
 
-import { httpInterceptorProviders } from "./helper/http.interceptor";
-import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,15 +33,24 @@ import { ProfileComponent } from './components/profile/profile.component';
     PageNotFoundComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    SinglePostingCardComponent,
+    SingleMoodboardCardComponent,
+    PostingDetailComponent,
+    AlertComponent,
+    MoodboardDetailComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule
+  ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })

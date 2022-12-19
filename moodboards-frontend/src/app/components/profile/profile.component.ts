@@ -17,19 +17,21 @@ import {Router} from "@angular/router";
 export class ProfileComponent implements OnInit {
 
   currentUser!: Auth_Model;
+
   posting$!: Observable<Posting[]>;
   moodboard$!: Observable<Moodboard[]>;
-  isUserEditable: boolean = false;
 
+  isUserEditable: boolean = false;
   usernameFieldValue!: string;
   emailFieldValue!: string;
   descriptionFieldValue!: string;
   errorMessage = '';
 
 
-  constructor(private fb: FormBuilder, private storageService: StorageService, private userService: UserService,
-              public authService: AuthService, private router: Router) {
-  }
+  constructor(private fb: FormBuilder,
+              private storageService: StorageService,
+              private userService: UserService,
+              public authService: AuthService) { }
 
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();

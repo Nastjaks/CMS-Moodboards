@@ -1,0 +1,38 @@
+<mat-dialog-content>
+  <div><img alt="Image not working" [src]="posting.attributes.image.data.attributes.url"></div>
+
+  <div class="postingDetailsInfo">
+    <div>
+      <div class="detailCloseBtn">
+        <button mat-button mat-dialog-close>X</button>
+      </div>
+
+      <div class="place">
+        <P>@{{posting.attributes.posting_creator.data.attributes.username}}</P>
+        <P>{{posting.attributes.publishedAt | date}}</P>
+      </div>
+
+
+      <h2>{{posting.attributes.title}}</h2>
+      <P class="noMarginBottom">Description</P>
+      <P>{{posting.attributes.description}}</P>
+      <P>Category</P>
+      <P>{{posting.attributes.tag}}</P>
+    </div>
+
+
+
+    <div *ngIf="isLoggedIn" class="place">
+
+        <select #moodboards name="pets" id="pet-select">
+          <option>select</option>
+          <option *ngFor="let moodboard of moodboard$ | async"[value]="moodboard.id">{{moodboard.attributes.title}}</option>
+        </select>
+        <button (click)="addImageToMoodboard(posting.id, moodboards.value )">Add to Moodboard</button>
+
+    </div>
+  </div>
+
+</mat-dialog-content>
+
+

@@ -1,0 +1,46 @@
+mat-dialog-actions {
+  justify-content: end;
+}
+
+mat-dialog-content {
+  display: flex;
+  padding: 20px;
+  max-height: 80vh;
+  border-radius: 30px;
+}
+
+mat-dialog-content img {
+  height: 100%;
+  border-radius: 25px;
+}
+
+.postingDetailsInfo {
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  border-radius: 30px;
+}
+
+button {
+  border-radius: 30px;
+}
+
+.detailCloseBtn {
+  display: flex;
+  justify-content: end;
+  margin-right: -30px;
+}
+
+.place {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+

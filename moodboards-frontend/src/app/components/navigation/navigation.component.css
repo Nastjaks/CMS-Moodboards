@@ -31,8 +31,8 @@ header ul li a:hover,
 header ul li a.active {
   background: #ffffff;
   color: #2b1055;
-  letter-spacing: 3px;
   transition: 0.5s;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
 header .logo {

@@ -34,6 +34,20 @@ export class PostingService {
     console.log("[POSTING-SERVICE] get one Postings function")
   }
 
+  getAllPostingsInMoodboard(moodboardId: number) {
+    return this.http.get<Posting[]>(this.strapiPostingUrl + '?populate=*&filters[moodboards][id]=' + moodboardId)
+      .pipe(
+        map((res: any) => { //der respons der vom server zurück kommt wird "gemapt", um einfacher an die Infos zu kommen. am anfang vom respone steht dieses "data{...}" und so können wir direkt hineins in das "..." greifen ohne dan das data davor zu denken
+          return res.data;
+        }),
+        map((posting: Posting[]) => {
+          return posting.map((posting) => {
+            posting.attributes.image.data.attributes.url = this.strapiUrl + posting.attributes.image.data.attributes.url; //  http://localhost:1337/uploads/Bilddatei.jpg", -> gibt uns das Bild
+            return posting;
+          })
+        }));
+  }
+
   //----------Mit Authentifizierung----------
   getAllUsersPostings() {
     console.log("[POSTING-SERVICE] get all Users Postings function")

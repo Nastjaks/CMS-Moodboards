@@ -1,33 +1,5 @@
 <div>
-
-  <h1 class="title">MOODBOARDS</h1>
-
-  <div class="postingCard" *ngFor="let moodboard of moodboard$ | async">
-    <div>
-      <div *ngIf="moodboard.attributes.postings.data.length == 1">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
-     </div>
-
-      <div *ngIf="moodboard.attributes.postings.data.length == 2">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
-      </div>
-
-      <div *ngIf="moodboard.attributes.postings.data.length >= 3">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[2].attributes.image.data.attributes.url">
-      </div>
-
-      <div class="postingCardInfo">
-        <div>
-          <p><b>{{moodboard.attributes.title}}</b></p>
-          <p class="postingTagInfo">Contains {{moodboard.attributes.postings.data.length}} Postings</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
+  <h1>MOODBOARDS</h1>
+  <app-single-moodboard-card class="overview" *ngFor="let moodboard of moodboard$ | async" [moodboard]="moodboard"></app-single-moodboard-card>
 </div>
 

@@ -1,0 +1,33 @@
+<div class="moodboardCard" (click)="showMoodboardDetails()">
+
+  <div class="ImgContainer">
+    <div>
+      <div class="oneImg" *ngIf="moodboard.attributes.postings.data.length == 1">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+      </div>
+
+      <div class="twoImg" *ngIf="moodboard.attributes.postings.data.length == 2">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+      </div>
+
+      <div class="threeImg" *ngIf="moodboard.attributes.postings.data.length >= 3">
+
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+        <img alt="postingImg" [src]="moodboard.attributes.postings.data[2].attributes.image.data.attributes.url">
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="MoodboardInfo">
+    <div>
+      <p><b>{{moodboard.attributes.title}}</b></p>
+      <p class="moodboardSizeInfo">Contains {{moodboard.attributes.postings.data.length}} Postings</p>
+    </div>
+  </div>
+
+
+</div>

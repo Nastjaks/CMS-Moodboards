@@ -1,0 +1,6 @@
+
+<h1>{{moodboard$.attributes.title}}</h1>
+<p>ID: {{moodboard$.id}}</p>
+<p>Erstellt am: {{moodboard$.attributes.createdAt | date}}</p>
+<p>Description: {{moodboard$.attributes.description}}</p>
+<app-single-posting-card class="overview" *ngFor="let post of postingsInMoodboard$ | async" [posting]="post"></app-single-posting-card>

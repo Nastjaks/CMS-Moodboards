@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {Posting} from "../../models/posting";
 import {PostingService} from "../../services/posting.service";
@@ -8,11 +8,16 @@ import {PostingService} from "../../services/posting.service";
   templateUrl: './postings-overview.component.html',
   styleUrls: ['./postings-overview.component.css']
 })
-export class PostingsOverviewComponent {
+export class PostingsOverviewComponent implements OnInit {
 
-  posting$: Observable<Posting[]>;
+  posting$!: Observable<Posting[]>;
 
-  constructor(private postingService: PostingService) {
+  constructor(private postingService: PostingService) {}
+
+  ngOnInit(): void {
     this.posting$ = this.postingService.getAllPostings();
   }
+
+
+
 }

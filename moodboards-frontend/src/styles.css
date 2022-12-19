@@ -1,8 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
-
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap");
 
 body {
   margin: 0;
   font-family: "poppins", sans-serif;
+}
+
+.overview{display: inline-grid;}
+
+html, body { height: 100%; }
+
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  border-radius: 30px !important;
+}
+h1{
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  letter-spacing: 0.1em;
+}
+button{
+  border: none;
+  padding: 5px 20px;
+  background-color: #2b1055;
+  color: #fff;
+  transition: 0.4s;
+}
+
+button:hover{
+  background-color: #fff;
+  color: #2b1055;
+  transition: 0.4s;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
