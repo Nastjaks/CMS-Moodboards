@@ -19,9 +19,8 @@ import {MoodboardService} from "../../services/moodboard.service";
 export class PostingDetailComponent {
 
   posting: Posting;
-  currentUser!: Auth_Model;
-  moodboard$!: Observable<Moodboard[]>;
   isLoggedIn = false;
+  moodboard$!: Observable<Moodboard[]>;
 
   constructor(public dialogRef: MatDialogRef<PostingDetailComponent>,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -29,9 +28,9 @@ export class PostingDetailComponent {
               private userService: UserService,
               private moodboardService: MoodboardService,) {
     this.posting = data.posting;
-    this.currentUser = this.storageService.getUser();
+
     this.isLoggedIn = this.storageService.isLoggedIn();
-    this.moodboard$ = this.userService.getAllUserMoodbards(this.currentUser.user.id);
+    this.isLoggedIn = this.storageService.isLoggedIn();
   }
 
 
