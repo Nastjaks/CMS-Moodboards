@@ -22,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from "@angular/material/button";
 import { AlertComponent } from './components/alert/alert.component';
 import { MoodboardDetailComponent } from './components/moodboard-detail/moodboard-detail.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { MoodboardDetailComponent } from './components/moodboard-detail/moodboar
     NgbModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

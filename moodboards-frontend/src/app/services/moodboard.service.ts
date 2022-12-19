@@ -17,7 +17,7 @@ export class MoodboardService {
   //----------Ohne Authentifizierung----------
   getAllMoodboards() {
     console.log("[MOODBOARD-SERVICE] get all Moodboards function")
-    return this.http.get<Moodboard[]>(this.strapiMoodboardUrl + '?populate[postings][populate][0]=image&filters[private]=false')
+    return this.http.get<Moodboard[]>(this.strapiMoodboardUrl + '?populate[postings][populate][0]=image&populate[moodboard_creator][populate]&filters[private]=false')
       .pipe(
         map((res: any) => {
           return res.data;

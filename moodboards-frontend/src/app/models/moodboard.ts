@@ -11,10 +11,27 @@ export interface Attributes {
   updatedAt: Date;
   publishedAt: Date;
   postings: Postings;
+  moodboard_creator: MoodboardCreator;
 }
 /*--------------*/
 
-
+export interface MoodboardCreator{
+  data: Data2;
+}
+export interface Data2 {
+  id: number;
+  attributes: Attributes4;
+}
+export interface Attributes4 {
+  username: string;
+  email: string;
+  provider: string;
+  confirmed: boolean;
+  blocked: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  description: string;
+}
 export interface Thumbnail {
   name: string;
   hash: string;

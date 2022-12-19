@@ -7,15 +7,13 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./alert.component.css']
 })
 export class AlertComponent {
-  durationInSeconds = 5;
+
   constructor(private _snackBar: MatSnackBar) {
   }
 
-  /**
-  openSnackBar() {
-    this._snackBar.openFromComponent(AlertComponent, {
-      duration: this.durationInSeconds * 1000,
-    })
-  }**/
+  openAlert(message: string) {
+    this._snackBar.open(message, 'CLOSE',{duration: 5000});
+  }
+
 
 }

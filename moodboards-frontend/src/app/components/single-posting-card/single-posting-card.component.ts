@@ -19,7 +19,7 @@ export class SinglePostingCardComponent {
 
   showPostDetails() {
 
-    this.location.go('/posting/' + this.posting.id);
+    //this.location.go('/posting/' + this.posting.id);
     console.log(this.posting);
 
     this.dialogPanal.open(PostingDetailComponent, {
@@ -31,7 +31,7 @@ export class SinglePostingCardComponent {
 
     }).afterClosed().subscribe(
       result => {
-        this.location.go('/');
+        //this.location.go('/');
       }
     );
 

@@ -39,4 +39,13 @@ mat-dialog-content img {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+button{
+  border-radius: 30px !important;
+}
+
+.detailHeader{
+  display: flex;
+  justify-content: space-between;
+}
+
 

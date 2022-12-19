@@ -15,7 +15,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'moodboard', component: MoodboardDetailComponent}, //add /:Id
+  {path: 'moodboard/:id', component: MoodboardDetailComponent}, //add /:Id
 ];
 
 @NgModule({
