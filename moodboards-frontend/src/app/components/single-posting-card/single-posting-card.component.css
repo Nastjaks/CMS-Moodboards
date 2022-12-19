@@ -1,24 +1,23 @@
 .postingCard{
-  margin: 10px;
-  padding: 20px;
+  margin: 5px;
+  padding: 10px;
   display: inline-grid;
   border-radius: 30px;
-  transition: 0.5s;
+  transition: 0.4s;
 }
 
 .postingCard:hover{
-  transform: scale(1.03);
-  transition: 0.5s;
+  transform: scale(1.02);
+  transition: 0.4s;
   border-radius: 30px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   cursor: pointer;
-  margin-left: 30px ;
-  margin-right: 30px ;
 }
 
 img {
   max-height: 500px;
   border-radius: 20px;
+  border: 1px solid #f6f6f6;
 }
 
 

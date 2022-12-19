@@ -1,20 +1,27 @@
 <div>
 
-  <h1 class="title">REGISTER</h1>
+  <h1 class="title">CREATE YOUR ACCOUNT</h1>
 
-  <div class="registerCard" >
+  <div class="register-Login_Card">
     <form *ngIf="!isSuccessful" name="form" novalidate [formGroup]="form">
+      <div class="displayAsColun">
         <label>Username</label>
-        <input type="text" name="username" formControlName="username" required minlength="3" maxlength="20" />
+        <input type="text" name="username" formControlName="username" required minlength="3" maxlength="20"/>
+      </div>
+      <div class="displayAsColun">
         <label>Email</label>
-        <input type="email" name="email" formControlName="email" required email />
+        <input type="email" name="email" formControlName="email" required email/>
+      </div>
+      <div class="displayAsColun">
         <label>Password</label>
-        <input type="password" name="password" formControlName="password"  required minlength="6"/>
+        <input type="password" name="password" formControlName="password" required minlength="6"/>
+      </div>
 
-        <button (click)="register()">Register</button>
+      <button (click)="register()">CREATE</button>
+
 
       <div class="alert alert-warning" *ngIf="isSignUpFailed">
-        Signup failed!<br />
+        Signup failed!<br/>
       </div>
     </form>
 

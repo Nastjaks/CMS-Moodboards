@@ -84,4 +84,18 @@ export class ProfileComponent implements OnInit {
         }
       });
   }
+
+  showPostings() {
+    document.getElementById('postingsContainer')!.style.setProperty("display", "block");
+    document.getElementById('moodboardContainer')!.style.setProperty("display", "none");
+    document.getElementById('postingNav')!.style.setProperty("border-bottom", "7px solid #2b1055");
+    document.getElementById('moodboardNav')!.style.setProperty("border-bottom", "none");
+  }
+
+  showMoodboards() {
+    document.getElementById('postingsContainer')!.style.setProperty("display", "none");
+    document.getElementById('moodboardContainer')!.style.setProperty("display", "block");
+    document.getElementById('postingNav')!.style.setProperty("border-bottom", "none");
+    document.getElementById('moodboardNav')!.style.setProperty("border-bottom", "7px solid #2b1055");
+  }
 }

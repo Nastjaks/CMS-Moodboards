@@ -7,22 +7,32 @@
       </div>
 
       <div class="twoImg" *ngIf="moodboard.attributes.postings.data.length == 2">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+        <img class="twoImg_one" alt="postingImg"             [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+        <img class="twoImg_two" alt="postingImg"             [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
       </div>
+
 
       <div class="threeImg" *ngIf="moodboard.attributes.postings.data.length >= 3">
 
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[2].attributes.image.data.attributes.url">
+        <div class="imageContainer">
+          <img class="threeImg_one" alt="postingImg"
+               [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+        </div>
+
+        <div class="imageContainer secondCont">
+          <img class="threeImg_two" alt="postingImg"  [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+          <img class="threeImg_three" alt="postingImg"  [src]="moodboard.attributes.postings.data[2].attributes.image.data.attributes.url">
+        </div>
 
       </div>
+
 
     </div>
   </div>
 
-  <div class="MoodboardInfo">
+
+
+  <div class="moodboardInfo">
     <div>
       <p><b>{{moodboard.attributes.title}}</b></p>
       <p class="moodboardSizeInfo">Contains {{moodboard.attributes.postings.data.length}} Postings</p>

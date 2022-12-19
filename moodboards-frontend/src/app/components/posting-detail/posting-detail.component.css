@@ -27,10 +27,6 @@ mat-dialog-content img {
   border-radius: 30px;
 }
 
-button {
-  border-radius: 30px;
-}
-
 .detailCloseBtn {
   display: flex;
   justify-content: end;
