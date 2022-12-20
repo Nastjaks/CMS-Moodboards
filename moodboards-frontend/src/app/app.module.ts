@@ -25,6 +25,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {CreatePostingComponent} from './components/create-posting/create-posting.component';
 import {Urls} from './helper/urls';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { DeletePostingDialogComponent } from './components/delete-posting-dialog/delete-posting-dialog.component';
+import { DeleteMoodboardDialogComponent } from './components/delete-moodboard-dialog/delete-moodboard-dialog.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
     MoodboardDetailComponent,
     CreatePostingComponent,
     DeleteDialogComponent,
+    DeletePostingDialogComponent,
+    DeleteMoodboardDialogComponent,
 
   ],
   imports: [

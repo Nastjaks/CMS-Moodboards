@@ -1,7 +1,7 @@
-import {Component, Inject, Input, Optional} from '@angular/core';
+import {Component, Inject, Optional} from '@angular/core';
 import {Posting} from "../../models/posting";
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Auth_Model} from "../../models/auth_Model";
 import {StorageService} from "../../services/storage.service";
 import {Observable} from "rxjs";
@@ -9,6 +9,9 @@ import {Moodboard} from "../../models/moodboard";
 import {UserService} from "../../services/user.service";
 import {MoodboardService} from "../../services/moodboard.service";
 import {AlertComponent} from "../alert/alert.component";
+import {PostingService} from "../../services/posting.service";
+import {Router} from "@angular/router";
+import {DeletePostingDialogComponent} from "../delete-posting-dialog/delete-posting-dialog.component";
 
 
 @Component({
@@ -30,8 +33,10 @@ export class PostingDetailComponent {
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
               private storageService: StorageService,
               private userService: UserService,
+              private postingService: PostingService,
               private moodboardService: MoodboardService,
-              private alert: AlertComponent) {
+              private alert: AlertComponent,
+              public dialogPanel: MatDialog) {
     this.posting = data.posting;
     this.currentUser = this.storageService.getUser();
     this.isLoggedIn = this.storageService.isLoggedIn();
@@ -61,7 +66,23 @@ export class PostingDetailComponent {
 
 
   deletePosting() {
-    this.alert.openAlert("TRY TO DELETE POSTING: " + this.posting.id); //TODO: DELETE FUNCTION
+    this.alert.openAlert("TRY TO DELETE POSTING: " + this.posting.id);
+    this.dialogPanel.closeAll();
+
+    this.dialogPanel.open(DeletePostingDialogComponent, {
+      width: '250px',
+      height: '250px',
+      data: {
+        user: this.currentUser,
+        posting: this.posting
+      }
+
+    }).afterClosed().subscribe(
+      result => {
+        //this.location.go('/');
+      }
+    );
+
   }
 
   editPosting() {

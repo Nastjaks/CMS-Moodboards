@@ -1,4 +1,4 @@
-import {Component, forwardRef, Inject, OnInit, Optional} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {Auth_Model} from "../../models/auth_Model";
 import {UserService} from "../../services/user.service";
 import {AuthService} from "../../services/auth.service";
