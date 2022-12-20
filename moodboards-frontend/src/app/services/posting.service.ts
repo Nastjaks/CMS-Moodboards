@@ -2,31 +2,29 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Posting} from "../models/posting";
 import {map} from 'rxjs';
-
+import {Urls} from "../helper/urls";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostingService {
 
-  private strapiUrl = 'http://localhost:1337';
-  private strapiPostingUrl = 'http://localhost:1337/api/postings';
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private urls: Urls) {
+  }
 
   //----------Ohne Authentifizierung----------
   getAllPostings() {
-    return this.http.get<Posting[]>(this.strapiPostingUrl + '?populate=*')
+    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*')
       .pipe(
-        map((res: any) => { //der respons der vom server zurück kommt wird "gemapt", um einfacher an die Infos zu kommen. am anfang vom respone steht dieses "data{...}" und so können wir direkt hineins in das "..." greifen ohne dan das data davor zu denken
+        map((res: any) => {
           return res.data;
         }),
-      map((posting: Posting[]) => {
-        return posting.map((posting) => {
-          posting.attributes.image.data.attributes.url = this.strapiUrl + posting.attributes.image.data.attributes.url; //  http://localhost:1337/uploads/Bilddatei.jpg", -> gibt uns das Bild
-          return posting;
-        })
-      }));
+        map((posting: Posting[]) => {
+          return posting.map((posting) => {
+            posting.attributes.image.data.attributes.url = this.urls.strapi_URL + posting.attributes.image.data.attributes.url;
+            return posting;
+          })
+        }));
   }
 
 
@@ -35,25 +33,46 @@ export class PostingService {
   }
 
   getAllPostingsInMoodboard(moodboardId: number) {
-    return this.http.get<Posting[]>(this.strapiPostingUrl + '?populate=*&filters[moodboards][id]=' + moodboardId)
+    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
       .pipe(
-        map((res: any) => { //der respons der vom server zurück kommt wird "gemapt", um einfacher an die Infos zu kommen. am anfang vom respone steht dieses "data{...}" und so können wir direkt hineins in das "..." greifen ohne dan das data davor zu denken
+        map((res: any) => {
           return res.data;
         }),
         map((posting: Posting[]) => {
           return posting.map((posting) => {
-            posting.attributes.image.data.attributes.url = this.strapiUrl + posting.attributes.image.data.attributes.url; //  http://localhost:1337/uploads/Bilddatei.jpg", -> gibt uns das Bild
+            posting.attributes.image.data.attributes.url = this.urls.strapi_URL + posting.attributes.image.data.attributes.url;
             return posting;
           })
         }));
   }
 
   //----------Mit Authentifizierung----------
-  createPosting(posting: any){
-    console.log("[POSTING-SERVICE] create Postings function: " + posting);
+  createPosting(posting: any, formData: FormData, jwt: string) {
+    const headers = {
+      'content-type': 'application/json', //multipart/form-data
+      'Authorization': 'Bearer ' + jwt,
+    };
 
-    return this.http.post<any>(this.strapiPostingUrl, posting).subscribe((res:any)=> console.log(res.data));
+    const headersX = {
+      'Authorization': 'Bearer ' + jwt,
+    };
 
+
+
+    return this.http.post<any>( 'http://localhost:1337/api/upload', formData,{'headers': headersX }  ).subscribe(res =>{
+        const body = JSON.stringify({
+          data:{
+          title: posting.title,
+          description: posting.description,
+          posting_creator: posting.posting_creator,
+          tag: posting.tag,
+          image:res[0].id}
+        });
+
+        return this.http.post<any>(this.urls.postings_URL, body, {'headers': headers}).subscribe(res => console.log(res));
+    }
+
+    );
   }
 
   getAllUsersPostings() {
@@ -67,10 +86,5 @@ export class PostingService {
   deletePosting(Id: number) {
     console.log("[POSTING-SERVICE] delete Postings function")
   }
-
-
-
-
-
 
 }

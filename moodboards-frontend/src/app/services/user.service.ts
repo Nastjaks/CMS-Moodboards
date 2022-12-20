@@ -5,10 +5,8 @@ import {Posting} from "../models/posting";
 import {Moodboard} from "../models/moodboard";
 import {User} from "../models/user";
 import {StorageService} from "./storage.service";
+import {Urls} from "../helper/urls";
 
-const strapiUrl = 'http://localhost:1337';
-const strapiPostingUrl = 'http://localhost:1337/api/postings';
-const strapiMoodboardUrl = 'http://localhost:1337/api/moodboards';
 
 @Injectable({
   providedIn: 'root'
@@ -16,26 +14,26 @@ const strapiMoodboardUrl = 'http://localhost:1337/api/moodboards';
 export class UserService {
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private urls: Urls) {
   }
 
   getAllUserPostings(id: number) {
-    return this.http.get<Posting[]>(strapiPostingUrl + '?populate=*&filters[posting_creator][id]=' + id)
+    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[posting_creator][id]=' + id)
       .pipe(
         map((res: any) => {
           return res.data;
         }),
         map((posting: Posting[]) => {
           return posting.map((posting) => {
-            posting.attributes.image.data.attributes.url = strapiUrl + posting.attributes.image.data.attributes.url;
+            posting.attributes.image.data.attributes.url = this.urls.strapi_URL  + posting.attributes.image.data.attributes.url;
             return posting;
           })
         }));
   }
 
-  getAllUserMoodbards(id: number) {
+  getAllUserMoodboards(id: number) {
     console.log("[MOODBOARD-SERVICE] get all Moodboards function")
-    return this.http.get<Moodboard[]>(strapiMoodboardUrl + '?populate[postings][populate][0]=image&filters[moodboard_creator][id]=' + id)
+    return this.http.get<Moodboard[]>(this.urls.moodboard_URL + '?populate[postings][populate][0]=image&filters[moodboard_creator][id]=' + id)
       .pipe(
         map((res: any) => {
           console.log(res.data);
@@ -44,7 +42,7 @@ export class UserService {
         map((moodboard: Moodboard[]) => {
           return moodboard.map((moodboard) => {
             moodboard.attributes.postings.data.map((data) => {
-              data.attributes.image.data.attributes.url = strapiUrl + data.attributes.image.data.attributes.url;
+              data.attributes.image.data.attributes.url = this.urls.strapi_URL + data.attributes.image.data.attributes.url;
               console.log(data.attributes.image.data.attributes.url);
               return data.attributes.image.data.attributes.url;
             })
@@ -64,11 +62,9 @@ export class UserService {
       email: email,
       description: description
     });
-    console.log("Test2")
-    console.log(jwt)
-    console.log(body)
 
-    return this.http.put<User>(strapiUrl + '/api/users/' + id, body,
+
+    return this.http.put<User>(this.urls.users_URL + id, body,
       {'headers': headers})
       .pipe(
         catchError((err) => {
@@ -84,7 +80,41 @@ export class UserService {
       'Authorization': 'Bearer ' + jwt,
     };
 
-    return this.http.delete(strapiUrl + '/api/users/' + id,
+    return this.http.delete(this.urls.users_URL +  id,
+      {'headers': headers})
+      .pipe(
+        catchError((err) => {
+            console.error(err);
+            throw err;
+          }
+        )
+      );
+  }
+
+  deleteUserMoodboards(id: number, jwt: string) {
+    console.log(id);
+    const headers = {
+      'Authorization': 'Bearer ' + jwt,
+    };
+
+    return this.http.delete(this.urls.moodboard_URL + '/' + id,
+      {'headers': headers})
+      .pipe(
+        catchError((err) => {
+            console.error(err);
+            throw err;
+          }
+        )
+      );
+  }
+
+  deleteUserPostings(id: number, jwt: string) {
+    console.log(id);
+    const headers = {
+      'Authorization': 'Bearer ' + jwt,
+    };
+
+    return this.http.delete(this.urls.postings_URL  + '/' +  id,
       {'headers': headers})
       .pipe(
         catchError((err) => {

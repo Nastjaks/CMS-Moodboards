@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NavigationComponent} from './components/navigation/navigation.component';
@@ -20,11 +19,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from "@angular/material/button";
-import { AlertComponent } from './components/alert/alert.component';
-import { MoodboardDetailComponent } from './components/moodboard-detail/moodboard-detail.component';
+import {AlertComponent} from './components/alert/alert.component';
+import {MoodboardDetailComponent} from './components/moodboard-detail/moodboard-detail.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import { CreatePostingComponent } from './components/create-posting/create-posting.component';
-
+import {CreatePostingComponent} from './components/create-posting/create-posting.component';
+import {Urls} from './helper/urls';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,8 @@ import { CreatePostingComponent } from './components/create-posting/create-posti
     AlertComponent,
     MoodboardDetailComponent,
     CreatePostingComponent,
+    DeleteDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -53,9 +55,9 @@ import { CreatePostingComponent } from './components/create-posting/create-posti
     BrowserAnimationsModule,
     MatDialogModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
-  providers: [httpInterceptorProviders],
+  providers: [httpInterceptorProviders, Urls],
   bootstrap: [AppComponent]
 })
 export class AppModule {

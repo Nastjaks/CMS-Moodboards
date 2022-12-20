@@ -2,7 +2,7 @@
 
   <div class="profileContainer">
     <div class="profileSidebar">
-      <button class="siebarBtn" (click)="editUserData()">
+      <button class="sidebarBtn" (click)="editUserData()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
              viewBox="0 0 16 16">
           <path
@@ -10,7 +10,7 @@
         </svg>
         EDIT PROFILE
       </button>
-      <button class="siebarBtn" (click)="deleteUserData()" [routerLink]="['/']">
+      <button class="sidebarBtn" (click)="checkDelete()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3"
              viewBox="0 0 16 16">
           <path
@@ -18,7 +18,7 @@
         </svg>
         DELETE PROFILE
       </button>
-      <button class="siebarBtn" (click)="createPotingDialog()">
+      <button class="sidebarBtn" (click)="createPostingDialog()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle"
              viewBox="0 0 16 16">
           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -27,7 +27,7 @@
         </svg>
         CREATE POSTING
       </button>
-      <button class="siebarBtn" (click)="editUserData()">
+      <button class="sidebarBtn" (click)="editUserData()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle"
              viewBox="0 0 16 16">
           <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
@@ -65,13 +65,13 @@
 
         <!--Users Postings-->
         <div id="postingsContainer">
-          <app-single-posting-card class="overview" *ngFor="let post of posting$ | async"
+          <app-single-posting-card class="overview" *ngFor="let post of postings$ | async"
                                    [posting]="post"></app-single-posting-card>
         </div>
 
         <!--Users Moodboards-->
         <div id="moodboardContainer">
-          <app-single-moodboard-card class="overview" *ngFor="let moodboard of moodboard$ | async"
+          <app-single-moodboard-card class="overview" *ngFor="let moodboard of moodboards$ | async"
                                      [moodboard]="moodboard"></app-single-moodboard-card>
         </div>
 

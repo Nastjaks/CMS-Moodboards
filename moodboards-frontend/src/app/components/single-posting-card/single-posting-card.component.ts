@@ -14,7 +14,7 @@ export class SinglePostingCardComponent {
 
   @Input() posting!: Posting;
 
-  constructor(private location: Location, public dialogPanal: MatDialog) {
+  constructor(private location: Location, public dialogPanel: MatDialog) {
   }
 
   showPostDetails() {
@@ -22,7 +22,7 @@ export class SinglePostingCardComponent {
     //this.location.go('/posting/' + this.posting.id);
     console.log(this.posting);
 
-    this.dialogPanal.open(PostingDetailComponent, {
+    this.dialogPanel.open(PostingDetailComponent, {
       width: 'auto',
       height: 'auto',
       data: {
@@ -34,7 +34,6 @@ export class SinglePostingCardComponent {
         //this.location.go('/');
       }
     );
-
 
   }
 }

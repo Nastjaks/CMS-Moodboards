@@ -3,22 +3,21 @@ import {AuthService} from "../../services/auth.service";
 import {StorageService} from "../../services/storage.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AlertComponent} from "../alert/alert.component";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [AlertComponent],
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
 
   isLoggedIn = false;
   isLoginFailed = false;
-  isUsernameFalse = false;
-  isPasswordFalse = false;
-  errorMessage = '';
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private storageService: StorageService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private storageService: StorageService, private router: Router, private alert: AlertComponent) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -34,31 +33,25 @@ export class LoginComponent implements OnInit {
   login(): void {
     const {username, password} = this.form.value;
 
-    if (username.length >= 3 && username.length <= 20 && password.length >= 6) {
+    if (username.length > 0 || password.length > 0) {
       this.authService.login(username, password)
         .subscribe({
           next: data => {
             this.isLoginFailed = false;
-            this.isUsernameFalse = false;
-            this.isPasswordFalse = false;
             this.isLoggedIn = true;
             this.router.navigate(['/profile']).then(r =>
-              this.reloadPage()
+              window.location.reload()
             );
           },
           error: err => {
-            this.errorMessage = err.error.message;
+            this.alert.openAlert(err.error.error.message);
             this.isLoginFailed = true;
           }
         });
-    }else if (username.length == 0 || 3 < username.length || username.length >= 20) {
-      this.isUsernameFalse = true;
-    }else if (password.length == 0 || 6 < password.length) {
-      this.isPasswordFalse = true;
+    } else {
+      this.alert.openAlert("Incorrect input");
     }
   }
 
-  reloadPage(): void {
-    window.location.reload();
-  }
+
 }

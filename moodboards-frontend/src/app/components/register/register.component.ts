@@ -2,24 +2,23 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {AlertComponent} from "../alert/alert.component";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [AlertComponent],
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
 
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
-
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private alert: AlertComponent) {
     this.form = this.fb.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      password_re: ['', Validators.required]
     });
 
   }
@@ -28,22 +27,32 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    const {username, email, password} = this.form.value;
+    const {username, email, password, password_re} = this.form.value;
 
-    if (username && email && password) {
-      this.authService.register(username, email, password)
-        .subscribe(  {
-          next: data => {
-            console.log("User is logged in");
-            this.isSuccessful = true;
-            this.isSignUpFailed = false;
-            this.router.navigate(['/login']);
-          },
+    if (username && email && password && password_re) {
+      if ((password == password_re)) {
+        this.authService.register(username, email, password)
+          .subscribe({
+            next: data => {
+              console.log("User is logged in");
+              this.authService.login(username, password).subscribe(res =>
+                this.router.navigate(['/profile']).then(r =>
+                  window.location.reload()
+                )
+              );
+            },
             error: err => {
-            this.errorMessage = err.error.message;
-            this.isSignUpFailed = true;
-          }
-      });
+              this.alert.openAlert(err.error.error.message);
+            }
+          });
+
+      } else {
+        this.alert.openAlert("Passwords not equal");
+      }
+    } else {
+      this.alert.openAlert("Please enter Input");
     }
   }
+
+
 }

@@ -17,19 +17,19 @@
   text-align: center;
 }
 
-.siebarBtn {
+.sidebarBtn {
   color: gray;
   background-color: #fff;
   margin-top: 5px;
   display: flex;
 }
 
-.siebarBtn svg {
+.sidebarBtn svg {
   margin-top: 3px;
   margin-right: 10px;
 }
 
-.siebarBtn:hover {
+.sidebarBtn:hover {
   background-color: #3f127b;
   color: #fff;
   box-shadow: none;

@@ -3,15 +3,15 @@ import {HttpClient} from '@angular/common/http';
 import {catchError, map, Observable} from 'rxjs';
 import {User} from "../models/user";
 import {StorageService} from "./storage.service";
+import {Urls} from "../helper/urls";
+import {Router} from "@angular/router";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
-  baseURL: string = 'http://localhost:1337/api/auth/';
-
-  constructor(private http: HttpClient, private storageService: StorageService) {
+  constructor(private http: HttpClient, private storageService: StorageService, private urls: Urls, private router: Router) {
   }
 
   register(username: string, email: string, password: string): Observable<User> {
@@ -22,7 +22,7 @@ export class AuthService {
       password: password
     });
 
-    return this.http.post<User>(this.baseURL + 'local/register', body, {'headers': headers})
+    return this.http.post<User>(this.urls.auth_URL + 'local/register', body, {'headers': headers})
       .pipe(
         catchError((err) => {
             console.error(err);
@@ -35,12 +35,12 @@ export class AuthService {
   login(identifier: string, password: string): Observable<User> {
     const headers = {'content-type': 'application/json'}
 
-    return this.http.post<User>(this.baseURL + 'local', {
+    return this.http.post<User>(this.urls.auth_URL + 'local', {
       identifier,
       password
     }, {'headers': headers})
       .pipe(
-        map((res: any) => { //der response der vom server zurück kommt wird "gemapt", um einfacher an die Infos zu kommen. am anfang vom respone steht dieses "data{...}" und so können wir direkt hineins in das "..." greifen ohne dan das data davor zu denken
+        map((res: any) => {
           this.storageService.saveUser(res);
           return res;
         }),
@@ -54,6 +54,6 @@ export class AuthService {
 
   logout(): void {
     this.storageService.clean();
-    window.location.reload();
+    this.router.navigate(['/']).then(r => window.location.reload());
   }
 }

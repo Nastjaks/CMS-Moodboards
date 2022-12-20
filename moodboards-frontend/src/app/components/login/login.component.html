@@ -1,25 +1,22 @@
 <div>
 
-  <h1 >LOGIN</h1>
+  <h1>LOGIN</h1>
 
   <div class="register-Login_Card">
 
-    <form class="displayAsColun" *ngIf="!isLoggedIn" name="form" novalidate [formGroup]="form">
+    <form class="displayAsColumn" *ngIf="!isLoggedIn" name="form" novalidate [formGroup]="form">
 
-      <div class="displayAsColun">
+      <div class="displayAsColumn">
         <label>Username</label>
-        <input type="text" name="username" formControlName="username" required minlength="3" maxlength="20" />
+        <input type="text" name="username" formControlName="username" required minlength="3" maxlength="20"/>
       </div>
 
-      <div class="displayAsColun">
+      <div class="displayAsColumn">
         <label>Password</label>
-        <input type="password" name="password" formControlName="password"  required minlength="6"/>
+        <input type="password" name="password" formControlName="password" required minlength="6"/>
       </div>
 
       <button (click)="login()">LOGIN</button>
-
-      <div class="alert alert-warning" *ngIf="isLoggedIn"> Login failed!<br /> </div>
-      <div class="alert alert-warning" *ngIf="isUsernameFalse">Username must be between 3 and 20 characters. <br /> </div>
 
     </form>
   </div>

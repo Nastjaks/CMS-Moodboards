@@ -1,16 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {StorageService} from "../../services/storage.service";
 import {Auth_Model} from "../../models/auth_Model";
 import {UserService} from "../../services/user.service";
 import {Observable} from "rxjs";
 import {Posting} from "../../models/posting";
 import {Moodboard} from "../../models/moodboard";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
-import {PostingDetailComponent} from "../posting-detail/posting-detail.component";
 import {MatDialog} from "@angular/material/dialog";
 import {CreatePostingComponent} from "../create-posting/create-posting.component";
+import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
 
 @Component({
   selector: 'app-profile',
@@ -21,8 +20,8 @@ export class ProfileComponent implements OnInit {
 
   currentUser!: Auth_Model;
 
-  posting$!: Observable<Posting[]>;
-  moodboard$!: Observable<Moodboard[]>;
+  postings$!: Observable<Posting[]>;
+  moodboards$!: Observable<Moodboard[]>;
 
   isUserEditable: boolean = false;
   usernameFieldValue!: string;
@@ -35,13 +34,13 @@ export class ProfileComponent implements OnInit {
               private storageService: StorageService,
               private userService: UserService,
               public authService: AuthService,
-              public dialogPanal: MatDialog) {
+              public dialogPanel: MatDialog) {
   }
 
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
-    this.posting$ = this.userService.getAllUserPostings(this.currentUser.user.id);
-    this.moodboard$ = this.userService.getAllUserMoodbards(this.currentUser.user.id);
+    this.postings$ = this.userService.getAllUserPostings(this.currentUser.user.id);
+    this.moodboards$ = this.userService.getAllUserMoodboards(this.currentUser.user.id);
   }
 
   editUserData() {
@@ -75,19 +74,20 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  deleteUserData() {
-    const id = this.currentUser.user.id;
-    const jwt = this.currentUser.jwt;
 
-    this.userService.deleteUserInformation(id, jwt)
-      .subscribe({
-        next: data => {
-          this.authService.logout();
-        },
-        error: err => {
-          this.errorMessage = err.error.message;
-        }
-      });
+  checkDelete(){
+    this.dialogPanel.open(DeleteDialogComponent, {
+      width: '250px',
+      height: '250px',
+      data: {
+        user: this.currentUser,
+      }
+
+    }).afterClosed().subscribe(
+      result => {
+        //this.location.go('/');
+      }
+    );
   }
 
   showPostings() {
@@ -104,8 +104,12 @@ export class ProfileComponent implements OnInit {
     document.getElementById('moodboardNav')!.style.setProperty("border-bottom", "7px solid #2b1055");
   }
 
-  createPotingDialog() {
-    this.dialogPanal.open(CreatePostingComponent).
+  createPostingDialog() {
+    this.dialogPanel.open(CreatePostingComponent,  {
+      data: {
+      user: this.currentUser,
+      }
+    }).
     afterClosed().subscribe(
       result => {
         //this.location.go('/');
