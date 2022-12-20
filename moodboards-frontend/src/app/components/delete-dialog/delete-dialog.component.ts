@@ -18,7 +18,7 @@ export class DeleteDialogComponent implements OnInit {
   postings$!: Observable<Posting[]>;
   moodboards$!: Observable<Moodboard[]>;
 
-  constructor(private userService: UserService, public authService: AuthService, @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(private userService: UserService, @Optional() @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService) {
     this.currentUser = this.data.user;
   }
 
@@ -33,19 +33,21 @@ export class DeleteDialogComponent implements OnInit {
     const id = this.currentUser.user.id;
     const jwt = this.currentUser.jwt;
 
-
     this.moodboards$.forEach((moodboard) => {
-      console.log(moodboard);
-
-      //this.userService.deleteUserMoodboards(moodboard.id, jwt).subscribe(res => console.log(res));
-    });
-    /*
-        this.postings.forEach((posting) => {
-          this.userService.deleteUserPostings(posting.id, jwt).subscribe(res => console.log(res));
-        });*/
-
-    // this.userService.deleteUserInformation(id, jwt).subscribe(res => console.log(res));
-
+      for (const moodboardDetail in moodboard) {
+        let moodboardID = moodboard[moodboardDetail].id
+        this.userService.deleteUserMoodboards(moodboardID, jwt).subscribe(res => console.log(res));
+      }
+    }).then(r =>
+      this.postings$.forEach((posting) => {
+        for (const postingDetail in posting) {
+          let postingID = posting[postingDetail].id
+          this.userService.deleteUserPostings(postingID, jwt).subscribe(res => console.log(res));
+        }
+      }).then(r =>
+        this.userService.deleteUserInformation(id, jwt).subscribe(res => console.log(res))
+      )
+    );
+    this.authService.logout();
   }
-
 }

@@ -10,7 +10,6 @@ import {UserService} from "../../services/user.service";
 import {MoodboardService} from "../../services/moodboard.service";
 import {AlertComponent} from "../alert/alert.component";
 import {PostingService} from "../../services/posting.service";
-import {Router} from "@angular/router";
 import {DeletePostingDialogComponent} from "../delete-posting-dialog/delete-posting-dialog.component";
 
 
@@ -48,22 +47,18 @@ export class PostingDetailComponent {
         this.isOwner = true;
       }
     }
-
     //TODO: OPEN POSTING ON RELOAD
   }
 
 
   addImageToMoodboard(imgId: number, moodboardId: string) {
-
     if (moodboardId != "select") {
       this.moodboardService.addImgToMoodboard(imgId, moodboardId); //TODO: ADD FUNCTION
       this.alert.openAlert('Try to add a image: ' + imgId + ' to moodboard with id: ' + moodboardId);
     } else {
       this.alert.openAlert("You have to select a Moodboard!");
     }
-
   }
-
 
   deletePosting() {
     this.alert.openAlert("TRY TO DELETE POSTING: " + this.posting.id);
@@ -76,13 +71,11 @@ export class PostingDetailComponent {
         user: this.currentUser,
         posting: this.posting
       }
-
     }).afterClosed().subscribe(
       result => {
         //this.location.go('/');
       }
     );
-
   }
 
   editPosting() {

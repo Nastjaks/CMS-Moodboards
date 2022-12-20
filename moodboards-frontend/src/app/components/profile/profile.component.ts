@@ -6,7 +6,6 @@ import {Observable} from "rxjs";
 import {Posting} from "../../models/posting";
 import {Moodboard} from "../../models/moodboard";
 import {FormBuilder} from "@angular/forms";
-import {AuthService} from "../../services/auth.service";
 import {MatDialog} from "@angular/material/dialog";
 import {CreatePostingComponent} from "../create-posting/create-posting.component";
 import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
@@ -33,7 +32,6 @@ export class ProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private storageService: StorageService,
               private userService: UserService,
-              public authService: AuthService,
               public dialogPanel: MatDialog) {
   }
 
@@ -77,8 +75,8 @@ export class ProfileComponent implements OnInit {
 
   checkDelete(){
     this.dialogPanel.open(DeleteDialogComponent, {
-      width: '250px',
-      height: '250px',
+      width: '500px',
+      height: '200px',
       data: {
         user: this.currentUser,
       }
@@ -115,5 +113,8 @@ export class ProfileComponent implements OnInit {
         //this.location.go('/');
       }
     );
+  }
+
+  createMoodboardDialog() {
   }
 }

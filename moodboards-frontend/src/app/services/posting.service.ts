@@ -57,7 +57,7 @@ export class PostingService {
       'Authorization': 'Bearer ' + jwt,
     };
 
-    return this.http.post<any>('http://localhost:1337/api/upload', formData, {'headers': headersImg})
+    return this.http.post<any>(this.urls.upload_URL, formData, {'headers': headersImg})
       .subscribe(res => {
         const body = JSON.stringify({
           data: {
@@ -76,17 +76,11 @@ export class PostingService {
       });
   }
 
-  getAllUsersPostings() {
-    console.log("[POSTING-SERVICE] get all Users Postings function")
-  }
-
   updatePosting(id: number, jwt: string) {
     console.log("[POSTING-SERVICE] update Postings function")
   }
 
   deletePosting(id: number, jwt: string) {
-    console.log("[POSTING-SERVICE] delete Postings function");
-
     const headers = {
       'Authorization': 'Bearer ' + jwt,
     };

@@ -5,7 +5,6 @@ import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {Posting} from "../../models/posting";
 import {PostingService} from "../../services/posting.service";
 import {Router} from "@angular/router";
-import {SinglePostingCardComponent} from "../single-posting-card/single-posting-card.component";
 import {PostingDetailComponent} from "../posting-detail/posting-detail.component";
 
 @Component({

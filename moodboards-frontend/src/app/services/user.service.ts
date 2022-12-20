@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map, Observable} from 'rxjs';
+import {catchError, map} from 'rxjs';
 import {Posting} from "../models/posting";
 import {Moodboard} from "../models/moodboard";
 import {User} from "../models/user";
-import {StorageService} from "./storage.service";
 import {Urls} from "../helper/urls";
 
 
