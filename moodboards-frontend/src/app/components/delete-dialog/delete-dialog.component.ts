@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Moodboard} from "../../models/moodboard";
 import {Posting} from "../../models/posting";
 import {Observable} from "rxjs";
+import {PostingService} from "../../services/posting.service";
 
 @Component({
   selector: 'app-delete-dialog',
@@ -18,7 +19,10 @@ export class DeleteDialogComponent implements OnInit {
   postings$!: Observable<Posting[]>;
   moodboards$!: Observable<Moodboard[]>;
 
-  constructor(private userService: UserService, @Optional() @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService) {
+  constructor(private userService: UserService,
+              @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+              private authService: AuthService,
+              private postingService: PostingService) {
     this.currentUser = this.data.user;
   }
 
@@ -41,8 +45,11 @@ export class DeleteDialogComponent implements OnInit {
     }).then(r =>
       this.postings$.forEach((posting) => {
         for (const postingDetail in posting) {
-          let postingID = posting[postingDetail].id
-          this.userService.deleteUserPostings(postingID, jwt).subscribe(res => console.log(res));
+          let postingID = posting[postingDetail].id;
+          let postingIDImage = posting[postingDetail].attributes.image.data.id;
+          this.postingService.deleteImage(postingIDImage, jwt).subscribe( res => {
+            this.userService.deleteUserPostings(postingID, jwt).subscribe(res => console.log(res));
+          })
         }
       }).then(r =>
         this.userService.deleteUserInformation(id, jwt).subscribe(res => console.log(res))

@@ -91,7 +91,6 @@ export class UserService {
   }
 
   deleteUserMoodboards(id: number, jwt: string) {
-    console.log(id);
     const headers = {
       'Authorization': 'Bearer ' + jwt,
     };
@@ -108,7 +107,6 @@ export class UserService {
   }
 
   deleteUserPostings(id: number, jwt: string) {
-    console.log(id);
     const headers = {
       'Authorization': 'Bearer ' + jwt,
     };

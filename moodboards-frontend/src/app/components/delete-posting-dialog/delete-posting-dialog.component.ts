@@ -29,8 +29,10 @@ export class DeletePostingDialogComponent implements OnInit {
   }
 
   deletePosting() {
-    this.postingService.deletePosting(this.posting.id, this.currentUser.jwt).subscribe(res => {
-      this.router.navigate(["/profile"]).then(r => window.location.reload());
+    this.postingService.deleteImage(this.posting.attributes.image.data.id, this.currentUser.jwt).subscribe( res => {
+      this.postingService.deletePosting(this.posting.id, this.currentUser.jwt).subscribe(res => {
+        this.router.navigate(["/profile"]).then(r => window.location.reload())
+      });
     });
   }
 

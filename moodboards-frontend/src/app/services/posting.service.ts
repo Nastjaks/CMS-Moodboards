@@ -96,4 +96,18 @@ export class PostingService {
       );
   }
 
+  deleteImage(id: number, jwt: string) {
+    const headersImg = {
+      'Authorization': 'Bearer ' + jwt,
+    };
+
+    return this.http.delete(this.urls.upload_URL + '/files/' + id, {'headers': headersImg})
+      .pipe(
+        catchError((err) => {
+            console.error(err);
+            throw err;
+          }
+        )
+      );
+  }
 }
