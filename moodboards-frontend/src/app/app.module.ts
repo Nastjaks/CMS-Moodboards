@@ -28,6 +28,10 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
 import { DeletePostingDialogComponent } from './components/delete-posting-dialog/delete-posting-dialog.component';
 import { DeleteMoodboardDialogComponent } from './components/delete-moodboard-dialog/delete-moodboard-dialog.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
+import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 
 @NgModule({
   declarations: [
@@ -50,19 +54,23 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     DeleteMoodboardDialogComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        NgbModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        MatButtonModule,
-        MatSnackBarModule,
-        MatSlideToggleModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgbModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatSnackBarModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatLegacyChipsModule,
+  ],
   providers: [httpInterceptorProviders, Urls],
   bootstrap: [AppComponent]
 })

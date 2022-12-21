@@ -1,4 +1,4 @@
-<div class="contentContainer">
+<div class="contentContainer" xmlns="http://www.w3.org/1999/html">
 
   <div class="profileContainer">
     <div class="profileSidebar">
@@ -54,7 +54,7 @@
           <label>Email</label>
           <input type="email" name="email" id="email" value="{{emailFieldValue}}"/>
           <label>Description</label>
-          <input type="text" name="description" id="description" value="{{descriptionFieldValue}}"/>
+          <textarea name="description" id="description" value="{{descriptionFieldValue}}"></textarea>
           <button (click)="save()">Save</button>
         </div>
 

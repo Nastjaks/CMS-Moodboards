@@ -6,9 +6,7 @@
 
       <div class="detailHeader" *ngIf="isLoggedIn && isOwner">
         <div class="dropdown">
-          <svg class="bi bi-three-dots dropbtn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
-          </svg>
+          <mat-icon>more_horiz</mat-icon>
           <div class="dropdown-content">
             <p (click)="deletePosting()">Delete</p>
             <p (click)="editPosting()">Edit</p>
@@ -20,7 +18,7 @@
         </div>
       </div>
 
-      <div  *ngIf="!isLoggedIn || !isOwner">
+      <div *ngIf="!isLoggedIn || !isOwner">
         <div class="detailCloseBtn">
           <button mat-button mat-dialog-close>X</button>
         </div>
@@ -28,27 +26,62 @@
 
 
       <div class="place">
-        <P>@{{posting.attributes.posting_creator.data.attributes.username}}</P>
-        <P>{{posting.attributes.publishedAt | date}}</P>
+        <p>@{{posting.attributes.posting_creator.data.attributes.username}}</p>
+        <p>{{posting.attributes.publishedAt | date}}</p>
+      </div>
+
+      <div *ngIf="!editPost">
+        <h2>{{posting.attributes.title}}</h2>
+        <p>{{posting.attributes.description}}</p>
+        <p class="noMarginBottom">Tag</p>
+        <mat-chip-list>
+          <mat-chip class="chip">{{posting.attributes.tag}}</mat-chip>
+        </mat-chip-list>
+      </div>
+
+      <div *ngIf="editPost">
+        <label for="title">Title</label>
+        <input [(ngModel)]="title" type="text" class="form-control" id="title" name="title"
+               value="{{posting.attributes.title}}">
+
+        <label for="description">Description</label>
+        <textarea [(ngModel)]="description" type="text" class="form-control" id="description" name="description"
+                  value="{{posting.attributes.description}}"></textarea>
+
+        <label for="tag">Tag</label>
+        <select id="tag" [(ngModel)]="tag" name="tag">
+          <option value="Other">Other</option>
+          <option value="Color">Color</option>
+          <option value="Font">Font</option>
+          <option value="Wireframe">Wireframe</option>
+          <option value="UI-Element">UI-Element</option>
+          <option value="Icon">Icon</option>
+        </select>
+
+        <button class="addBtn" (click)="save()">Save</button>
       </div>
 
 
-      <h2>{{posting.attributes.title}}</h2>
-      <P>{{posting.attributes.description}}</P>
-      <P class="noMarginBottom">Category</P>
-      <P>{{posting.attributes.tag}}</P>
     </div>
 
 
-
     <div *ngIf="isLoggedIn" class="place">
+      <!--<select #moodboards>
+        <option>select</option>
+        <option *ngFor="let moodboard of moodboard$ | async"
+                [value]="moodboard.id">{{moodboard.attributes.title}}</option>
+      </select>-->
 
-        <select #moodboards>
-          <option>select</option>
-          <option *ngFor="let moodboard of moodboard$ | async" [value]="moodboard.id">{{moodboard.attributes.title}}</option>
-        </select>
-        <button (click)="addImageToMoodboard(posting.id, moodboards.value )">Add to Moodboard</button>
+      <mat-form-field appearance="fill">
+        <mat-label>Select</mat-label>
+        <mat-select #moodboards>
+          <mat-option *ngFor="let moodboard of moodboard$ | async" [value]="moodboard.id">
+            {{moodboard.attributes.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
+      <button class="addBtn" (click)="addImageToMoodboard(posting.id, moodboards.value )">Add to Moodboard</button>
     </div>
   </div>
 

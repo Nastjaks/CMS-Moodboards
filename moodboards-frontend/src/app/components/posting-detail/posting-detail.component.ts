@@ -22,11 +22,16 @@ import {DeletePostingDialogComponent} from "../delete-posting-dialog/delete-post
 export class PostingDetailComponent {
 
   posting: Posting;
-  isLoggedIn = false;
   currentUser!: Auth_Model;
   moodboard$!: Observable<Moodboard[]>;
-  isOwner = false;
 
+  isLoggedIn: boolean = false;
+  isOwner: boolean = false;
+  editPost: boolean = false;
+
+  title!: string;
+  description!: string;
+  tag!: string;
 
   constructor(public dialogRef: MatDialogRef<PostingDetailComponent>,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -84,5 +89,30 @@ export class PostingDetailComponent {
 
   editPosting() {
     this.alert.openAlert("TRY TO EDIT POSTING: " + this.posting.id); //TODO: EDIT FUNCTION
+
+    this.editPost = true;
+    this.title = this.posting.attributes.title;
+    this.description = this.posting.attributes.description;
+    this.tag = this.posting.attributes.tag;
+  }
+
+  save() {
+    let title = (<HTMLInputElement>document.getElementById("title")).value;
+    let description = (<HTMLInputElement>document.getElementById("description")).value;
+    let tag = (<HTMLInputElement>document.getElementById("tag")).value;
+
+
+    if (title && description) {
+      this.postingService.editPosting(title, description, tag, this.posting.id, this.currentUser.jwt)
+        .subscribe({
+          next: data => {
+            this.editPost = true;
+            window.location.reload();
+          },
+          error: err => {
+            console.log(err.error.message);
+          }
+        });
+    }
   }
 }

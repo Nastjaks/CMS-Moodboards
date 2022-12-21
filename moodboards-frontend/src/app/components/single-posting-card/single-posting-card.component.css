@@ -35,3 +35,8 @@ img {
 p {
   margin-bottom: 0;
 }
+
+.chip{
+  background-color: rgba(43, 16, 85, 0.54);
+  color: #ffffff
+}

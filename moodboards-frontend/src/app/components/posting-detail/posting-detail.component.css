@@ -33,6 +33,11 @@ mat-dialog-content img {
   margin-right: -30px;
 }
 
+.addBtn {
+  margin-right: -30px;
+  margin-left: 10px;
+}
+
 .place {
   display: flex;
   justify-content: space-between;
@@ -48,4 +53,8 @@ button{
   justify-content: space-between;
 }
 
+.chip{
+  background-color: rgba(43, 16, 85, 0.54);
+  color: #ffffff
+}
 

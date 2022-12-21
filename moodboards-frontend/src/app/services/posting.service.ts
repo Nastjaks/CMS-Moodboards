@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Posting} from "../models/posting";
 import {catchError, map} from 'rxjs';
 import {Urls} from "../helper/urls";
+import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -76,8 +77,29 @@ export class PostingService {
       });
   }
 
-  updatePosting(id: number, jwt: string) {
+  editPosting(title: string, description: string, tag: string, id: number, jwt: string) {
     console.log("[POSTING-SERVICE] update Postings function")
+    const headers = {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + jwt,
+    };
+    const body = JSON.stringify({
+      data: {
+        title: title,
+        description: description,
+        tag: tag
+      }
+    });
+
+    return this.http.put<Posting>(this.urls.postings_URL + '/' + id, body,
+      {'headers': headers})
+      .pipe(
+        catchError((err) => {
+            console.error(err);
+            throw err;
+          }
+        )
+      );
   }
 
   deletePosting(id: number, jwt: string) {
