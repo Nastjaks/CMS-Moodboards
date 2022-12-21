@@ -27,6 +27,7 @@ import {Urls} from './helper/urls';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { DeletePostingDialogComponent } from './components/delete-posting-dialog/delete-posting-dialog.component';
 import { DeleteMoodboardDialogComponent } from './components/delete-moodboard-dialog/delete-moodboard-dialog.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -49,18 +50,19 @@ import { DeleteMoodboardDialogComponent } from './components/delete-moodboard-di
     DeleteMoodboardDialogComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatSnackBarModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatSnackBarModule,
+        MatSlideToggleModule,
+    ],
   providers: [httpInterceptorProviders, Urls],
   bootstrap: [AppComponent]
 })

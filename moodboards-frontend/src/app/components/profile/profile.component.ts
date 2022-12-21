@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 import {Posting} from "../../models/posting";
 import {Moodboard} from "../../models/moodboard";
 import {FormBuilder} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {CreatePostingComponent} from "../create-posting/create-posting.component";
 import {DeleteDialogComponent} from "../delete-dialog/delete-dialog.component";
 import {Router} from "@angular/router";
@@ -28,8 +28,6 @@ export class ProfileComponent implements OnInit {
   usernameFieldValue!: string;
   emailFieldValue!: string;
   descriptionFieldValue!: string;
-  errorMessage = '';
-  currentUser2!: User;
 
   constructor(private fb: FormBuilder,
               private storageService: StorageService,
@@ -61,7 +59,6 @@ export class ProfileComponent implements OnInit {
 
     const id = this.currentUser.user.id;
     const jwt = this.currentUser.jwt;
-    let result: User;
 
     if (username && email) {
       this.userService.editUserInformation(username, email, description, id, jwt)
@@ -69,12 +66,10 @@ export class ProfileComponent implements OnInit {
           next: data => {
             this.isUserEditable = false;
             this.storageService.saveUser(this.currentUser);
-
-            //this.router.navigate(["/profile"]).then(r => window.location.reload());
-
+             window.location.reload();
           },
           error: err => {
-            this.errorMessage = err.error.message;
+            console.log(err.error.message);
           }
         });
     }
@@ -82,14 +77,20 @@ export class ProfileComponent implements OnInit {
 
 
   checkDelete() {
-    this.dialogPanel.open(DeleteDialogComponent, {
-      width: '500px',
-      height: '200px',
-      data: {
-        user: this.currentUser,
-      }
 
-    }).afterClosed().subscribe(
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '500px';
+    dialogConfig.height = '200px';
+    dialogConfig.data = {
+      user: this.currentUser,
+    };
+
+
+    this.dialogPanel.open(DeleteDialogComponent, dialogConfig)
+      .afterClosed().subscribe(
       result => {
         //this.location.go('/');
       }

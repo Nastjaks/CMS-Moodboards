@@ -56,7 +56,7 @@ export class MoodboardService {
     console.log("[MOODBOARD-SERVICE] add image: " + imgId + " to Moodboard: " + moodboardId + " function")
   }
 
-  makeMoodboardPrivate(moodboard: Moodboard, jwt: string, privateBoard: boolean) {
+  changeVisibility(moodboard: Moodboard, jwt: string, privateBoard: boolean) {
     console.log("[MOODBOARD-SERVICE] make Moodboard: " + moodboard.id + " private")
 
     const headers = {

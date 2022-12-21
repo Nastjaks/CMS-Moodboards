@@ -1,7 +1,7 @@
 import {Component, Inject, Optional} from '@angular/core';
 import {Posting} from "../../models/posting";
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {Auth_Model} from "../../models/auth_Model";
 import {StorageService} from "../../services/storage.service";
 import {Observable} from "rxjs";
@@ -64,14 +64,18 @@ export class PostingDetailComponent {
     this.alert.openAlert("TRY TO DELETE POSTING: " + this.posting.id);
     this.dialogPanel.closeAll();
 
-    this.dialogPanel.open(DeletePostingDialogComponent, {
-      width: '250px',
-      height: '250px',
-      data: {
-        user: this.currentUser,
-        posting: this.posting
-      }
-    }).afterClosed().subscribe(
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '250px';
+    dialogConfig.height = '250px';
+    dialogConfig.data = {
+      user: this.currentUser,
+      posting: this.posting
+    };
+
+    this.dialogPanel.open(DeletePostingDialogComponent, dialogConfig).afterClosed().subscribe(
       result => {
         //this.location.go('/');
       }

@@ -5,11 +5,12 @@ import {Location} from "@angular/common";
 import {map, Observable} from "rxjs";
 import {Posting} from "../../models/posting";
 import {PostingService} from "../../services/posting.service";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {DeleteMoodboardDialogComponent} from "../delete-moodboard-dialog/delete-moodboard-dialog.component";
 import {Auth_Model} from "../../models/auth_Model";
 import {StorageService} from "../../services/storage.service";
 import {MoodboardService} from "../../services/moodboard.service";
+import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 
 @Component({
   selector: 'app-moodboard-detail',
@@ -26,7 +27,8 @@ export class MoodboardDetailComponent implements OnInit {
   isLoggedIn = false;
   isOwner = false;
   moodboardCreatorId: number = 1;
-  privateBoard: boolean = false;
+  checked: boolean = false;
+  result: string = "public";
 
   constructor(private router: Router, private location: Location, private storageService: StorageService,
               private postingService: PostingService, private moodboardService: MoodboardService, public dialogPanel: MatDialog) {
@@ -39,7 +41,6 @@ export class MoodboardDetailComponent implements OnInit {
     );
 
     this.moodboard = history.state.moodboard;
-    this.privateBoard = this.moodboard.attributes.private;
     this.moodboardCreatorId = this.moodboard.attributes.moodboard_creator.data.id;
     if (this.moodboardCreatorId == this.currentUser.user.id) {
       this.isOwner = true;
@@ -53,41 +54,19 @@ export class MoodboardDetailComponent implements OnInit {
     this.postingsInMoodboard$ = this.postingService.getAllPostingsInMoodboard(this.moodboard.id);
   }
 
-  changeVisibilityPublic() {
-    this.moodboardService.makeMoodboardPrivate(this.moodboard, this.currentUser.jwt, false)
-      .subscribe({
-        next: data => {
-          this.privateBoard = false;
-          this.router.navigate(["/moodboard/" + this.moodboard.id]).then(r => window.location.reload())
-        },
-        error: err => {
-          console.log(err.error.message);
-        }
-      });
-  }
-
-  changeVisibilityPrivate() {
-    this.moodboardService.makeMoodboardPrivate(this.moodboard, this.currentUser.jwt, true)
-      .subscribe({
-        next: data => {
-          this.privateBoard = true;
-          this.router.navigate(["/moodboard/" + this.moodboard.id]).then(r => window.location.reload())
-        },
-        error: err => {
-          console.log(err.error.message);
-        }
-      });
-  }
-
   checkDelete() {
-    this.dialogPanel.open(DeleteMoodboardDialogComponent, {
-      width: '250px',
-      height: '250px',
-      data: {
-        user: this.currentUser,
-        moodboard: this.moodboard
-      }
-    }).afterClosed().subscribe(
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '250px';
+    dialogConfig.height = '250px';
+    dialogConfig.data = {
+      user: this.currentUser,
+      moodboard: this.moodboard
+    };
+
+    this.dialogPanel.open(DeleteMoodboardDialogComponent, dialogConfig).afterClosed().subscribe(
       result => {
         //this.location.go('/');
       }
@@ -96,5 +75,28 @@ export class MoodboardDetailComponent implements OnInit {
 
   editMoodboardData() {
 
+  }
+
+  slideToggleChange(event: MatSlideToggleChange) {
+    this.checked = event.source.checked;
+    if (this.checked) {
+      this.result = "private";
+      this.changeMoodboardVisibility(true);
+    } else {
+      this.result = "public";
+      this.changeMoodboardVisibility(false);
+    }
+  }
+
+  changeMoodboardVisibility(change: boolean) {
+    this.moodboardService.changeVisibility(this.moodboard, this.currentUser.jwt, change)
+      .subscribe({
+        next: data => {
+          this.router.navigate(["/moodboard/" + this.moodboard.id]).then(r => window.location.reload())
+        },
+        error: err => {
+          console.log(err.error.message);
+        }
+      });
   }
 }
