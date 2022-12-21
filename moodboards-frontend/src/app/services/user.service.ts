@@ -5,6 +5,7 @@ import {Posting} from "../models/posting";
 import {Moodboard} from "../models/moodboard";
 import {User} from "../models/user";
 import {Urls} from "../helper/urls";
+import {StorageService} from "./storage.service";
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import {Urls} from "../helper/urls";
 export class UserService {
 
 
-  constructor(private http: HttpClient, private urls: Urls) {
+  constructor(private http: HttpClient, private urls: Urls, private storageService: StorageService) {
   }
 
   getAllUserPostings(id: number) {
@@ -24,7 +25,7 @@ export class UserService {
         }),
         map((posting: Posting[]) => {
           return posting.map((posting) => {
-            posting.attributes.image.data.attributes.url = this.urls.strapi_URL  + posting.attributes.image.data.attributes.url;
+            posting.attributes.image.data.attributes.url = this.urls.strapi_URL + posting.attributes.image.data.attributes.url;
             return posting;
           })
         }));
@@ -48,6 +49,21 @@ export class UserService {
             return moodboard;
           })
         })
+      );
+  }
+
+  getUserInformation(id: number) {
+    return this.http.get<User>(this.urls.users_URL + id)
+      .pipe(
+        map((res: any) => {
+          //this.storageService.saveUser(res);
+          return res;
+        }),
+        catchError((err) => {
+            console.error(err);
+            throw err;
+          }
+        )
       );
   }
 
@@ -79,7 +95,7 @@ export class UserService {
       'Authorization': 'Bearer ' + jwt,
     };
 
-    return this.http.delete(this.urls.users_URL +  id,
+    return this.http.delete(this.urls.users_URL + id,
       {'headers': headers})
       .pipe(
         catchError((err) => {
@@ -111,7 +127,7 @@ export class UserService {
       'Authorization': 'Bearer ' + jwt,
     };
 
-    return this.http.delete(this.urls.postings_URL  + '/' +  id,
+    return this.http.delete(this.urls.postings_URL + '/' + id,
       {'headers': headers})
       .pipe(
         catchError((err) => {
@@ -121,4 +137,6 @@ export class UserService {
         )
       );
   }
+
+
 }

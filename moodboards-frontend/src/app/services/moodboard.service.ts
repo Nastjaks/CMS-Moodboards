@@ -9,7 +9,6 @@ import {Urls} from "../helper/urls";
 })
 export class MoodboardService {
 
-
   constructor(private http: HttpClient, private urls: Urls) {
   }
 
@@ -57,8 +56,29 @@ export class MoodboardService {
     console.log("[MOODBOARD-SERVICE] add image: " + imgId + " to Moodboard: " + moodboardId + " function")
   }
 
-  makeMoodboardPrivate(imgId: number, moodboardId: number) {
-    console.log("[MOODBOARD-SERVICE] make Moodboard: " + moodboardId + " private")
+  makeMoodboardPrivate(moodboard: Moodboard, jwt: string, privateBoard: boolean) {
+    console.log("[MOODBOARD-SERVICE] make Moodboard: " + moodboard.id + " private")
+
+    const headers = {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + jwt
+    };
+
+    const body = JSON.stringify({
+      data: {
+        private: privateBoard
+      }
+    });
+
+    return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' +  moodboard.id, body,
+      {'headers': headers})
+      .pipe(
+        catchError((err) => {
+            console.error(err);
+            throw err;
+          }
+        )
+      );
   }
 
   removeImgFromMoodboard(imgId: number, moodboardId: number) {
