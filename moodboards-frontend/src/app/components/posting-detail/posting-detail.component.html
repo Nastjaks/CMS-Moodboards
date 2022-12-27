@@ -1,5 +1,7 @@
 <mat-dialog-content>
-  <div><img alt="Image not working" [src]="posting.attributes.image.data.attributes.url"></div>
+  <div class="detailLeft">
+    <img alt="Image not working" [src]="posting.attributes.image.data.attributes.url">
+  </div>
 
   <div class="postingDetailsInfo">
     <div>
@@ -33,7 +35,7 @@
       <div *ngIf="!editPost">
         <h2>{{posting.attributes.title}}</h2>
         <p>{{posting.attributes.description}}</p>
-        <p class="noMarginBottom">Tag</p>
+        <p class="noMarginBottom">Category</p>
         <mat-chip-list>
           <mat-chip class="chip">{{posting.attributes.tag}}</mat-chip>
         </mat-chip-list>
@@ -66,18 +68,10 @@
 
 
     <div *ngIf="isLoggedIn" class="place">
-      <!--<select #moodboards>
-        <option>select</option>
-        <option *ngFor="let moodboard of moodboard$ | async"
-                [value]="moodboard.id">{{moodboard.attributes.title}}</option>
-      </select>-->
-
-      <mat-form-field appearance="fill">
+           <mat-form-field appearance="fill">
         <mat-label>Select</mat-label>
         <mat-select #moodboards>
-          <mat-option *ngFor="let moodboard of moodboard$ | async" [value]="moodboard.id">
-            {{moodboard.attributes.title}}
-          </mat-option>
+          <mat-option *ngFor="let moodboard of moodboard$ | async" [value]="moodboard.id"> {{moodboard.attributes.title}}  </mat-option>
         </mat-select>
       </mat-form-field>
 

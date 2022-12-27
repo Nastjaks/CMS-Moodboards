@@ -57,7 +57,7 @@ export class PostingDetailComponent {
 
 
   addImageToMoodboard(imgId: number, moodboardId: string) {
-    if (moodboardId != "select") {
+    if (moodboardId) {
       this.moodboardService.addImgToMoodboard(imgId, moodboardId); //TODO: ADD FUNCTION
       this.alert.openAlert('Try to add a image: ' + imgId + ' to moodboard with id: ' + moodboardId);
     } else {

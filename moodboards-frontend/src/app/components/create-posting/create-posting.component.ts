@@ -45,9 +45,15 @@ export class CreatePostingComponent {
   }
 
   getFile(files: FileList | string | string[] | File[]) {
+
     this.imageFile = <File>files[0]
     this.formData.append('files', this.imageFile, this.imageFile.name);
+
+    var preview =  document.getElementById('preview') as HTMLImageElement ;
+    preview!.src = URL.createObjectURL( this.imageFile);
+
     console.log(this.formData);
+
   }
 
   close() {

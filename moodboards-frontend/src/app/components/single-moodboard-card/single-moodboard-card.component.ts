@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, Input,} from '@angular/core';
 import {Moodboard} from "../../models/moodboard";
 import {Location} from "@angular/common";
 import {Router} from "@angular/router";
@@ -14,8 +14,8 @@ export class SingleMoodboardCardComponent {
   constructor(private location: Location, private router: Router) {  }
 
   showMoodboardDetails() {
-    this.router.navigateByUrl('/moodboard/' + this.moodboard.id, { state: {moodboard: this.moodboard } }); //leitet zur seite "/moodboard" weiter und gibt das moodboard mit
     console.log(this.moodboard);
+    this.router.navigateByUrl('/moodboard/' + this.moodboard.id, { state: {moodboard: this.moodboard } });
     //this.location.go('/moodboard/' + this.moodboard.id);
   }
 

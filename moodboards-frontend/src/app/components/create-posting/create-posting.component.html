@@ -8,6 +8,7 @@
     <div class="form-group">
       <label for="img">Select image:</label>
       <input type="file" id="img" name="img" accept="image/*" (change)="getFile($any($event).target.files);">
+      <img id="preview" src="#" alt="" />
     </div>
 
     <div class="form-group">
