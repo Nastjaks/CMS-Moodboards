@@ -2,7 +2,7 @@
 
 module.exports = {
   /**
-   * An asynchronous register function that runs before
+   * An asynchronous user-register function that runs before
    * your application is initialized.
    *
    * This gives you an opportunity to extend code.

@@ -1,0 +1,91 @@
+<mat-dialog-content>
+  <div class="detailLeft">
+    <img alt="Image not working" [src]="posting.attributes.image.data.attributes.url">
+  </div>
+
+  <div class="postingDetailsInfo">
+    <div>
+
+      <div class="detailHeader" *ngIf="isLoggedIn && isOwner">
+        <div class="dropdown">
+          <div *ngIf="!postCurrentlyEdit">
+            <mat-icon>more_horiz</mat-icon>
+            <div class="dropdown-content">
+              <p (click)="startEditPosting()">Edit</p>
+              <p (click)="openDeletePostingDialog()">Delete</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="detailCloseBtn">
+          <button mat-button mat-dialog-close>X</button>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoggedIn || !isOwner">
+        <div class="detailCloseBtn">
+          <button mat-button mat-dialog-close>X</button>
+        </div>
+      </div>
+
+
+      <div class="place">
+        <p>@{{posting.attributes.posting_creator.data.attributes.username}}</p>
+        <p>{{posting.attributes.publishedAt | date}}</p>
+      </div>
+
+      <div *ngIf="!postCurrentlyEdit">
+        <h2>{{posting.attributes.title}}</h2>
+        <p>{{posting.attributes.description}}</p>
+
+        <p class="noMarginBottom"><b>Category</b></p>
+        <p>{{posting.attributes.tag}}</p>
+        <!-- <mat-chip-list>
+           <mat-chip class="chip">{{posting.attributes.tag}}</mat-chip>
+         </mat-chip-list>-->
+      </div>
+
+      <div *ngIf="postCurrentlyEdit">
+        <label for="title">Title</label>
+        <input [(ngModel)]="this.posting.attributes.title" type="text" class="form-control" id="title" name="title">
+
+        <label for="description">Description</label>
+        <textarea [(ngModel)]="this.posting.attributes.description" type="text" class="form-control" id="description" name="description"></textarea>
+
+        <label for="tag">Tag</label>
+        <select id="tag" [(ngModel)]="this.posting.attributes.tag" name="tag">
+          <option value="Other">Other</option>
+          <option value="Color">Color</option>
+          <option value="Font">Font</option>
+          <option value="Wireframe">Wireframe</option>
+          <option value="UI-Element">UI-Element</option>
+          <option value="Icon">Icon</option>
+          <option value="Graphic">Graphic</option>
+          <option value="Website-Example">Website-Example</option>
+        </select>
+
+        <button class="addBtn" (click)="saveChanges()">Save</button>
+        <button class="addBtn" (click)="cancelChanges()">cancel</button>
+      </div>
+    </div>
+
+
+    <div *ngIf="isLoggedIn && !postCurrentlyEdit">
+      <p class="noMarginBottom">Add to moodboard</p>
+      <div class="place">
+        <mat-form-field appearance="fill">
+          <mat-label>Select</mat-label>
+          <mat-select #moodboards>
+            <mat-option *ngFor="let moodboard of moodboard$ | async" [value]="moodboard.id"> {{moodboard.attributes.title}}  </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <button class="addBtn" (click)="addImageToMoodboard(moodboards.value )"> + </button>
+      </div>
+
+    </div>
+  </div>
+
+</mat-dialog-content>
+
+

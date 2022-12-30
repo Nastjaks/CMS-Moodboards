@@ -1,0 +1,24 @@
+<div>
+
+  <h1>LOGIN</h1>
+
+  <div class="register-Login_Card">
+
+    <form class="displayAsColumn" *ngIf="!isLoggedIn" name="form" novalidate [formGroup]="form">
+
+      <div class="displayAsColumn">
+        <label>Username or E-Mail</label>
+        <input type="text" name="username" formControlName="username" required minlength="3" maxlength="20"/>
+      </div>
+
+      <div class="displayAsColumn">
+        <label>Password</label>
+        <input type="password" name="password" formControlName="password" required minlength="6"/>
+      </div>
+
+      <button (click)="login()">LOGIN</button>
+
+    </form>
+  </div>
+
+</div>

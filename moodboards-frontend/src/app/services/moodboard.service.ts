@@ -41,23 +41,90 @@ export class MoodboardService {
           return res.data;
         }),
         map((moodboard: Moodboard) => {
-            moodboard.attributes.postings.data.map((data) => {
-              data.attributes.image.data.attributes.url = this.urls.strapi_URL + data.attributes.image.data.attributes.url;
-              return data.attributes.image.data.attributes.url;
-            })
-            return moodboard;
+          moodboard.attributes.postings.data.map((data) => {
+            data.attributes.image.data.attributes.url = this.urls.strapi_URL + data.attributes.image.data.attributes.url;
+            return data.attributes.image.data.attributes.url;
+          })
+          return moodboard;
         })
       );
   }
 
   //----------Mit Authentifizierung----------
+  createMoodboard(moodboard: any, jwt: string) {
+    console.log("[MOODBOARD-SERVICE] create Moodboards function " + moodboard.title);
 
-  addImgToMoodboard(imgId: number, moodboardId: string) {
-    console.log("[MOODBOARD-SERVICE] add image: " + imgId + " to Moodboard: " + moodboardId + " function")
+    const headers = {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + jwt,
+    };
+
+    return this.http.post<any>(this.urls.moodboard_URL, {
+      data: {
+        title: moodboard.title,
+        description: moodboard.description,
+        moodboard_creator: moodboard.moodboard_creator,
+        private: moodboard.visibilityPrivate
+      }
+    }, {'headers': headers}).subscribe(
+      res => console.log(res)
+    )
+
   }
 
-  changeVisibility(moodboard: Moodboard, jwt: string, privateBoard: boolean) {
-    console.log("[MOODBOARD-SERVICE] make Moodboard: " + moodboard.id + " private")
+  addImgToMoodboard(imgId: number, moodboardId: number, jwt: string) {
+    console.log("[MOODBOARD-SERVICE] add image: " + imgId + " to Moodboard: " + moodboardId + " function");
+
+    let postings: number[] = [];
+
+    this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
+      .subscribe((res: any) => {
+          for (let i = 0; i < res.data.length; i++) {
+            postings.push(res.data[i].id);
+          }
+          postings.push(imgId);
+
+          const headers = {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + jwt,
+          };
+
+
+          const body = JSON.stringify({
+            data: {postings: postings}
+          });
+
+          return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe()
+        }
+      )
+  }
+
+  removeImgFromMoodboard(imgId: number, moodboardId: number) {
+    console.log("[MOODBOARD-SERVICE] remove image: " + imgId + " from Moodboard: " + moodboardId + " function")
+  }
+
+  updateMoodboard(moodboardId: number, moodboard: any, jwt: string) {
+    console.log("[MOODBOARD-SERVICE] update Moodboard " +moodboardId + " function")
+    console.log(moodboard)
+
+    const headers = {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer ' + jwt
+    };
+
+    return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, {
+      data: {
+        title: moodboard.title,
+        description: moodboard.description,
+        private: moodboard.visibilityPrivate
+      }
+    }, {'headers': headers}).subscribe(
+      res=> console.log(res))
+  }
+
+  /*
+  changeVisibility(moodboard: Moodboard, jwt: string, visibilityPrivate: boolean) {
+    console.log("[MOODBOARD-SERVICE] make Moodboard: " + moodboard.id + " private " + visibilityPrivate)
 
     const headers = {
       'content-type': 'application/json',
@@ -66,11 +133,11 @@ export class MoodboardService {
 
     const body = JSON.stringify({
       data: {
-        private: privateBoard
+        private: visibilityPrivate
       }
     });
 
-    return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' +  moodboard.id, body,
+    return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboard.id, body,
       {'headers': headers})
       .pipe(
         catchError((err) => {
@@ -79,15 +146,7 @@ export class MoodboardService {
           }
         )
       );
-  }
-
-  removeImgFromMoodboard(imgId: number, moodboardId: number) {
-    console.log("[MOODBOARD-SERVICE] remove image: " + imgId + " from Moodboard: " + moodboardId + " function")
-  }
-
-  updateMoodboard(moodboardId: number) {
-    console.log("[MOODBOARD-SERVICE] update Moodboard function")
-  }
+  }*/
 
   deleteMoodboard(moodboardId: number, jwt: string) {
     console.log("[MOODBOARD-SERVICE] delete Moodboard function")
@@ -96,7 +155,7 @@ export class MoodboardService {
       'Authorization': 'Bearer ' + jwt,
     };
 
-    return this.http.delete(this.urls.moodboard_URL + '/' +  moodboardId,
+    return this.http.delete(this.urls.moodboard_URL + '/' + moodboardId,
       {'headers': headers})
       .pipe(
         catchError((err) => {
@@ -106,4 +165,6 @@ export class MoodboardService {
         )
       );
   }
+
+
 }

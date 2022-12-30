@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {Posting} from "../models/posting";
 import {catchError, map} from 'rxjs';
 import {Urls} from "../helper/urls";
-import {User} from "../models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,8 @@ export class PostingService {
 
   //----------Ohne Authentifizierung----------
   getAllPostings() {
+    console.log("[POSTING-SERVICE] get al Postings function")
+
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*')
       .pipe(
         map((res: any) => {
@@ -28,12 +29,13 @@ export class PostingService {
         }));
   }
 
-
   getOnePosting(Id: number) {
     console.log("[POSTING-SERVICE] get one Postings function")
   }
 
   getAllPostingsInMoodboard(moodboardId: number) {
+    console.log("[POSTING-SERVICE] get all Postings in moodboard function")
+
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
       .pipe(
         map((res: any) => {
@@ -42,6 +44,7 @@ export class PostingService {
         map((posting: Posting[]) => {
           return posting.map((posting) => {
             posting.attributes.image.data.attributes.url = this.urls.strapi_URL + posting.attributes.image.data.attributes.url;
+            console.log(posting.id);
             return posting;
           })
         }));
@@ -49,8 +52,10 @@ export class PostingService {
 
   //----------Mit Authentifizierung----------
   createPosting(posting: any, formData: FormData, jwt: string) {
+    console.log("[POSTING-SERVICE] create Postings function")
+
     const headers = {
-      'content-type': 'application/json', //multipart/form-data
+      'content-type': 'application/json',
       'Authorization': 'Bearer ' + jwt,
     };
 
@@ -103,6 +108,8 @@ export class PostingService {
   }
 
   deletePosting(id: number, jwt: string) {
+    console.log("[POSTING-SERVICE] delete Postings function")
+
     const headers = {
       'Authorization': 'Bearer ' + jwt,
     };
@@ -119,6 +126,8 @@ export class PostingService {
   }
 
   deleteImage(id: number, jwt: string) {
+    console.log("[POSTING-SERVICE] delete image Postings function")
+
     const headersImg = {
       'Authorization': 'Bearer ' + jwt,
     };

@@ -56,6 +56,7 @@ button:hover {
   margin-bottom: 20px;
 }
 
+
 input {
   border-radius: 30px !important;
   border: none !important;
@@ -113,3 +114,4 @@ label {
 }
 
 .dropdown:hover .dropdown-content {display: block; border-radius: 15px}
+

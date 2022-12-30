@@ -1,0 +1,45 @@
+<mat-dialog-content>
+
+  <div class="detailHeader">
+    <h3>Create Posting</h3>
+    <button mat-button mat-dialog-close>X</button>
+  </div>
+
+
+  <form>
+
+    <div class="form-group">
+      <label for="img">Image*</label>
+      <div><img id="preview" src="#" alt="" /></div>
+      <input type="file" id="img" name="img" accept="image/*" (change)="getFile($any($event).target.files);">
+    </div>
+
+    <div class="form-group">
+      <label for="title_Input">Title*</label>
+      <input [(ngModel)]="title" type="text" class="form-control" id="title_Input"  name="title">
+    </div>
+
+    <div class="form-group">
+      <label for="description_Input">Description</label>
+      <input [(ngModel)]="description" type="text" class="form-control" id="description_Input"  name="description">
+    </div>
+
+    <div class="form-group">
+      <label for="tag">Category</label>
+    <select id="tag" [(ngModel)]="tag" name="tag">
+      <option value="Other">Other</option>
+      <option value="Color">Color</option>
+      <option value="Font">Font</option>
+      <option value="Wireframe">Wireframe</option>
+      <option value="UI-Element">UI-Element</option>
+      <option value="Icon">Icon</option>
+    </select>
+    </div>
+
+    <button (click)="addPosting()" type="submit" class="btn btn-primary">ADD</button>
+
+  </form>
+
+</mat-dialog-content>
+
+
