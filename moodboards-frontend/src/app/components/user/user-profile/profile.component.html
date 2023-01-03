@@ -1,7 +1,7 @@
 <div class="contentContainer" xmlns="http://www.w3.org/1999/html">
 
-  <div class="profileContainer">
-    <div class="profileSidebar">
+  <div class="pageContainer">
+    <div class="sidebar">
       <button class="sidebarBtn" (click)="editUserData()">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
              viewBox="0 0 16 16">
@@ -38,44 +38,46 @@
       </button>
     </div>
 
-    <div class="profileContent">
+    <div class="pageContent">
 
       <div *ngIf="currentUser.user">
-        <div class="userInfo">
-          <h1 >@{{ currentUser.user.username }}</h1>
-          <p class="profileDescr" >{{ currentUser.user.description }}</p>
+
+        <div class="center">
+          <div class="userInfo">
+            <h1>@{{ currentUser.user.username }}</h1>
+            <p class="profileDescr">{{ currentUser.user.description }}</p>
+          </div>
         </div>
 
 
         <div *ngIf="userCurrentlyEdit">
 
           <label>Username</label>
-          <input [(ngModel)]="this.currentUser.user.username" type="text" name="username" id="username" required minlength="3" maxlength="20" />
+          <input [(ngModel)]="this.currentUser.user.username" type="text" name="username" id="username" required
+                 minlength="3" maxlength="20"/>
 
           <label>Email</label>
           <input [(ngModel)]="this.currentUser.user.email" type="email" name="email" id="email"/>
 
           <label>Description</label>
-          <textarea  [(ngModel)]="this.currentUser.user.description" name="description" id="description"></textarea>
+          <textarea [(ngModel)]="this.currentUser.user.description" name="description" id="description"></textarea>
 
           <button (click)="saveChanges()">Save</button>
         </div>
 
         <div class="profileNavi">
-          <h3 id="postingNav" (click)="showPostings();" >YOUR POSTINGS</h3>
+          <h3 id="postingNav" (click)="showPostings();">YOUR POSTINGS</h3>
           <h3 id="moodboardNav" (click)="showMoodboards();">YOUR MOODBOARDS</h3>
         </div>
 
         <!--Users Postings-->
-        <div id="postingsContainer">
-          <app-single-posting-card class="overview" *ngFor="let post of postings$ | async"
-                                   [posting]="post"></app-single-posting-card>
+        <div class="overviewContainer" id="postingsContainer">
+          <app-single-posting-card class="single-postingCard" *ngFor="let post of postings$ | async" [posting]="post"></app-single-posting-card>
         </div>
 
         <!--Users Moodboards-->
-        <div id="moodboardContainer">
-          <app-single-moodboard-card class="overview" *ngFor="let moodboard of moodboards$ | async"
-                                     [moodboard]="moodboard"></app-single-moodboard-card>
+        <div class="overviewContainer" id="moodboardContainer">
+          <app-single-moodboard-card *ngFor="let moodboard of moodboards$ | async" [moodboard]="moodboard"></app-single-moodboard-card>
         </div>
 
 

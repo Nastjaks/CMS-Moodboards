@@ -1,0 +1,14 @@
+footer{
+  margin-top: 100px;
+  background-color: #403b67;
+  padding: 30px 100px;
+}
+
+p {
+  color: #fff;
+  text-transform: uppercase;
+  margin-right: 50px;
+}
+.footerContent{
+  display: flex;
+}

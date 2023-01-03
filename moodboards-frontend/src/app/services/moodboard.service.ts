@@ -89,6 +89,37 @@ export class MoodboardService {
             'Authorization': 'Bearer ' + jwt,
           };
 
+          const body = JSON.stringify({
+            data: {postings: postings}
+          });
+
+          return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe()
+        }
+      )
+  }
+
+  removeImgFromMoodboard(imgId: number, moodboardId: number, jwt: string) {
+    console.log("[MOODBOARD-SERVICE] remove image: " + imgId + " from Moodboard: " + moodboardId + " function");
+
+    let postings: number[] = [];
+
+    this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
+      .subscribe((res: any) => {
+          for (let i = 0; i < res.data.length; i++) {
+            postings.push(res.data[i].id);
+          }
+
+        for( var i = 0; i < postings.length; i++){
+          if ( postings[i] === imgId) {
+            postings.splice(i, 1);
+          }
+        }
+        console.log(postings);
+
+          const headers = {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + jwt,
+          };
 
           const body = JSON.stringify({
             data: {postings: postings}
@@ -99,13 +130,8 @@ export class MoodboardService {
       )
   }
 
-  removeImgFromMoodboard(imgId: number, moodboardId: number) {
-    console.log("[MOODBOARD-SERVICE] remove image: " + imgId + " from Moodboard: " + moodboardId + " function")
-  }
-
   updateMoodboard(moodboardId: number, moodboard: any, jwt: string) {
     console.log("[MOODBOARD-SERVICE] update Moodboard " +moodboardId + " function")
-    console.log(moodboard)
 
     const headers = {
       'content-type': 'application/json',

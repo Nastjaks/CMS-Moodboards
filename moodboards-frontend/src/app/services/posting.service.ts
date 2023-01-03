@@ -44,7 +44,6 @@ export class PostingService {
         map((posting: Posting[]) => {
           return posting.map((posting) => {
             posting.attributes.image.data.attributes.url = this.urls.strapi_URL + posting.attributes.image.data.attributes.url;
-            console.log(posting.id);
             return posting;
           })
         }));

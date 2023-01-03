@@ -1,53 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+/**---------------------General-----------------------**/
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap");
 
 body {
-  margin: 0;
   font-family: "poppins", sans-serif;
 }
 
-.overview {
-  display: inline-grid;
+h1 {
+  padding-top: 80px;
+  padding-bottom: 37px;
+  font-weight: 700;
+  font-size: 2.5em;
+  letter-spacing: 2px;
+  color: #403b67;
+  position: relative;
 }
 
-html, body {
-  height: 100%;
+h1::before {
+  content: "";
+  position: absolute;
+  left: 60px;
+  bottom: 40px;
+  width: 150px;
+  height: 14px;
+  transform: skew(-12deg) translateX(-50%);
+  background: #ee6756;
+  z-index: -1;
 }
 
-.mat-mdc-dialog-surface.mdc-dialog__surface {
-  border-radius: 30px !important;
+p {
+  margin-bottom: 0;
 }
 
-h1, .centerText {
+.center {
   justify-content: center;
   display: flex;
-  text-align: center;
-  margin-top: 100px;
-  margin-bottom: 30px;
-  letter-spacing: 0.1em;
 }
 
-button {
-  border: none;
-  padding: 8px 20px;
-  background-color: #2b1055;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 30px;
-}
-
-button:hover {
-  background-color: #4d1792;
-  color: #fff;
-  transition: 0.4s;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-}
-
-.register-Login_Card {
-  margin: 10px;
-  padding: 20px;
+.overviewContainer {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contentContainer {
+  margin-top: 120px;
+  margin-left: 2%;
+  margin-right: 2%;
+  min-height: calc(100vh - 304px);
 }
 
 .displayAsColumn {
@@ -56,29 +55,44 @@ button:hover {
   margin-bottom: 20px;
 }
 
-
-input {
-  border-radius: 30px !important;
-  border: none !important;
-  background-color: #f1f1f1 !important;
-  padding: 8px !important;
+.navigation {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 100000;
 }
 
-
-label {
-  margin-left: 15px;
+/**--------------posting Card overviwe-----------------*/
+.single-postingCard {
+  width: 12.5%;
 }
 
-.contentContainer {
-  margin-left: 3%;
-  margin-right: 3%;
-}
-.noMarginBottom{
-  margin-bottom: 0;
-  margin-top: 30px;
+@media screen and (max-width: 1400px) {
+  .single-postingCard {
+    width: 20%;
+  }
 }
 
-/**------------Dropdowns---------------**/
+@media screen and (max-width: 1130px) {
+  .single-postingCard {
+    width: 33.33%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .single-postingCard {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .single-postingCard {
+    width: 100%;
+  }
+}
+
+/**--------------------Dropdowns-----------------------**/
 .dropdown{
   position: relative;
   display: inline-block;
@@ -115,3 +129,136 @@ label {
 
 .dropdown:hover .dropdown-content {display: block; border-radius: 15px}
 
+
+/*---------------------Buttons-------------------------*/
+
+button, .cBtn {
+  border: none ;
+  padding: 8px 20px ;
+  background-color: #403b67 ;
+  color: #fff ;
+  transition: 0.4s ;
+  border-radius: 30px ;
+}
+
+button:hover, .cBtn:hover {
+  background-color: #ee6756 ;
+  color: #fff ;
+  transition: 0.4s ;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px ;
+}
+
+.mdc-button {
+  border-radius: 30px !important;
+}
+
+/*-----------------------Dialog------------------------*/
+.mat-mdc-dialog-surface.mdc-dialog__surface {
+  border-radius: 25px !important;
+}
+
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dialog-header p {
+  display: flex;
+  align-items: center;
+}
+
+/*-------------------Delete Dialog---------------------*/
+.deleteDialog {
+  height: auto;
+  width: 300px;
+}
+
+.deleteDialog-content p {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.deleteDialog-content .btn {
+  border-radius: 50px;
+}
+
+/*----------------------Toggle-------------------------*/
+/*----------------------Select-------------------------*/
+select {
+  border: none;
+  height: 40px;
+  border-radius: 40px;
+  padding-left: 10px;
+}
+select::-ms-expand {
+  display: none;
+}
+
+/*---------------------textarea------------------------*/
+textarea{
+  border: medium none !important;
+  background-color: #f1f1f1 !important;
+  border-radius: 20px !important;
+  height: 100px !important;
+  resize: none;
+}
+
+/*-----------------------Input-------------------------*/
+
+input {
+  border-radius: 20px !important;
+  border: none !important;
+  background-color: #f1f1f1 !important;
+  padding: 8px !important;
+}
+
+input:focus-visible {
+  outline: 2px solid #ee6756 !important;
+}
+input:focus {
+  box-shadow: none !important;
+}
+
+label {
+  margin-left: 15px;
+}
+
+/*--------------------Login/Regist---------------------*/
+.register-Login_Card {
+  margin: 10px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/*----------------------Sidebar-----------------------*/
+.pageContainer {
+  display: flex;
+}
+
+.pageContent {
+  width: 85%;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  margin-top: 90px;
+  justify-content: left;
+  width: 15%;
+}
+.sidebarBtn {
+  color: gray;
+  background-color: #fff;
+  margin-top: 5px;
+  display: flex;
+}
+.sidebarBtn svg {
+  margin-top: 3px;
+  margin-right: 10px;
+}
+.sidebarBtn:hover {
+  background-color: #ee6756;
+  color: #fff;
+  box-shadow: none;
+}

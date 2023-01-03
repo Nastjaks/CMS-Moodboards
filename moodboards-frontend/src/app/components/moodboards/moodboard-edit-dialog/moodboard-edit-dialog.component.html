@@ -1,30 +1,32 @@
 <mat-dialog-content>
 
-  <div class="detailHeader">
-    <h3>Edit Moodboard</h3>
+  <div class="dialog-header">
+    <p>Edit Moodboard</p>
     <button mat-button mat-dialog-close>X</button>
   </div>
 
 
-  <form>
+  <form class="displayAsColumn">
 
-    <div class="form-group">
+    <div class="displayAsColumn title">
       <label for="title_Input">Title*</label>
-      <input [(ngModel)]="newTitle" type="text" class="form-control" id="title_Input"  name="title">
+      <input [(ngModel)]="newTitle" type="text" class="form-control" id="title_Input" name="title">
     </div>
 
-    <div class="form-group">
+    <div cclass="displayAsColumn">
       <label for="description_Input">Description</label>
-      <input [(ngModel)]="newDescription" type="text" class="form-control" id="description_Input"  name="description">
+      <textarea [(ngModel)]="newDescription" class="form-control" type="text" id="description_Input" name="description"></textarea>
     </div>
 
-    <div class="form-group ">
-      <p>Visibility</p>
-      <p>private</p>
-      <label class="switch" for="visibility_Input">
-        <input  [checked]="newVisibilityPrivate" (change)="newVisibilityPrivate = !newVisibilityPrivate"  type="checkbox" id="visibility_Input"   name="visibility">
-        <span class="slider round"></span>
-      </label>
+    <div class="displayAsColumn">
+      <div class="toggleSec">
+        <p>set visibility private</p>
+        <label class="toggle-switch" for="visibility_Input">
+          <input [checked]="newVisibilityPrivate" (change)="newVisibilityPrivate = !newVisibilityPrivate"
+                 type="checkbox" id="visibility_Input" name="visibility">
+          <span class="toggle-slider round"></span>
+        </label>
+      </div>
     </div>
 
     <button (click)="updateMoodboard()" type="submit">save changes</button>

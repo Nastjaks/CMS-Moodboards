@@ -1,10 +1,10 @@
 #preview {
   max-width: 400px;
   margin-bottom: 20px;
+  margin-top: 20px;
   border-radius: 20px;
 }
 
-.detailHeader{
-  display: flex;
-  justify-content: space-between;
+mat-dialog-content{
+  width: 400px;
 }

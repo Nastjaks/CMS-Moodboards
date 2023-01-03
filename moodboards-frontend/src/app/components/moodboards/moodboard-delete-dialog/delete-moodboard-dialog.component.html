@@ -1,8 +1,12 @@
-<mat-dialog-content>
+<mat-dialog-content class="deleteDialog">
 
-  <button mat-button mat-dialog-close="">X</button>
+  <div class="dialog-header">
+    <p>Delete Moodboard</p>
+    <button mat-button mat-dialog-close="">X</button>
+  </div>
 
-  <p> DO YOU REALLY WANT TO DELETE YOUR MOODBOARD?</p>
-  <button (click)="deleteMoodboard()" type="submit" class="btn btn-danger">DELETE</button>
-
+  <div class="deleteDialog-content displayAsColumn ">
+    <p> DO YOU REALLY WANT TO DELETE this MOODBOARD?</p>
+    <button (click)="deleteMoodboard()" type="submit" class="btn btn-danger">DELETE</button>
+  </div>
 </mat-dialog-content>

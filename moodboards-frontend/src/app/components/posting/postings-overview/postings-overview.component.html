@@ -1,4 +1,11 @@
 <div class="contentContainer">
-  <h1>POSTINGS</h1>
-  <app-single-posting-card class="overview" *ngFor="let post of posting$ | async" [posting]="post"></app-single-posting-card>
+
+  <div class="center">
+    <h1>DISCOVER</h1>
+  </div>
+
+  <div class="overviewContainer">
+    <app-single-posting-card class="single-postingCard" *ngFor="let post of posting$ | async" [posting]="post"></app-single-posting-card>
+  </div>
+
 </div>

@@ -39,11 +39,6 @@ export class MoodboardDetailComponent implements OnInit {
               public dialogPanel: MatDialog,
               private route: ActivatedRoute,) {
 
-    this.dialogConfig.data = {
-      user: this.currentUser,
-      moodboard: this.moodboard
-    };
-
     this.moodboard = history.state.moodboard;
     this.moodboardCreatorId = this.moodboard.attributes.moodboard_creator.data.id;
 
@@ -60,12 +55,11 @@ export class MoodboardDetailComponent implements OnInit {
         )
       );
     }
-
-
   }
 
   ngOnInit(): void {
-      this.postingsInMoodboard$ = this.postingService.getAllPostingsInMoodboard(this.moodboard.id);
+    this.postingsInMoodboard$ = this.postingService.getAllPostingsInMoodboard(this.moodboard.id);
+    this.dialogConfig.data = {user: this.currentUser, moodboard: this.moodboard};
     //TODO: OPEN MOODBOARD ON RELOAD
   }
 
@@ -78,7 +72,7 @@ export class MoodboardDetailComponent implements OnInit {
   }
 
   /**
-  slideToggleChange(event: MatSlideToggleChange) {
+   slideToggleChange(event: MatSlideToggleChange) {
     this.checked = event.source.checked;
     if (this.checked) {
       this.result = "private";
@@ -89,7 +83,7 @@ export class MoodboardDetailComponent implements OnInit {
     }
   }
 
-  changeMoodboardVisibility(change: boolean) {
+   changeMoodboardVisibility(change: boolean) {
     this.moodboardService.changeVisibility(this.moodboard, this.currentUser.jwt, change)
       .subscribe({
         next: data => {

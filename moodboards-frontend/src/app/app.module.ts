@@ -34,6 +34,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import { MoodboardCreateDialogComponent } from './components/moodboards/moodboard-create-dialog/moodboard-create-dialog.component';
 import { MoodboardEditDialogComponent } from './components/moodboards/moodboard-edit-dialog/moodboard-edit-dialog.component';
+import { FooterComponent } from './components/general/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { MoodboardEditDialogComponent } from './components/moodboards/moodboard-
     DeleteMoodboardDialogComponent,
     MoodboardCreateDialogComponent,
     MoodboardEditDialogComponent,
+    FooterComponent,
 
   ],
   imports: [

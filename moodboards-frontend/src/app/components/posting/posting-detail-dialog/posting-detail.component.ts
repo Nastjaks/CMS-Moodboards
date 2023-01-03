@@ -58,6 +58,7 @@ export class PostingDetailComponent {
   addImageToMoodboard(moodboardId: number) {
     if (moodboardId) {
       this.moodboardService.addImgToMoodboard(this.posting.id, moodboardId, this.currentUser.jwt);
+      //this.moodboardService.removeImgFromMoodboard(this.posting.id, moodboardId, this.currentUser.jwt);
       this.alert.openAlert('add' + this.posting.id + ' to moodboard' + moodboardId);
     } else {
       this.alert.openAlert("You have to select a Moodboard!");

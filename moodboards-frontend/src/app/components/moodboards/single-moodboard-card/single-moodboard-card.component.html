@@ -1,5 +1,5 @@
 <div class="moodboardCard" (click)="showMoodboardDetails()">
-
+<div>
   <div class="ImgContainer">
     <div>
       <div class="oneImg" *ngIf="moodboard.attributes.postings.data.length == 1">
@@ -30,11 +30,9 @@
     </div>
   </div>
 
-  <div class="moodboardInfo">
-    <div>
+  <div class="singleCardInfo">
       <p><b>{{moodboard.attributes.title}}</b></p>
-      <p class="moodboardSizeInfo">Contains {{moodboard.attributes.postings.data.length}} Postings</p>
-    </div>
+      <p class="singleCardTag">Contains {{moodboard.attributes.postings.data.length}} Postings</p>
   </div>
-
+</div>
 </div>

@@ -1,41 +1,6 @@
-.profileSidebar {
-  display: flex;
-  flex-direction: column;
-  margin-top: 90px;
-  justify-content: left;
-  width: 15%;
-}
-
-.profileContainer {
-  display: flex;
-}
-
-.profileContent {
-  width: 85%;
-}
-
 .profileDescr {
   text-align: center;
 }
-
-.sidebarBtn {
-  color: gray;
-  background-color: #fff;
-  margin-top: 5px;
-  display: flex;
-}
-
-.sidebarBtn svg {
-  margin-top: 3px;
-  margin-right: 10px;
-}
-
-.sidebarBtn:hover {
-  background-color: #3f127b;
-  color: #fff;
-  box-shadow: none;
-}
-
 .userInfo {
   margin-bottom: 95px;
 }
@@ -67,3 +32,4 @@
 .profileNavi h3 {
   margin: 15px;
 }
+

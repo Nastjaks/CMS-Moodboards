@@ -1,20 +1,20 @@
-<header>
+<nav>
 
-  <a class="logo" routerLink="/">
-    <div>Moodboards.</div>
-    <div class="underLogo">your better design</div>
-  </a>
+  <a class="logo" routerLink="/">Moodboards<span class="dott">.</span></a>
 
+  <input type="checkbox" id="burgerMenu">
+  <label for="burgerMenu">|||</label>
 
-  <ul>
-    <li><a routerLink="/postings">Postings</a></li>
-    <li><a routerLink="/moodboards">Moodboards</a></li>
-    <li  *ngIf="!isLoggedIn" ><a routerLink="/login">Login</a></li>
-    <li  *ngIf="!isLoggedIn"><a routerLink="/register">Register</a></li>
+  <div class="menu">
+    <ul class="list">
+      <li><a routerLink="/postings">Postings</a></li>
+      <li><a routerLink="/moodboards">Moodboards</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/register">Sign up</a></li>
 
-    <li *ngIf="isLoggedIn"><a routerLink="/profile">Profile</a></li>
-    <li *ngIf="isLoggedIn"><a href (click)="logOut()">Logout</a></li>
-  </ul>
+      <li *ngIf="isLoggedIn"><a routerLink="/profile">Profile</a></li>
+      <li *ngIf="isLoggedIn"><a href (click)="logOut()">Logout</a></li>
+    </ul>
+  </div>
 
-
-</header>
+</nav>

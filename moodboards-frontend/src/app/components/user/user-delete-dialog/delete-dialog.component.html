@@ -1,10 +1,14 @@
-<mat-dialog-content>
+<mat-dialog-content class="deleteDialog">
 
-  <button mat-button mat-dialog-close>X</button>
+  <div class="dialog-header">
+    <p>Delete Profile</p>
+    <button mat-button mat-dialog-close>X</button>
+  </div>
 
-  <p> DO YOU WANT TO DELETE YOUR ACCOUNT PERMANENTLY?</p>
-  <button (click)="deleteUserData()" type="submit" class="btn btn-danger">DELETE</button>
-
+  <div class="deleteDialog-content displayAsColumn ">
+    <p> DO YOU WANT TO DELETE YOUR ACCOUNT PERMANENTLY?</p>
+    <button (click)="deleteUserData()" type="submit" class="btn btn-danger">DELETE</button>
+  </div>
 
 </mat-dialog-content>
 

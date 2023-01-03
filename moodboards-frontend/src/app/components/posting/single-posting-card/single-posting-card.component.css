@@ -1,42 +1,32 @@
 .postingCard{
   margin: 5px;
   padding: 10px;
-  display: inline-grid;
+  display: flex;
   border-radius: 30px;
-  transition: 0.4s;
+  transition: 0.5s;
 }
 
 .postingCard:hover{
-  transform: scale(1.02);
+  transform: scale(1.03);
   transition: 0.4s;
   border-radius: 30px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   cursor: pointer;
 }
 
-img {
-  max-height: 500px;
-  border-radius: 20px;
-  border: 1px solid #f6f6f6;
+.singleCardInfo{
+  margin-left: 7px;
+  margin-top: 7px;
 }
 
-
-.postingTagInfo{
+.singleCardTag{
   font-size: 14px;
   color: gray;
   margin-top: 0;
 }
 
-.postingCardInfo{
-  margin-left: 5px;
-  margin-top: 10px;
-}
-
-p {
-  margin-bottom: 0;
-}
-
-.chip{
-  background-color: rgba(43, 16, 85, 0.54);
-  color: #ffffff
+img {
+  border-radius: 20px;
+  border: 1px solid #f6f6f6;
+  width: 100%;
 }
