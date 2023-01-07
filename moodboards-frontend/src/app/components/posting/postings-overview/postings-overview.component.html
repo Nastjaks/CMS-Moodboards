@@ -5,7 +5,8 @@
   </div>
 
   <div class="overviewContainer">
-    <app-single-posting-card class="single-postingCard" *ngFor="let post of posting$ | async" [posting]="post"></app-single-posting-card>
+    <app-single-posting-card class="single-postingCard" *ngFor="let post of posting$ | async" [posting]="post">
+    </app-single-posting-card>
   </div>
 
 </div>

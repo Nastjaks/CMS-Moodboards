@@ -1,6 +1,6 @@
 <mat-dialog-content>
 
-  <div>
+  <div class="postingImgContainer">
     <img alt="Image not working" [src]="posting.attributes.image.data.attributes.url">
   </div>
 
@@ -49,19 +49,19 @@
         <div>
           <div class="displayAsColumn">
             <label for="title">Title</label>
-            <input [(ngModel)]="this.posting.attributes.title" type="text" class="form-control" id="title" name="title">
+            <input [(ngModel)]="this.currentTitle" type="text" class="form-control" id="title" name="title">
           </div>
 
           <div class="displayAsColumn">
             <label for="description">Description</label>
-            <textarea [(ngModel)]="this.posting.attributes.description" type="text" class="form-control"
+            <textarea [(ngModel)]="this.currentDescription" type="text" class="form-control"
                       id="description"
                       name="description"></textarea>
           </div>
 
           <div class="displayAsColumn">
             <label for="tag">Category</label>
-            <select id="tag" [(ngModel)]="this.posting.attributes.tag" name="tag">
+            <select id="tag" [(ngModel)]="this.currentTag" name="tag">
               <option value="Other">Other</option>
               <option value="Color">Color</option>
               <option value="Font">Font</option>

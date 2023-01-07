@@ -14,8 +14,8 @@ export class SingleMoodboardCardComponent {
   constructor(private location: Location, private router: Router) {  }
 
   showMoodboardDetails() {
-    console.log(this.moodboard);
     this.router.navigateByUrl('/moodboard/' + this.moodboard.id, { state: {moodboard: this.moodboard } });
+    //this.router.navigateByUrl('/moodboard/' + this.moodboard.id);
     //this.location.go('/moodboard/' + this.moodboard.id);
   }
 

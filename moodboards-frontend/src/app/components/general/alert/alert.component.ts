@@ -12,7 +12,7 @@ export class AlertComponent {
   }
 
   openAlert(message: string) {
-    this._snackBar.open(message, 'CLOSE',{duration: 5000});
+    this._snackBar.open(message, 'X',{duration: 5000});
   }
 
 

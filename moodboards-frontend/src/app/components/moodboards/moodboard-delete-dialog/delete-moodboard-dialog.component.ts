@@ -20,8 +20,8 @@ export class DeleteMoodboardDialogComponent {
   }
 
   deleteMoodboard() {
-    this.moodboardService.deleteMoodboard(this.moodboard.id, this.currentUser.jwt).subscribe(res => {
-      this.router.navigate(["/profile"]).then(r => window.location.reload());
+    this.moodboardService.deleteMoodboard(this.moodboard.id, this.currentUser.jwt).subscribe(() => {
+      this.router.navigate(["/profile"]).then(() => window.location.reload());
     });
   }
 }

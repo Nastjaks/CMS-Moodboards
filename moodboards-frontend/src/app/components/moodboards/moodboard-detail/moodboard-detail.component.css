@@ -1,0 +1,110 @@
+.moodboardInfo {
+  margin-bottom: 95px;
+}
+
+.visible_Icon {
+  background-color: #d7d7d7;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.moodboardInfo-Head {
+  display: flex;
+  justify-content: center;
+}
+
+.visible_Container {
+  display: flex;
+  align-self: center;
+  margin-left: 20px;
+  margin-bottom: -35px;
+}
+
+.moodboardInfo-user {
+  margin-top: -40px;
+  margin-bottom: 20px;
+}
+
+
+/*-------------------Posting Card----------------------------*/
+
+.postingCard {
+  margin: 5px;
+  padding: 10px;
+  display: flex;
+  border-radius: 30px;
+  transition: 0.5s;
+}
+
+.postingCard:hover {
+  transform: scale(1.03);
+  transition: 0.4s;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  cursor: pointer;
+}
+
+.singleCardInfo {
+  margin-left: 7px;
+  margin-top: 7px;
+}
+
+.singleCardTag {
+  font-size: 14px;
+  color: gray;
+  margin-top: 0;
+}
+
+.postingCard img {
+  border-radius: 20px;
+  border: 1px solid #f6f6f6;
+  width: 100%;
+}
+
+
+/*-------------------Posting remove stuff-----------------------*/
+.removeFromMood-Container {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 10px;
+  margin-bottom: -28px;
+  position: relative;
+  z-index: 1;
+  top: 5px;
+  font-weight: 700;
+}
+
+.postingCard:hover .removeFromMood-Icon{
+  visibility: visible;
+
+}
+
+.removeFromMood-Icon {
+  visibility: hidden;
+  background-color: #f3f3f3;
+  padding: 2px 9px;
+  border-radius: 50%;
+}
+
+.removeFromMood-Icon:hover {
+  background-color: #ee6756;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: #fff;
+}
+
+.img-gradient {
+  position: relative;
+}
+
+.postingCard:hover .img-gradient::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+  border-radius: 20px;
+}

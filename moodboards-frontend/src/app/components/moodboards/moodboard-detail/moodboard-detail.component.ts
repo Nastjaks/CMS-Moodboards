@@ -1,29 +1,32 @@
 import {Component, OnInit} from '@angular/core';
-import {Moodboard} from "../../../models/moodboard";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
-import {map, Observable} from "rxjs";
-import {Posting} from "../../../models/posting";
-import {PostingService} from "../../../services/posting.service";
+import {Observable} from "rxjs";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
-import {DeleteMoodboardDialogComponent} from "../moodboard-delete-dialog/delete-moodboard-dialog.component";
+import {Moodboard} from "../../../models/moodboard";
+import {Posting} from "../../../models/posting";
 import {Auth_Model} from "../../../models/auth_Model";
+import {PostingService} from "../../../services/posting.service";
 import {StorageService} from "../../../services/storage.service";
 import {MoodboardService} from "../../../services/moodboard.service";
+import {DeleteMoodboardDialogComponent} from "../moodboard-delete-dialog/delete-moodboard-dialog.component";
 import {MoodboardEditDialogComponent} from "../moodboard-edit-dialog/moodboard-edit-dialog.component";
+import {PostingDetailComponent} from "../../posting/posting-detail-dialog/posting-detail.component";
+import {AlertComponent} from "../../general/alert/alert.component";
+import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-moodboard-detail',
   templateUrl: './moodboard-detail.component.html',
-  styleUrls: ['./moodboard-detail.component.css']
+  styleUrls: ['./moodboard-detail.component.css'],
+  providers: [AlertComponent],
 })
 export class MoodboardDetailComponent implements OnInit {
 
   currentUser!: Auth_Model;
-
-  moodboard$!: Observable<Moodboard>;
   moodboard!: Moodboard;
   postingsInMoodboard$!: Observable<Posting[]>;
+
   isLoggedIn = false;
   isOwner = false;
   moodboardCreatorId: number = 1;
@@ -31,15 +34,37 @@ export class MoodboardDetailComponent implements OnInit {
   //result: string = "public";
   dialogConfig = new MatDialogConfig();
 
+  mood!: Moodboard //TODO GET SINGLE MOODBOARD BY PARAM
+
   constructor(private router: Router,
               private location: Location,
               private storageService: StorageService,
               private postingService: PostingService,
               private moodboardService: MoodboardService,
               public dialogPanel: MatDialog,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute,
+              private alert: AlertComponent,
+  ) {
+    /*
+     this.moodboard$ = this.moodboardService.getOneMoodboard(this.currentUser.user.id).pipe(
+       map((moodboard) =>
+         this.moodboard = moodboard
+       )
+     );*/
 
-    this.moodboard = history.state.moodboard;
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params: any) => {
+      if (params.id != null) {
+        this.moodboardService.getOneMoodboard(params.id).subscribe(moodboard => this.moodboard = moodboard);
+      }
+    })
+
+    if (history.state.moodboard) {
+      this.moodboard = history.state.moodboard;
+    }
+    this.postingsInMoodboard$ = this.postingService.getAllPostingsInMoodboard(this.moodboard.id);
     this.moodboardCreatorId = this.moodboard.attributes.moodboard_creator.data.id;
 
     this.currentUser = this.storageService.getUser();
@@ -49,18 +74,10 @@ export class MoodboardDetailComponent implements OnInit {
       if (this.moodboardCreatorId == this.currentUser.user.id) {
         this.isOwner = true;
       }
-      this.moodboard$ = this.moodboardService.getOneMoodboard(this.currentUser.user.id).pipe(
-        map((moodboard) =>
-          this.moodboard = moodboard
-        )
-      );
     }
-  }
 
-  ngOnInit(): void {
-    this.postingsInMoodboard$ = this.postingService.getAllPostingsInMoodboard(this.moodboard.id);
+
     this.dialogConfig.data = {user: this.currentUser, moodboard: this.moodboard};
-    //TODO: OPEN MOODBOARD ON RELOAD
   }
 
   openDeleteDialog() {
@@ -94,4 +111,18 @@ export class MoodboardDetailComponent implements OnInit {
         }
       });
   }**/
+
+  showPostDetails(post: Posting) {
+    this.dialogPanel.open(PostingDetailComponent, {
+      data: {
+        posting: post
+      }
+    });
+  }
+
+  removeImgFromMoodboard(imgId: number) {
+    console.log(this.moodboard.id + " " + imgId);
+    this.moodboardService.removeImgFromMoodboard(imgId, this.moodboard.id, this.currentUser.jwt);
+    this.alert.openAlert('remove posting from Moodboard');
+  }
 }

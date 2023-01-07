@@ -1,7 +1,7 @@
 .moodboardCard {
   margin: 5px;
   padding: 10px;
-  display: flex;
+  display: flex ;
   border-radius: 30px;
   transition: 0.5s;
 }

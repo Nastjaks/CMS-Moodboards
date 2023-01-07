@@ -42,16 +42,16 @@ export class DeleteDialogComponent implements OnInit {
         let moodboardID = moodboard[moodboardDetail].id
         this.userService.deleteUserMoodboards(moodboardID, jwt).subscribe(res => console.log(res));
       }
-    }).then(r =>
+    }).then(() =>
       this.postings$.forEach((posting) => {
         for (const postingDetail in posting) {
           let postingID = posting[postingDetail].id;
           let postingIDImage = posting[postingDetail].attributes.image.data.id;
-          this.postingService.deleteImage(postingIDImage, jwt).subscribe( res => {
+          this.postingService.deleteImage(postingIDImage, jwt).subscribe( () => {
             this.userService.deleteUserPostings(postingID, jwt).subscribe(res => console.log(res));
           })
         }
-      }).then(r =>
+      }).then(() =>
         this.userService.deleteUserInformation(id, jwt).subscribe(res => console.log(res))
       )
     );

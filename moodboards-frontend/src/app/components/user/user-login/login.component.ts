@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
     if (username.length > 0 || password.length > 0) {
       this.authService.login(username, password)
         .subscribe({
-          next: data => {
+          next: () => {
             this.isLoginFailed = false;
             this.isLoggedIn = true;
-            this.router.navigate(['/profile']).then(r =>
+            this.router.navigate(['/profile']).then(() =>
               window.location.reload()
             );
           },

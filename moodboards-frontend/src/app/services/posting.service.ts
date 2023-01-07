@@ -14,7 +14,7 @@ export class PostingService {
 
   //----------Ohne Authentifizierung----------
   getAllPostings() {
-    console.log("[POSTING-SERVICE] get al Postings function")
+    console.log("[POSTING-SERVICE] get al Postings function");
 
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*')
       .pipe(
@@ -30,11 +30,11 @@ export class PostingService {
   }
 
   getOnePosting(Id: number) {
-    console.log("[POSTING-SERVICE] get one Postings function")
+    console.log("[POSTING-SERVICE] get one Postings function");
   }
 
   getAllPostingsInMoodboard(moodboardId: number) {
-    console.log("[POSTING-SERVICE] get all Postings in moodboard function")
+    console.log("[POSTING-SERVICE] get all Postings in moodboard function");
 
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
       .pipe(
@@ -51,7 +51,7 @@ export class PostingService {
 
   //----------Mit Authentifizierung----------
   createPosting(posting: any, formData: FormData, jwt: string) {
-    console.log("[POSTING-SERVICE] create Postings function")
+    console.log("[POSTING-SERVICE] create Postings function");
 
     const headers = {
       'content-type': 'application/json',

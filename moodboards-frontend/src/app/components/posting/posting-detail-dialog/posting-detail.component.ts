@@ -1,15 +1,15 @@
 import {Component, Inject, Optional} from '@angular/core';
-import {Posting} from "../../../models/posting";
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {Auth_Model} from "../../../models/auth_Model";
-import {StorageService} from "../../../services/storage.service";
-import {Observable} from "rxjs";
+import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {Posting} from "../../../models/posting";
 import {Moodboard} from "../../../models/moodboard";
+import {Auth_Model} from "../../../models/auth_Model";
+import {Observable} from "rxjs";
+import {StorageService} from "../../../services/storage.service";
 import {UserService} from "../../../services/user.service";
 import {MoodboardService} from "../../../services/moodboard.service";
-import {AlertComponent} from "../../general/alert/alert.component";
 import {PostingService} from "../../../services/posting.service";
+import {AlertComponent} from "../../general/alert/alert.component";
 import {DeletePostingDialogComponent} from "../posting-delete-dialog/delete-posting-dialog.component";
 
 
@@ -29,11 +29,11 @@ export class PostingDetailComponent {
   isOwner: boolean = false;
   postCurrentlyEdit: boolean = false;
 
-  //currentTitle!: string;
-  //currentDescription!: string;
-  //currentTag!: string;
+  currentTitle!: string;
+  currentDescription!: string;
+  currentTag!: string;
 
-  constructor(public dialogRef: MatDialogRef<PostingDetailComponent>,
+  constructor(
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
               private storageService: StorageService,
               private userService: UserService,
@@ -58,8 +58,7 @@ export class PostingDetailComponent {
   addImageToMoodboard(moodboardId: number) {
     if (moodboardId) {
       this.moodboardService.addImgToMoodboard(this.posting.id, moodboardId, this.currentUser.jwt);
-      //this.moodboardService.removeImgFromMoodboard(this.posting.id, moodboardId, this.currentUser.jwt);
-      this.alert.openAlert('add' + this.posting.id + ' to moodboard' + moodboardId);
+      this.alert.openAlert('add' + this.posting.attributes.title + ' to Moodboard');
     } else {
       this.alert.openAlert("You have to select a Moodboard!");
     }
@@ -67,19 +66,6 @@ export class PostingDetailComponent {
 
   openDeletePostingDialog() {
     this.dialogPanel.closeAll();
-
-    /**
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      user: this.currentUser,
-      posting: this.posting
-    };
-
-    this.dialogPanel.open(DeletePostingDialogComponent, dialogConfig).afterClosed().subscribe(
-      result => {
-        //this.location.go('/');
-      }
-    );*/
 
     this.dialogPanel.open(DeletePostingDialogComponent, {
       data: {
@@ -93,9 +79,9 @@ export class PostingDetailComponent {
   startEditPosting() {
     this.postCurrentlyEdit = true;
 
-    //this.currentTitle = this.posting.attributes.title;
-    //this.currentDescription = this.posting.attributes.description;
-    //this.currentTag = this.posting.attributes.tag;
+    this.currentTitle = this.posting.attributes.title;
+    this.currentDescription = this.posting.attributes.description;
+    this.currentTag = this.posting.attributes.tag;
   }
 
   cancelChanges() {
@@ -107,17 +93,12 @@ export class PostingDetailComponent {
     let title = (<HTMLInputElement>document.getElementById("title")).value;
     let description = (<HTMLInputElement>document.getElementById("description")).value;
     let tag = (<HTMLInputElement>document.getElementById("tag")).value;
-
-
-    let newTitle = (<HTMLInputElement>document.getElementById("title")).value;
-    let newDescription = (<HTMLInputElement>document.getElementById("description")).value;
-    let newTag = (<HTMLInputElement>document.getElementById("tag")).value;
   */
 
-    if (this.posting.attributes.title && this.posting.attributes.description) {
-      this.postingService.editPosting(this.posting.attributes.title, this.posting.attributes.description, this.posting.attributes.tag, this.posting.id, this.currentUser.jwt)
+    if (this.currentTitle.length > 0) {
+      this.postingService.editPosting( this.currentTitle, this.currentDescription, this.currentTag, this.posting.id, this.currentUser.jwt)
         .subscribe({
-          next: data => {
+          next: () => {
             this.postCurrentlyEdit = false;
             window.location.reload();
           },
@@ -125,6 +106,8 @@ export class PostingDetailComponent {
             console.log(err.error.message);
           }
         });
+    } else {
+      this.alert.openAlert("You have to add a title");
     }
   }
 

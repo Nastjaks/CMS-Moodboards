@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Moodboard} from "../models/moodboard";
-import {catchError, map} from "rxjs";
+import {catchError, map, Observable} from "rxjs";
 import {Urls} from "../helper/urls";
 
 @Injectable({
@@ -32,22 +32,16 @@ export class MoodboardService {
       );
   }
 
-  getOneMoodboard(id: number) {
-    console.log("[MOODBOARD-SERVICE] get one Moodboard function")
 
-    return this.http.get<Moodboard>(this.urls.moodboard_URL + '/' + id + '?populate*')
-      .pipe(
-        map((res: any) => {
-          return res.data;
-        }),
-        map((moodboard: Moodboard) => {
-          moodboard.attributes.postings.data.map((data) => {
-            data.attributes.image.data.attributes.url = this.urls.strapi_URL + data.attributes.image.data.attributes.url;
-            return data.attributes.image.data.attributes.url;
-          })
-          return moodboard;
-        })
-      );
+  getOneMoodboard(id: number) {
+    console.log("[MOODBOARD-SERVICE] get one Moodboard " + id + " function")
+
+    return this.http.get<Moodboard>(this.urls.moodboard_URL + '/' + id + '?populate[postings][populate][0]=image&populate[moodboard_creator][populate]').pipe(
+      map((res: any) => {
+        return res.data;
+      }),
+
+    )
   }
 
   //----------Mit Authentifizierung----------
@@ -109,12 +103,12 @@ export class MoodboardService {
             postings.push(res.data[i].id);
           }
 
-        for( var i = 0; i < postings.length; i++){
-          if ( postings[i] === imgId) {
-            postings.splice(i, 1);
+          for (var i = 0; i < postings.length; i++) {
+            if (postings[i] === imgId) {
+              postings.splice(i, 1);
+            }
           }
-        }
-        console.log(postings);
+          console.log(postings);
 
           const headers = {
             'content-type': 'application/json',
@@ -131,7 +125,7 @@ export class MoodboardService {
   }
 
   updateMoodboard(moodboardId: number, moodboard: any, jwt: string) {
-    console.log("[MOODBOARD-SERVICE] update Moodboard " +moodboardId + " function")
+    console.log("[MOODBOARD-SERVICE] update Moodboard " + moodboardId + " function")
 
     const headers = {
       'content-type': 'application/json',
@@ -145,7 +139,7 @@ export class MoodboardService {
         private: moodboard.visibilityPrivate
       }
     }, {'headers': headers}).subscribe(
-      res=> console.log(res))
+      res => console.log(res))
   }
 
   /*

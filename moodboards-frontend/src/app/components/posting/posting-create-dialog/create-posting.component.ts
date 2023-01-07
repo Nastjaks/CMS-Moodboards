@@ -43,7 +43,7 @@ export class CreatePostingComponent {
       this.postingService.createPosting(posting, this.formData, this.user.jwt);
 
       (<HTMLInputElement>document.getElementById("img")).value = "";
-      var preview =  document.getElementById('preview') as HTMLImageElement ;
+      const preview = document.getElementById('preview') as HTMLImageElement;
       preview!.src = "";
 
       this.title = '';
@@ -65,11 +65,11 @@ export class CreatePostingComponent {
     this.imageFile = <File>files[0]
     this.formData.append('files', this.imageFile, this.imageFile.name);
 
-    var preview =  document.getElementById('preview') as HTMLImageElement ;
+    const preview = document.getElementById('preview') as HTMLImageElement;
     preview!.src = URL.createObjectURL( this.imageFile);
   }
 
   close() {
-    this.router.navigate(["/profile"]).then(r => window.location.reload());
+    this.router.navigate(["/profile"]).then(() => window.location.reload());
   }
 }

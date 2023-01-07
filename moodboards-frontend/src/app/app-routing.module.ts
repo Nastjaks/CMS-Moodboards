@@ -11,11 +11,15 @@ import {MoodboardDetailComponent} from "./components/moodboards/moodboard-detail
 const routes: Routes = [
   {path: '', component: PostingsOverviewComponent},
   {path: 'postings', component: PostingsOverviewComponent},
+
+  {path: 'moodboard/:id', component: MoodboardDetailComponent},
   {path: 'moodboards', component: MoodboardsOverviewComponent},
+
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'moodboard/:id', component: MoodboardDetailComponent}, //add /:Id
+
+
 ];
 
 @NgModule({

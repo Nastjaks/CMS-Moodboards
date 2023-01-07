@@ -30,10 +30,10 @@ export class RegisterComponent  {
       if ((password == password_re)) {
         this.authService.register(username, email, password)
           .subscribe({
-            next: data => {
+            next: () => {
               console.log("User is logged in");
-              this.authService.login(username, password).subscribe(res =>
-                this.router.navigate(['/profile']).then(r =>
+              this.authService.login(username, password).subscribe(() =>
+                this.router.navigate(['/profile']).then(() =>
                   window.location.reload()
                 )
               );

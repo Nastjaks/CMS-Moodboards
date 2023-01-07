@@ -1,25 +1,13 @@
-.profileDescr {
-  text-align: center;
-}
 .userInfo {
   margin-bottom: 95px;
 }
 
-#postingsContainer {
-  display: block;
-}
-
-#moodboardContainer {
-  display: none;
-}
 
 #postingNav {
-  border-bottom: 7px solid #2b1055;
   cursor: pointer;
 }
 
 #moodboardNav {
-  border-bottom: none;
   cursor: pointer;
 }
 
@@ -33,3 +21,10 @@
   margin: 15px;
 }
 
+.active{
+  border-bottom: 7px solid #2b1055 !important;
+}
+
+.hiddeContainer{
+  display: none !important;
+}

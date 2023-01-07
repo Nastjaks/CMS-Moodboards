@@ -13,7 +13,7 @@ export class NavigationComponent implements OnInit{
   isLoggedIn = false;
   username?: string;
 
-  constructor(private storageService: StorageService, public authService: AuthService, private alert: AlertComponent) { }
+  constructor(private storageService: StorageService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
@@ -21,6 +21,5 @@ export class NavigationComponent implements OnInit{
 
   logOut(){
     this.authService.logout();
-    //this.alert.openAlert("DU wurdest ausgeloggt");
   }
 }

@@ -9,8 +9,9 @@ import {FormBuilder} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {CreatePostingComponent} from "../../posting/posting-create-dialog/create-posting.component";
 import {DeleteDialogComponent} from "../user-delete-dialog/delete-dialog.component";
-import {Router} from "@angular/router";
-import {MoodboardCreateDialogComponent} from "../../moodboards/moodboard-create-dialog/moodboard-create-dialog.component";
+import {
+  MoodboardCreateDialogComponent
+} from "../../moodboards/moodboard-create-dialog/moodboard-create-dialog.component";
 
 @Component({
   selector: 'app-user-profile',
@@ -25,14 +26,15 @@ export class ProfileComponent implements OnInit {
 
   userCurrentlyEdit: boolean = false;
 
-  //usernameFieldValue!: string;
-  //emailFieldValue!: string;
-  //descriptionFieldValue!: string;
+  currentUsername!: string;
+  currentMail!: string;
+  currentDescription!: string;
 
   constructor(private fb: FormBuilder,
               private storageService: StorageService,
               private userService: UserService,
-              public dialogPanel: MatDialog, private router: Router) { }
+              public dialogPanel: MatDialog) {
+  }
 
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
@@ -43,29 +45,29 @@ export class ProfileComponent implements OnInit {
   editUserData() {
     this.userCurrentlyEdit = true;
 
-    //this.currentUsername = this.currentUser.user.username;
-    //this.currentMail = this.currentUser.user.email;
-    //this.currentDescription = this.currentUser.user.description;
+    this.currentUsername = this.currentUser.user.username;
+    this.currentMail = this.currentUser.user.email;
+    this.currentDescription = this.currentUser.user.description;
   }
 
   saveChanges() {
     //let username = (<HTMLInputElement>document.getElementById("username")).value;
     //let email = (<HTMLInputElement>document.getElementById("email")).value;
     //let description = (<HTMLInputElement>document.getElementById("description")).value;
-   //this.currentUser.user.username = username;
-   //this.currentUser.user.email = email;
+    //this.currentUser.user.username = username;
+    //this.currentUser.user.email = email;
     //this.currentUser.user.description = description;
 
     //const id = this.currentUser.user.id;
     //const jwt = this.currentUser.jwt;
 
     if (this.currentUser.user.username && this.currentUser.user.email) {
-      this.userService.editUserInformation(this.currentUser.user.username, this.currentUser.user.email, this.currentUser.user.description, this.currentUser.user.id, this.currentUser.jwt)
+      this.userService.editUserInformation(this.currentUsername, this.currentMail, this.currentDescription, this.currentUser.user.id, this.currentUser.jwt)
         .subscribe({
-          next: data => {
+          next: () => {
             this.userCurrentlyEdit = false;
             this.storageService.saveUser(this.currentUser);
-             window.location.reload();
+            window.location.reload();
           },
           error: err => {
             console.log(err.error.message);
@@ -75,7 +77,7 @@ export class ProfileComponent implements OnInit {
   }
 
   openDeleteUserDialog() {
-    this.dialogPanel.open(DeleteDialogComponent,{
+    this.dialogPanel.open(DeleteDialogComponent, {
       data: {
         user: this.currentUser,
       }
@@ -99,16 +101,16 @@ export class ProfileComponent implements OnInit {
   }
 
   showPostings() {
-    document.getElementById('postingsContainer')!.style.setProperty("display", "block");
-    document.getElementById('moodboardContainer')!.style.setProperty("display", "none");
-    document.getElementById('postingNav')!.style.setProperty("border-bottom", "7px solid #2b1055");
-    document.getElementById('moodboardNav')!.style.setProperty("border-bottom", "none");
+    document.getElementById('moodboardContainer')!.classList.add("hiddeContainer");
+    document.getElementById('postingsContainer')!.classList.remove("hiddeContainer");
+    document.getElementById('postingNav')!.classList.add("active");
+    document.getElementById('moodboardNav')!.classList.remove("active");
   }
 
   showMoodboards() {
-    document.getElementById('postingsContainer')!.style.setProperty("display", "none");
-    document.getElementById('moodboardContainer')!.style.setProperty("display", "block");
-    document.getElementById('postingNav')!.style.setProperty("border-bottom", "none");
-    document.getElementById('moodboardNav')!.style.setProperty("border-bottom", "7px solid #2b1055");
+    document.getElementById('moodboardContainer')!.classList.remove("hiddeContainer");
+    document.getElementById('postingsContainer')!.classList.add("hiddeContainer");
+    document.getElementById('moodboardNav')!.classList.add("active");
+    document.getElementById('postingNav')!.classList.remove("active");
   }
 }

@@ -18,7 +18,7 @@ export class UserService {
   }
 
   getAllUserPostings(id: number) {
-    console.log("[USER-SERVICE] get all Postings from user function")
+    console.log("[USER-SERVICE] get all Postings from user function");
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[posting_creator][id]=' + id)
       .pipe(
         map((res: any) => {
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   getAllUserMoodboards(id: number) {
-    console.log("[USER-SERVICE] get all Moodboards from user function")
+    console.log("[USER-SERVICE] get all Moodboards from user function");
     return this.http.get<Moodboard[]>(this.urls.moodboard_URL + '?populate[postings][populate][0]=image&populate[moodboard_creator][populate]&filters[moodboard_creator][id]=' + id)
       .pipe(
         map((res: any) => {
@@ -52,7 +52,7 @@ export class UserService {
   }
 
   getUserInformation(id: number) {
-    console.log("[USER-SERVICE] get Information from user function")
+    console.log("[USER-SERVICE] get Information from user function");
     return this.http.get<User>(this.urls.users_URL + id)
       .pipe(
         map((res: any) => {
@@ -68,7 +68,7 @@ export class UserService {
   }
 
   editUserInformation(username: string, email: string, description: string, id: number, jwt: string) {
-    console.log("[USER-SERVICE] edit user function")
+    console.log("[USER-SERVICE] edit user function");
     const headers = {
       'content-type': 'application/json',
       'Authorization': 'Bearer ' + jwt,
@@ -92,7 +92,7 @@ export class UserService {
   };
 
   deleteUserInformation(id: number, jwt: string) {
-    console.log("[USER-SERVICE] get delete user function")
+    console.log("[USER-SERVICE] get delete user function");
     const headers = {
       'Authorization': 'Bearer ' + jwt,
     };

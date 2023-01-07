@@ -25,9 +25,9 @@ export class DeletePostingDialogComponent {
   }
 
   deletePosting() {
-    this.postingService.deleteImage(this.posting.attributes.image.data.id, this.currentUser.jwt).subscribe( res => {
-      this.postingService.deletePosting(this.posting.id, this.currentUser.jwt).subscribe(res => {
-        this.router.navigate(["/profile"]).then(r => window.location.reload())
+    this.postingService.deleteImage(this.posting.attributes.image.data.id, this.currentUser.jwt).subscribe( () => {
+      this.postingService.deletePosting(this.posting.id, this.currentUser.jwt).subscribe(() => {
+        this.router.navigate(["/profile"]).then(() => window.location.reload())
       });
     });
   }
