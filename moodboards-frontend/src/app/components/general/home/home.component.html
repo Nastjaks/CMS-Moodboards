@@ -1,0 +1,33 @@
+<div class="contentContainer">
+  <div class="home-Teaser-Container">
+    <div>
+    <div>
+      <p class="title-logo">MOODBOARDS</p>
+      <p class="undertitle-logo">YOUR BETTER DESIGN</p>
+    </div>
+
+    <div class="home-Teaser-box-container">
+      <div class="home-Teaser-box" routerLink="/postings">POSTINGS</div>
+      <div class="home-Teaser-box" routerLink="/moodboards">MOODBOARDS</div>
+      <div class="home-Teaser-box" routerLink="/academy">ACADEMY</div>
+    </div>
+    </div>
+  </div>
+
+  <div>
+    <section id="section10" class="demo">
+      <a href="#discover"><span></span>SCROLL</a>
+    </section>
+
+  </div>
+
+  <div class="center" id="discover">
+    <h1>DISCOVER</h1>
+  </div>
+
+  <div class="overviewContainer">
+    <app-single-posting-card class="single-postingCard" *ngFor="let post of posting$ | async" [posting]="post">
+    </app-single-posting-card>
+  </div>
+
+</div>

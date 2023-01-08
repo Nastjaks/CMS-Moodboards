@@ -52,19 +52,17 @@ export class UserService {
   }
 
   getUserInformation(id: number) {
-    console.log("[USER-SERVICE] get Information from user function");
-    return this.http.get<User>(this.urls.users_URL + id)
+    console.log("[USER-SERVICE] get Information from user function " + id); //TODO
+
+    return this.http.get<User[]>(this.urls.users_URL + id)
       .pipe(
         map((res: any) => {
-          //this.storageService.saveUser(res);
           return res;
         }),
-        catchError((err) => {
-            console.error(err);
-            throw err;
-          }
-        )
-      );
+      map((user: User) => {
+        return user
+      })
+    )
   }
 
   editUserInformation(username: string, email: string, description: string, id: number, jwt: string) {

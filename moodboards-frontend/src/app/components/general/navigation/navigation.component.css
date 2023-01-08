@@ -4,11 +4,9 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 30px 100px;
-  background-color: #403b67;
+  background-color: #002541;
+  background: linear-gradient(130deg, rgba(0,37,65,1) 30%, rgb(0, 50, 87) 60%);
 }
-
-
-
 
 nav .list {
   list-style: none;
@@ -22,23 +20,41 @@ nav a {
   text-decoration: none;
   color: #fff;
   text-transform: uppercase;
+  transition: 0.4s;
 }
 
-nav .list li a {
+nav .list li{
   font-weight: 600;
-  padding: 6px 15px;
+  padding: 6px 15px 4px 15px;
   border-radius: 20px;
   letter-spacing: 0.1em;
-  transition: 0.5s;
+  transition: 0.4s;
   text-align: center;
 }
 
-nav .list li a:hover,
-nav .list li a.active {
+nav .list:hover li,
+nav .list:active li {
+  transition: 0.4s;
   background: #ee6756;
-  color: #403b67;
-  transition: 0.5s;
+  color: #fff;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  transform: scale(1.03);
+}
+
+nav .list:hover li:not(:hover), nav .list:hover li:not(:hover) a {
+  background: transparent;
+  transform: scale(1);
+  box-shadow: none;
+  color: rgba(255, 255, 255, 0.3);
+  transition: 0.4s;
+}
+
+.signUp{
+  border: 2px solid #ee6756;
+}
+
+nav .list:hover .signUp:not(:hover){
+  border: 2px solid rgba(238, 103, 86, 0.3);
 }
 
 #burgerMenu, label {

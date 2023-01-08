@@ -9,11 +9,12 @@
     <ul class="list">
       <li><a routerLink="/postings">Postings</a></li>
       <li><a routerLink="/moodboards">Moodboards</a></li>
+      <li><a routerLink="/academy">Academy</a></li>
+
       <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
-      <li *ngIf="!isLoggedIn"><a routerLink="/register">Sign up</a></li>
+      <li *ngIf="!isLoggedIn" class="signUp"><a routerLink="/register">Sign up</a></li>
 
       <li *ngIf="isLoggedIn"><a routerLink="/profile">Profile</a></li>
-      <li *ngIf="isLoggedIn"><a href (click)="logOut()">Logout</a></li>
     </ul>
   </div>
 

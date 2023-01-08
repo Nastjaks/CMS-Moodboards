@@ -35,6 +35,9 @@ import {MatLegacyChipsModule} from "@angular/material/legacy-chips";
 import { MoodboardCreateDialogComponent } from './components/moodboards/moodboard-create-dialog/moodboard-create-dialog.component';
 import { MoodboardEditDialogComponent } from './components/moodboards/moodboard-edit-dialog/moodboard-edit-dialog.component';
 import { FooterComponent } from './components/general/footer/footer.component';
+import { HomeComponent } from './components/general/home/home.component';
+import { BlogOverviewComponent } from './components/blog/blog-overview/blog-overview.component';
+import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +61,9 @@ import { FooterComponent } from './components/general/footer/footer.component';
     MoodboardCreateDialogComponent,
     MoodboardEditDialogComponent,
     FooterComponent,
+    HomeComponent,
+    BlogOverviewComponent,
+    BlogDetailComponent,
 
   ],
   imports: [

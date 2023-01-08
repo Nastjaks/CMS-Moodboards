@@ -1,0 +1,26 @@
+.blogcontent{
+  display: flex;
+}
+h1{
+  margin: 20px;
+}
+.blogcontent p{
+  display: flex;
+  margin: 20px;
+  max-width: 60%;
+}
+
+.blogcontent img{
+  display: flex;
+  margin: 20px;
+  max-height: 500px;
+  max-width: 40%;
+  object-fit: contain;
+  border: 1px solid #f6f6f6;
+  border-radius: 30px;
+}
+.contentContainer {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+

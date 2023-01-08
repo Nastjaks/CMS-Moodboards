@@ -1,0 +1,22 @@
+<div class="contentContainer">
+
+  <div class="center">
+    <h1>ACADEMY</h1>
+  </div>
+  <div class="overviewContainer">
+    <div *ngFor="let blogpost of blogpost$ | async">
+      <div class="blogpost-container" (click)="showDetails(blogpost.id)">
+
+        <div class="img-gradient">
+          <img src="{{blogpost.attributes.thumbnail.data.attributes.url}}">
+        </div>
+
+        <p class="blogTitle">{{blogpost.attributes.title}}</p>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+

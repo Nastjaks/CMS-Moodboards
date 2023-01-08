@@ -13,13 +13,10 @@ export class NavigationComponent implements OnInit{
   isLoggedIn = false;
   username?: string;
 
-  constructor(private storageService: StorageService, public authService: AuthService) { }
+  constructor(private storageService: StorageService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = this.storageService.isLoggedIn();
   }
 
-  logOut(){
-    this.authService.logout();
-  }
 }

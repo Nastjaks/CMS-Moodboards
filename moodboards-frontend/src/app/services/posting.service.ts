@@ -14,7 +14,7 @@ export class PostingService {
 
   //----------Ohne Authentifizierung----------
   getAllPostings() {
-    console.log("[POSTING-SERVICE] get al Postings function");
+    console.log("[POSTING-SERVICE] get all Postings function");
 
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*')
       .pipe(
@@ -26,7 +26,8 @@ export class PostingService {
             posting.attributes.image.data.attributes.url = this.urls.strapi_URL + posting.attributes.image.data.attributes.url;
             return posting;
           })
-        }));
+        })
+      );
   }
 
   getOnePosting(Id: number) {
@@ -113,7 +114,7 @@ export class PostingService {
       'Authorization': 'Bearer ' + jwt,
     };
 
-    return this.http.delete(this.urls.postings_URL + '/' +  id,
+    return this.http.delete(this.urls.postings_URL + '/' + id,
       {'headers': headers})
       .pipe(
         catchError((err) => {

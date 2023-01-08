@@ -7,20 +7,21 @@ body {
 }
 
 h1 {
-  padding-top: 80px;
-  padding-bottom: 37px;
+  padding-top: 90px;
+  padding-bottom: 60px;
   font-weight: 700;
   font-size: 2.5em;
   letter-spacing: 2px;
-  color: #403b67;
+  color: #002541;
   position: relative;
+  z-index: 4;
 }
 
 h1::before {
   content: "";
   position: absolute;
   left: 60px;
-  bottom: 40px;
+  bottom: 63px;
   width: 150px;
   height: 14px;
   transform: skew(-12deg) translateX(-50%);
@@ -31,9 +32,11 @@ h1::before {
 p {
   margin-bottom: 0;
 }
+
 .alignTextCenter {
   text-align: center;
 }
+
 .center {
   justify-content: center;
   display: flex;
@@ -45,10 +48,9 @@ p {
 }
 
 .contentContainer {
-  margin-top: 120px;
   margin-left: 2%;
   margin-right: 2%;
-  min-height: calc(100vh - 304px);
+  min-height: calc(100vh - 204px);
 }
 
 .displayAsColumn {
@@ -58,7 +60,7 @@ p {
 }
 
 .navigation {
-  position: fixed;
+
   top: 0;
   right: 0;
   left: 0;
@@ -95,7 +97,7 @@ p {
 }
 
 /**--------------------Dropdowns-----------------------**/
-.dropdown{
+.dropdown {
   position: relative;
   display: inline-block;
 }
@@ -105,7 +107,7 @@ p {
   position: absolute;
   background-color: #fff;
   min-width: 160px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -129,25 +131,28 @@ p {
   border-radius: 0 0 15px 15px;
 }
 
-.dropdown:hover .dropdown-content {display: block; border-radius: 15px}
+.dropdown:hover .dropdown-content {
+  display: block;
+  border-radius: 15px
+}
 
 
 /*---------------------Buttons-------------------------*/
 
 button, .cBtn {
-  border: none ;
-  padding: 8px 20px ;
-  background-color: #403b67 ;
-  color: #fff ;
-  transition: 0.4s ;
-  border-radius: 30px ;
+  border: none;
+  padding: 8px 20px;
+  background-color: #002541;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 30px;
 }
 
 button:hover, .cBtn:hover {
-  background-color: #ee6756 ;
-  color: #fff ;
-  transition: 0.4s ;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px ;
+  background-color: #ee6756;
+  color: #fff;
+  transition: 0.4s;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
 .mdc-button {
@@ -191,12 +196,13 @@ select {
   border-radius: 40px;
   padding-left: 10px;
 }
+
 select::-ms-expand {
   display: none;
 }
 
 /*---------------------textarea------------------------*/
-textarea{
+textarea {
   border: medium none !important;
   background-color: #f1f1f1 !important;
   border-radius: 20px !important;
@@ -216,6 +222,7 @@ input {
 input:focus-visible {
   outline: 2px solid #ee6756 !important;
 }
+
 input:focus {
   box-shadow: none !important;
 }
@@ -225,7 +232,7 @@ label {
 }
 
 /*----------------------Tooltip------------------------*/
-.own-Tooltip{
+.own-Tooltip {
   position: relative;
   display: inline-block;
 }
@@ -264,7 +271,6 @@ label {
 }
 
 
-
 /*--------------------Login/Regist---------------------*/
 
 .register-Login_Card {
@@ -278,15 +284,17 @@ label {
 .pageContainer {
   display: flex;
 }
-.fullWidth{
+
+.fullWidth {
   width: 100%;
 }
-.headerWithSidebar{
+
+.headerWithSidebar {
   display: flex;
   justify-content: center;
 }
 
-.sidebar{
+.sidebar {
   position: absolute;
   left: 0;
   margin-left: 2%;
@@ -301,10 +309,12 @@ label {
   display: flex;
 
 }
+
 .sidebarBtn svg {
   margin-top: 3px;
   margin-right: 10px;
 }
+
 .sidebarBtn:hover {
   background-color: #ee6756;
   color: #fff;

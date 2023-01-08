@@ -12,6 +12,8 @@ import {DeleteDialogComponent} from "../user-delete-dialog/delete-dialog.compone
 import {
   MoodboardCreateDialogComponent
 } from "../../moodboards/moodboard-create-dialog/moodboard-create-dialog.component";
+import {AuthService} from "../../../services/auth.service";
+import {User} from "../../../models/user";
 
 @Component({
   selector: 'app-user-profile',
@@ -23,6 +25,7 @@ export class ProfileComponent implements OnInit {
   currentUser!: Auth_Model;
   postings$!: Observable<Posting[]>;
   moodboards$!: Observable<Moodboard[]>;
+  user!: User;
 
   userCurrentlyEdit: boolean = false;
 
@@ -33,35 +36,28 @@ export class ProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private storageService: StorageService,
               private userService: UserService,
-              public dialogPanel: MatDialog) {
+              public dialogPanel: MatDialog,
+              public authService: AuthService) {
+
   }
 
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
+    this.userService.getUserInformation(this.currentUser.user.id).subscribe(user => this.user = user);
+
     this.postings$ = this.userService.getAllUserPostings(this.currentUser.user.id);
     this.moodboards$ = this.userService.getAllUserMoodboards(this.currentUser.user.id);
   }
 
   editUserData() {
     this.userCurrentlyEdit = true;
-
-    this.currentUsername = this.currentUser.user.username;
-    this.currentMail = this.currentUser.user.email;
-    this.currentDescription = this.currentUser.user.description;
+    this.currentUsername = this.user.username
+    this.currentMail = this.user.email
+    this.currentDescription = this.user.description
   }
 
   saveChanges() {
-    //let username = (<HTMLInputElement>document.getElementById("username")).value;
-    //let email = (<HTMLInputElement>document.getElementById("email")).value;
-    //let description = (<HTMLInputElement>document.getElementById("description")).value;
-    //this.currentUser.user.username = username;
-    //this.currentUser.user.email = email;
-    //this.currentUser.user.description = description;
-
-    //const id = this.currentUser.user.id;
-    //const jwt = this.currentUser.jwt;
-
-    if (this.currentUser.user.username && this.currentUser.user.email) {
+    if (this.currentUsername && this.currentMail) {
       this.userService.editUserInformation(this.currentUsername, this.currentMail, this.currentDescription, this.currentUser.user.id, this.currentUser.jwt)
         .subscribe({
           next: () => {
@@ -112,5 +108,9 @@ export class ProfileComponent implements OnInit {
     document.getElementById('postingsContainer')!.classList.add("hiddeContainer");
     document.getElementById('moodboardNav')!.classList.add("active");
     document.getElementById('postingNav')!.classList.remove("active");
+  }
+
+  logOut() {
+    this.authService.logout();
   }
 }

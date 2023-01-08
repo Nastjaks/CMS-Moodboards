@@ -7,10 +7,18 @@ import {RegisterComponent} from "./components/user/user-register/register.compon
 import {LoginComponent} from "./components/user/user-login/login.component";
 import {ProfileComponent} from "./components/user/user-profile/profile.component";
 import {MoodboardDetailComponent} from "./components/moodboards/moodboard-detail/moodboard-detail.component";
+import {HomeComponent} from "./components/general/home/home.component";
+import {BlogOverviewComponent} from "./components/blog/blog-overview/blog-overview.component";
+import {BlogDetailComponent} from "./components/blog/blog-detail/blog-detail.component";
 
 const routes: Routes = [
-  {path: '', component: PostingsOverviewComponent},
+  {path: '', component: HomeComponent},
+  {path: 'posting/:id', component: HomeComponent},
   {path: 'postings', component: PostingsOverviewComponent},
+  {path: 'postings/posting/:id', component: PostingsOverviewComponent},
+
+  {path: 'academy', component: BlogOverviewComponent},
+  {path: 'academy/:id', component: BlogDetailComponent},
 
   {path: 'moodboard/:id', component: MoodboardDetailComponent},
   {path: 'moodboards', component: MoodboardsOverviewComponent},
@@ -18,7 +26,6 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-
 
 ];
 

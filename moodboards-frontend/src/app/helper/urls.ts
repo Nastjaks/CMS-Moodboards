@@ -8,6 +8,7 @@ export class Urls {
   users_URL: string = 'http://localhost:1337/api/users/';
   moodboard_URL: string = 'http://localhost:1337/api/moodboards';
   postings_URL: string = 'http://localhost:1337/api/postings';
+  blogposts_URL: string = 'http://localhost:1337/api/blogposts';
   upload_URL: string = 'http://localhost:1337/api/upload';
 }
 
