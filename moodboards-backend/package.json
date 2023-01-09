@@ -14,6 +14,7 @@
     "@strapi/plugin-users-permissions": "4.5.3",
     "@strapi/strapi": "4.5.3",
     "better-sqlite3": "7.4.6",
+    "strapi-html-editor": "^1.0.2",
     "strapi-plugin-entity-relationship-chart": "^4.1.0",
     "strapi-plugin-import-export-entries": "^1.18.0"
   },

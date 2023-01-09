@@ -50,6 +50,23 @@ export class PostingService {
         }));
   }
 
+  getAllPostingsByCategory(category: string) {
+    console.log("[POSTING-SERVICE] get all Postings function");
+
+    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[tag]=' + category)
+      .pipe(
+        map((res: any) => {
+          return res.data;
+        }),
+        map((posting: Posting[]) => {
+          return posting.map((posting) => {
+            posting.attributes.image.data.attributes.url = this.urls.strapi_URL + posting.attributes.image.data.attributes.url;
+            return posting;
+          })
+        })
+      );
+  }
+
   //----------Mit Authentifizierung----------
   createPosting(posting: any, formData: FormData, jwt: string) {
     console.log("[POSTING-SERVICE] create Postings function");
@@ -141,4 +158,5 @@ export class PostingService {
         )
       );
   }
+
 }

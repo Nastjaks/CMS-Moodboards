@@ -38,31 +38,35 @@ export class MoodboardDetailComponent implements OnInit {
               public dialogPanel: MatDialog,
               private route: ActivatedRoute,
               private alert: AlertComponent) {
-    this.route.params.subscribe((params: any) => {
-      if (params.id != null) {
-        this.moodboardService.getOneMoodboard(params.id).subscribe(moodboard => this.moodboard = moodboard);
-      }
-    })
+
   }
 
   ngOnInit(): void {
 
-    if (history.state.moodboard) {
-      this.moodboard = history.state.moodboard;
-    }
 
-    this.postingsInMoodboard$ = this.postingService.getAllPostingsInMoodboard(this.moodboard.id);
-
-    this.moodboardCreatorId = this.moodboard.attributes.moodboard_creator.data.id;
+    this.route.params.subscribe((params: any) => {
+      if (params.poId != null) {
+        console.log(params.poId)
+      }
+    })
 
     this.currentUser = this.storageService.getUser();
     this.isLoggedIn = this.storageService.isLoggedIn();
 
-    if (this.isLoggedIn) {
-      if (this.moodboardCreatorId == this.currentUser.user.id) {
-        this.isOwner = true;
-      }
-    }
+    this.route.params.subscribe((params: any) => {
+        this.moodboardService.getOneMoodboard(params.id).subscribe(
+          moodboard => {
+            this.moodboard = moodboard
+            this.moodboardCreatorId = this.moodboard.attributes.moodboard_creator.data.id;
+            this.postingsInMoodboard$ = this.postingService.getAllPostingsInMoodboard(this.moodboard.id);
+            if (this.isLoggedIn) {
+              if (this.moodboardCreatorId == this.currentUser.user.id) {
+                this.isOwner = true;
+              }
+            }
+          }
+        );
+    })
 
     this.dialogConfig.data = {user: this.currentUser, moodboard: this.moodboard};
   }
@@ -76,16 +80,20 @@ export class MoodboardDetailComponent implements OnInit {
   }
 
   showPostDetails(post: Posting) {
+    const url = this.router.url
+    this.location.go(url + '/posting/' + post.id)
+
     this.dialogPanel.open(PostingDetailComponent, {
       data: {
         posting: post
       }
+    }).afterClosed().subscribe(()=>{
+      this.location.go(url)
     });
   }
 
   removeImgFromMoodboard(imgId: number) {
-    console.log(this.moodboard.id + " " + imgId);
     this.moodboardService.removeImgFromMoodboard(imgId, this.moodboard.id, this.currentUser.jwt);
-    this.alert.openAlert('remove posting from Moodboard');
+    this.alert.openAlert('remove Posting from Moodboard');
   }
 }

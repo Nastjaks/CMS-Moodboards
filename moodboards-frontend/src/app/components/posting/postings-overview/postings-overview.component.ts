@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {Posting} from "../../../models/posting";
 import {PostingService} from "../../../services/posting.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-postings-overview',
@@ -12,10 +13,27 @@ export class PostingsOverviewComponent implements OnInit {
 
   posting$!: Observable<Posting[]>;
 
-  constructor(private postingService: PostingService) {}
+  constructor(private postingService: PostingService,  private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.posting$ = this.postingService.getAllPostings();
+    this.route.url.subscribe((params: any) => {
+      this.route.params.subscribe((params: any) => {
+        console.log(params.poId)
+      })
+
+      if (params.length == 2){
+        this.posting$ = this.postingService.getAllPostingsByCategory(params[1].path);
+
+      } else if(params.length == 1){
+        this.posting$ = this.postingService.getAllPostings();
+      }
+
+    })
+  }
+
+  setActive(name: string) {
+    //document.getElementById( "'"+name+"'")!.classList.add("active");
+    //document.getElementById('moodboardNav')!.classList.remove("active");
   }
 
 }

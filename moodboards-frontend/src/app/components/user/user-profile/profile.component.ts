@@ -14,6 +14,7 @@ import {
 } from "../../moodboards/moodboard-create-dialog/moodboard-create-dialog.component";
 import {AuthService} from "../../../services/auth.service";
 import {User} from "../../../models/user";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-user-profile',
@@ -37,11 +38,17 @@ export class ProfileComponent implements OnInit {
               private storageService: StorageService,
               private userService: UserService,
               public dialogPanel: MatDialog,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private route: ActivatedRoute) {
 
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: any) => {
+      if (params.poId != null) {
+        console.log(params.poId)
+      }
+    })
     this.currentUser = this.storageService.getUser();
     this.userService.getUserInformation(this.currentUser.user.id).subscribe(user => this.user = user);
 

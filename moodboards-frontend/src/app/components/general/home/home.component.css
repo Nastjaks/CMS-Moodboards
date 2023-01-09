@@ -1,3 +1,10 @@
+.contentContainer{
+  margin-top: 0 !important;
+}
+
+h1{
+  margin-top: 90px;
+}
 .home-Teaser-Container {
   background-image: url(https://img.freepik.com/free-vector/white-abstract-background_23-2148806276.jpg?w=2000);
   background-repeat: no-repeat, repeat;
@@ -6,7 +13,7 @@
   margin-right: -2%;
   margin-left: -2%;
 
-  height: calc(100vh - 120px);
+  height: calc(100vh - 100px);
 
   align-items: center;
   justify-content: center;
@@ -61,8 +68,9 @@
 }
 /**--------------------MOUS--------------------**/
 .demo a {
+  opacity: 0.5;
   position: absolute;
-  bottom: 20px;
+  bottom: -10px;
   left: 48%;
   z-index: 2;
   display: inline-block;
@@ -73,7 +81,7 @@
   transition: opacity .3s;
 }
 .demo a:hover {
-  opacity: .5;
+  opacity: 1;
 }
 
 

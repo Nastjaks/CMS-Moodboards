@@ -13,20 +13,41 @@ import {BlogDetailComponent} from "./components/blog/blog-detail/blog-detail.com
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'posting/:id', component: HomeComponent},
+  //Postings
+  {path: 'posting/:poId', component: HomeComponent},
   {path: 'postings', component: PostingsOverviewComponent},
-  {path: 'postings/posting/:id', component: PostingsOverviewComponent},
-
+  {path: 'postings/posting/:poId', component: PostingsOverviewComponent},
+  //Postings -- filter
+  {path: 'postings/Color', component: PostingsOverviewComponent},
+  {path: 'postings/Color/posting/:poId', component: PostingsOverviewComponent},
+  {path: 'postings/Font', component: PostingsOverviewComponent},
+  {path: 'postings/Font/posting/:poId', component: PostingsOverviewComponent},
+  {path: 'postings/Ui-Element', component: PostingsOverviewComponent},
+  {path: 'postings/Ui-Element/posting/:poId', component: PostingsOverviewComponent},
+  {path: 'postings/Icon', component: PostingsOverviewComponent},
+  {path: 'postings/Icon/posting/:poId', component: PostingsOverviewComponent},
+  {path: 'postings/Graphic', component: PostingsOverviewComponent},
+  {path: 'postings/Graphic/posting/:poId', component: PostingsOverviewComponent},
+  {path: 'postings/Wireframe', component: PostingsOverviewComponent},
+  {path: 'postings/Wireframe/posting/:poId', component: PostingsOverviewComponent},
+  {path: 'postings/Website-Example', component: PostingsOverviewComponent},
+  {path: 'postings/Website-Example/posting/:poId', component: PostingsOverviewComponent},
+  {path: 'postings/Other', component: PostingsOverviewComponent},
+  {path: 'postings/Othere/posting/:poId', component: PostingsOverviewComponent},
+  //Academy
   {path: 'academy', component: BlogOverviewComponent},
   {path: 'academy/:id', component: BlogDetailComponent},
-
-  {path: 'moodboard/:id', component: MoodboardDetailComponent},
+  //Moodboards
   {path: 'moodboards', component: MoodboardsOverviewComponent},
-
+  {path: 'moodboard/:id', component: MoodboardDetailComponent},
+  {path: 'moodboard/:id/posting/:poId', component: MoodboardDetailComponent},
+  //User
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-
+  {path: 'profile/posting/:poId', component: ProfileComponent},
+  //Error
+  { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];
 
 @NgModule({

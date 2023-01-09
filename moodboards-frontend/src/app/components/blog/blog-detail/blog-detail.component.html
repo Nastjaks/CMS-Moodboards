@@ -1,11 +1,17 @@
 <div class="contentContainer">
 
   <div class="blogpost-content-container">
-    <h1>{{blogpost.attributes.title}}</h1>
-
+    <div>
+      <p>ACADEMY | {{blogpost.attributes.createdAt | date}}</p>
+      <h1>{{blogpost.attributes.title}}</h1>
+    </div>
     <div class="blogcontent">
-      <p>{{blogpost.attributes.content}}</p>
-      <img src="{{blogpost.attributes.thumbnail.data.attributes.url}}">
+      <div class="textContainer">
+        <div [innerHTML]="blogpost.attributes.content"></div>
+      </div>
+      <div class="imgContainer">
+        <img src="{{blogpost.attributes.thumbnail.data.attributes.url}}">
+      </div>
     </div>
 
   </div>
