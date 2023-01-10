@@ -194,6 +194,7 @@ select {
   height: 40px;
   border-radius: 40px;
   padding-left: 10px;
+  background-color: #F1F1F1;
 }
 
 select::-ms-expand {
@@ -223,6 +224,14 @@ input:focus-visible {
 }
 
 input:focus {
+  box-shadow: none !important;
+}
+
+textarea:focus-visible {
+  outline: 2px solid #ee6756 !important;
+}
+
+textarea:focus {
   box-shadow: none !important;
 }
 

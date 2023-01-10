@@ -8,11 +8,11 @@ import {Moodboard} from "../../../models/moodboard";
 import {FormBuilder} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {CreatePostingComponent} from "../../posting/posting-create-dialog/create-posting.component";
-import {DeleteDialogComponent} from "../user-delete-dialog/delete-dialog.component";
 import {MoodboardCreateDialogComponent} from "../../moodboards/moodboard-create-dialog/moodboard-create-dialog.component";
 import {AuthService} from "../../../services/auth.service";
 import {User} from "../../../models/user";
 import {ActivatedRoute} from "@angular/router";
+import {UserEditDialogComponent} from "../user-edit-dialog/user-edit-dialog.component";
 
 @Component({
   selector: 'app-user-profile',
@@ -26,19 +26,12 @@ export class ProfileComponent implements OnInit {
   moodboards$!: Observable<Moodboard[]>;
   user!: User;
 
-  userCurrentlyEdit: boolean = false;
-
-  currentUsername!: string;
-  currentMail!: string;
-  currentDescription!: string;
-
   constructor(private fb: FormBuilder,
               private storageService: StorageService,
               private userService: UserService,
               public dialogPanel: MatDialog,
               public authService: AuthService,
               private route: ActivatedRoute) {
-
   }
 
   ngOnInit(): void {
@@ -55,30 +48,7 @@ export class ProfileComponent implements OnInit {
   }
 
   editUserData() {
-    this.userCurrentlyEdit = true;
-    this.currentUsername = this.user.username
-    this.currentMail = this.user.email
-    this.currentDescription = this.user.description
-  }
-
-  saveChanges() {
-    if (this.currentUsername && this.currentMail) {
-      this.userService.editUserInformation(this.currentUsername, this.currentMail, this.currentDescription, this.currentUser.user.id, this.currentUser.jwt)
-        .subscribe({
-          next: () => {
-            this.userCurrentlyEdit = false;
-            this.storageService.saveUser(this.currentUser);
-            window.location.reload();
-          },
-          error: err => {
-            console.log(err.error.message);
-          }
-        });
-    }
-  }
-
-  openDeleteUserDialog() {
-    this.dialogPanel.open(DeleteDialogComponent, {
+    this.dialogPanel.open(UserEditDialogComponent, {
       data: {
         user: this.currentUser,
       }
@@ -115,7 +85,7 @@ export class ProfileComponent implements OnInit {
     document.getElementById('postingNav')!.classList.remove("active");
   }
 
-  logOut() {
+  logout() {
     this.authService.logout();
   }
 }

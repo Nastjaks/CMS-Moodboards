@@ -6,7 +6,7 @@
       <!--user sidebar-->
 
       <div class="sidebar">
-        <button class="sidebarBtn" (click)="logOut()">
+        <button class="sidebarBtn" (click)="logout()">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"/>
             <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
@@ -21,14 +21,7 @@
           </svg>
           EDIT PROFILE
         </button>
-        <button class="sidebarBtn" (click)="openDeleteUserDialog()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3"
-               viewBox="0 0 16 16">
-            <path
-              d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-          </svg>
-          DELETE PROFILE
-        </button>
+
         <button class="sidebarBtn" (click)="openCreatePostingDialog()">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle"
                viewBox="0 0 16 16">
@@ -59,28 +52,11 @@
               <p class="alignTextCenter">{{ user.description }}</p>
             </div>
           </div>
-
-
-          <div *ngIf="userCurrentlyEdit">
-
-            <label>Username</label>
-            <input [(ngModel)]="this.currentUsername" type="text" name="username" id="username" required
-                   minlength="3" maxlength="20"/>
-
-            <label>Email</label>
-            <input [(ngModel)]=" this.currentMail" type="email" name="email" id="email"/>
-
-            <label>Description</label>
-            <textarea [(ngModel)]="this.currentDescription" name="description" id="description"></textarea>
-
-            <button (click)="saveChanges()">Save</button>
-          </div>
         </div>
 
       </div>
 
     </div>
-
 
 
     <!--Navi-->

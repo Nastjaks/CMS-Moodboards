@@ -1,0 +1,21 @@
+mat-dialog-content{
+  width: 400px;
+}
+
+.username {
+  margin-top: 20px;
+}
+
+.deleteBtn {
+  background-color: transparent;
+  color: black;
+  opacity: 0.5;
+  text-align: left;
+}
+
+.deleteBtn:hover {
+  background-color: transparent;
+  color: #ee6756;
+  opacity: 1;
+  box-shadow: none;
+}

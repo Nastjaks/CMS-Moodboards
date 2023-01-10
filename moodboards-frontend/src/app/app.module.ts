@@ -38,6 +38,7 @@ import { FooterComponent } from './components/general/footer/footer.component';
 import { HomeComponent } from './components/general/home/home.component';
 import { BlogOverviewComponent } from './components/blog/blog-overview/blog-overview.component';
 import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.component';
+import { UserEditDialogComponent } from './components/user/user-edit-dialog/user-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { BlogDetailComponent } from './components/blog/blog-detail/blog-detail.c
     HomeComponent,
     BlogOverviewComponent,
     BlogDetailComponent,
+    UserEditDialogComponent,
 
   ],
   imports: [
