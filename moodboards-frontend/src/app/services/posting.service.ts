@@ -32,6 +32,16 @@ export class PostingService {
 
   getOnePosting(Id: number) {
     console.log("[POSTING-SERVICE] get one Postings function");
+
+    return this.http.get<Posting>(this.urls.postings_URL + '/' + Id + '?populate=*').pipe(
+      map((res: any) => {
+        return res.data
+      }),
+      map((posting:Posting)=>{
+        posting.attributes.image.data.attributes.url = this.urls.strapi_URL + posting.attributes.image.data.attributes.url;
+        return posting;
+      })
+    )
   }
 
   getAllPostingsInMoodboard(moodboardId: number) {
@@ -82,21 +92,21 @@ export class PostingService {
 
     return this.http.post<any>(this.urls.upload_URL, formData, {'headers': headersImg})
       .subscribe(res => {
-        const body = JSON.stringify({
-          data: {
-            title: posting.title,
-            description: posting.description,
-            posting_creator: posting.posting_creator,
-            tag: posting.tag,
-            image: res[0].id
-          }
-        });
+          const body = JSON.stringify({
+            data: {
+              title: posting.title,
+              description: posting.description,
+              posting_creator: posting.posting_creator,
+              tag: posting.tag,
+              image: res[0].id
+            }
+          });
 
-        return this.http.post<any>(this.urls.postings_URL, body, {'headers': headers})
-          .subscribe(res =>
-            console.log(res)
-          );
-      });
+          return this.http.post<any>(this.urls.postings_URL, body, {'headers': headers}).subscribe(() => {
+            window.location.reload();
+          })
+        }
+      );
   }
 
   editPosting(title: string, description: string, tag: string, id: number, jwt: string) {

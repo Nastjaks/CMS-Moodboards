@@ -3,6 +3,9 @@ import {Observable} from "rxjs";
 import {Posting} from "../../../models/posting";
 import {PostingService} from "../../../services/posting.service";
 import {ActivatedRoute} from "@angular/router";
+import {PostingDetailComponent} from "../posting-detail-dialog/posting-detail.component";
+import {Location} from "@angular/common";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-postings-overview',
@@ -13,12 +16,17 @@ export class PostingsOverviewComponent implements OnInit {
 
   posting$!: Observable<Posting[]>;
 
-  constructor(private postingService: PostingService,  private route: ActivatedRoute) {}
+  constructor(private postingService: PostingService,
+              private route: ActivatedRoute,
+              private location: Location,
+              public dialogPanel: MatDialog) {}
 
   ngOnInit(): void {
     this.route.url.subscribe((params: any) => {
       this.route.params.subscribe((params: any) => {
-        console.log(params.poId)
+        if (params.poId != null) {
+          this.showPostDetails(params.poId);
+        }
       })
 
       if (params.length == 2){
@@ -29,6 +37,18 @@ export class PostingsOverviewComponent implements OnInit {
       }
 
     })
+  }
+
+  showPostDetails(poId: number) {
+    this.location.go('postings/posting/' + poId)
+
+    this.dialogPanel.open(PostingDetailComponent, {
+      data: {
+        postingID: poId
+      }
+    }).afterClosed().subscribe(() => {
+      this.location.go('postings/')
+    });
   }
 
   setActive(name: string) {

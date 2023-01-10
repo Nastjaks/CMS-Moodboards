@@ -87,11 +87,11 @@
                 </div>
               </div>
 
-              <div class="img-gradient" (click)="showPostDetails(post)">
+              <div class="img-gradient" (click)="showPostDetails(post.id)">
                 <img alt="postingImg" [src]="post.attributes.image.data.attributes.url">
               </div>
 
-              <div class="singleCardInfo" (click)="showPostDetails(post)">
+              <div class="singleCardInfo" (click)="showPostDetails(post.id)">
                 <div>
                   <p><b>{{post.attributes.title}}</b></p>
                   <p class="singleCardTag"> {{post.attributes.tag}} </p>

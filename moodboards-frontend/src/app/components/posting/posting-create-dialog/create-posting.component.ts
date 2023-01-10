@@ -39,21 +39,7 @@ export class CreatePostingComponent {
         tag: this.tag,
         posting_creator: this.user.user.id
       }
-
-      this.postingService.createPosting(posting, this.formData, this.user.jwt);
-
-      (<HTMLInputElement>document.getElementById("img")).value = "";
-      const preview = document.getElementById('preview') as HTMLImageElement;
-      preview!.src = "";
-
-      this.title = '';
-      this.tag = '';
-      this.description = '';
-
-      //TODO: close modal an reload page
-      this.alert.openAlert("Created new posting");
-
-
+      this.postingService.createPosting(posting, this.formData, this.user.jwt)
     } else {
       this.alert.openAlert("Image and title required");
     }

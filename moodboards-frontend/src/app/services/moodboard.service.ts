@@ -40,7 +40,6 @@ export class MoodboardService {
       map((res: any) => {
         return res.data;
       }),
-
     )
   }
 
@@ -60,8 +59,9 @@ export class MoodboardService {
         moodboard_creator: moodboard.moodboard_creator,
         private: moodboard.visibilityPrivate
       }
-    }, {'headers': headers}).subscribe(
-      res => console.log(res)
+    }, {'headers': headers}).subscribe(() => {
+      window.location.reload();
+    }
     )
 
   }
@@ -119,7 +119,9 @@ export class MoodboardService {
             data: {postings: postings}
           });
 
-          return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe()
+          return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe(()=>{
+            window.location.reload();
+          })
         }
       )
   }
@@ -141,32 +143,6 @@ export class MoodboardService {
     }, {'headers': headers}).subscribe(
       res => console.log(res))
   }
-
-  /*
-  changeVisibility(moodboard: Moodboard, jwt: string, visibilityPrivate: boolean) {
-    console.log("[MOODBOARD-SERVICE] make Moodboard: " + moodboard.id + " private " + visibilityPrivate)
-
-    const headers = {
-      'content-type': 'application/json',
-      'Authorization': 'Bearer ' + jwt
-    };
-
-    const body = JSON.stringify({
-      data: {
-        private: visibilityPrivate
-      }
-    });
-
-    return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboard.id, body,
-      {'headers': headers})
-      .pipe(
-        catchError((err) => {
-            console.error(err);
-            throw err;
-          }
-        )
-      );
-  }*/
 
   deleteMoodboard(moodboardId: number, jwt: string) {
     console.log("[MOODBOARD-SERVICE] delete Moodboard function")

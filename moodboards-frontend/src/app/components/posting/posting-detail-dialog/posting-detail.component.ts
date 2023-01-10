@@ -1,4 +1,4 @@
-import {Component, Inject, Optional} from '@angular/core';
+import {Component, Inject, OnInit, Optional} from '@angular/core';
 import {NgbModalConfig, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
 import {Posting} from "../../../models/posting";
@@ -19,9 +19,10 @@ import {DeletePostingDialogComponent} from "../posting-delete-dialog/delete-post
   styleUrls: ['./posting-detail.component.css'],
   providers: [NgbModalConfig, NgbModal, AlertComponent],
 })
-export class PostingDetailComponent {
+export class PostingDetailComponent implements OnInit{
 
-  posting: Posting;
+  posting!: Posting;
+  postingID!: number;
   currentUser!: Auth_Model;
   moodboard$!: Observable<Moodboard[]>;
 
@@ -41,7 +42,22 @@ export class PostingDetailComponent {
               private moodboardService: MoodboardService,
               private alert: AlertComponent,
               public dialogPanel: MatDialog) {
-    this.posting = data.posting;
+    this.postingID = this.data.postingID;
+    if (!this.data.postingID){
+      this.posting = this.data.posting;
+    }
+    if (this.data.postingID){
+      this.postingService.getOnePosting(this.postingID).subscribe( posting => {
+        this.posting = posting
+        console.log(this.posting)
+      });
+    }
+
+
+  }
+
+  ngOnInit(): void {
+
     this.currentUser = this.storageService.getUser();
     this.isLoggedIn = this.storageService.isLoggedIn();
 
@@ -52,7 +68,7 @@ export class PostingDetailComponent {
         this.isOwner = true;
       }
     }
-    //TODO: OPEN POSTING ON RELOAD
+
   }
 
   addImageToMoodboard(moodboardId: number) {

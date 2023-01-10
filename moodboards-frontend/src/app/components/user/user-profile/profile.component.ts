@@ -13,6 +13,8 @@ import {AuthService} from "../../../services/auth.service";
 import {User} from "../../../models/user";
 import {ActivatedRoute} from "@angular/router";
 import {UserEditDialogComponent} from "../user-edit-dialog/user-edit-dialog.component";
+import {PostingDetailComponent} from "../../posting/posting-detail-dialog/posting-detail.component";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-user-profile',
@@ -29,6 +31,7 @@ export class ProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private storageService: StorageService,
               private userService: UserService,
+              private location: Location,
               public dialogPanel: MatDialog,
               public authService: AuthService,
               private route: ActivatedRoute) {
@@ -37,7 +40,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params: any) => {
       if (params.poId != null) {
-        console.log(params.poId)
+        this.showPostDetails(params.poId);
       }
     })
     this.currentUser = this.storageService.getUser();
@@ -45,6 +48,18 @@ export class ProfileComponent implements OnInit {
 
     this.postings$ = this.userService.getAllUserPostings(this.currentUser.user.id);
     this.moodboards$ = this.userService.getAllUserMoodboards(this.currentUser.user.id);
+  }
+
+  showPostDetails(poId: number) {
+    this.location.go('/profile/posting/' + poId)
+
+    this.dialogPanel.open(PostingDetailComponent, {
+      data: {
+        postingID: poId
+      }
+    }).afterClosed().subscribe(() => {
+      this.location.go("/profile")
+    });
   }
 
   editUserData() {

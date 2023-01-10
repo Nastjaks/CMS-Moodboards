@@ -18,15 +18,15 @@ export class MoodboardCreateDialogComponent {
   description!: string;
   visibility!: string;
 
-  constructor( private dialogRef: MatDialogRef<MoodboardCreateDialogComponent>,
-               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-               private alert: AlertComponent,
-               private moodboardService: MoodboardService) {
+  constructor(private dialogRef: MatDialogRef<MoodboardCreateDialogComponent>,
+              @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+              private alert: AlertComponent,
+              private moodboardService: MoodboardService) {
     this.user = data.user;
   }
 
   createMoodboard() {
-    if (this.title ){
+    if (this.title) {
       const moodboard: {} = {
         title: this.title,
         description: this.description,
@@ -34,9 +34,7 @@ export class MoodboardCreateDialogComponent {
         moodboard_creator: this.user.user.id
       }
 
-      this.moodboardService.createMoodboard(moodboard, this.user.jwt);
-      this.alert.openAlert("Created Moodboard " + this.title);
-      this.dialogRef.close();
+      this.moodboardService.createMoodboard(moodboard, this.user.jwt)
 
     } else {
       this.alert.openAlert("Please enter a title");

@@ -18,6 +18,7 @@ export class SinglePostingCardComponent {
   constructor(public dialogPanel: MatDialog, private location: Location, private router: Router) {
   }
 
+
   showPostDetails() {
     const url = this.router.url
 
