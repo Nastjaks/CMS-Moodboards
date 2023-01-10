@@ -97,7 +97,7 @@ export class MoodboardService {
 
     let postings: number[] = [];
 
-    this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
+   this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
       .subscribe((res: any) => {
           for (let i = 0; i < res.data.length; i++) {
             postings.push(res.data[i].id);

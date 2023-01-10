@@ -9,9 +9,7 @@ import {FormBuilder} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {CreatePostingComponent} from "../../posting/posting-create-dialog/create-posting.component";
 import {DeleteDialogComponent} from "../user-delete-dialog/delete-dialog.component";
-import {
-  MoodboardCreateDialogComponent
-} from "../../moodboards/moodboard-create-dialog/moodboard-create-dialog.component";
+import {MoodboardCreateDialogComponent} from "../../moodboards/moodboard-create-dialog/moodboard-create-dialog.component";
 import {AuthService} from "../../../services/auth.service";
 import {User} from "../../../models/user";
 import {ActivatedRoute} from "@angular/router";

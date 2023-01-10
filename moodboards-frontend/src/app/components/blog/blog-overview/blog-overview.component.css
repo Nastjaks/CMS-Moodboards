@@ -49,3 +49,29 @@
   font-weight: 700;
   letter-spacing: 0.1em;
 }
+
+
+
+@media screen and (max-width: 1600px) {
+  .giveWi {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 1130px) {
+  .giveWi {
+    width: 33.33%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .giveWi {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .giveWi {
+    width: 100%;
+  }
+}

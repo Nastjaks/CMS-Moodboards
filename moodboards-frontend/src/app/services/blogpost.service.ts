@@ -29,6 +29,7 @@ export class BlogpostService {
 
   getOneBlogposts(blogId: number){
     console.log("[BLOGPOST-SERVICE] get one Blogposts function " + blogId);
+
     return this.http.get<Blogpost>(this.urls.blogposts_URL + '/' + blogId + '?populate=*').pipe(
       map((res: any) => {
         return res.data;

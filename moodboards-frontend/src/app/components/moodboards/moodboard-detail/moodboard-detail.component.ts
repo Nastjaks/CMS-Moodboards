@@ -67,15 +67,15 @@ export class MoodboardDetailComponent implements OnInit {
           }
         );
     })
-
-    this.dialogConfig.data = {user: this.currentUser, moodboard: this.moodboard};
   }
 
   openDeleteDialog() {
+    this.dialogConfig.data = {user: this.currentUser, moodboard: this.moodboard};
     this.dialogPanel.open(DeleteMoodboardDialogComponent, this.dialogConfig);
   }
 
   openEditMoodboardDialog() {
+    this.dialogConfig.data = {user: this.currentUser, moodboard: this.moodboard};
     this.dialogPanel.open(MoodboardEditDialogComponent, this.dialogConfig)
   }
 
@@ -95,5 +95,6 @@ export class MoodboardDetailComponent implements OnInit {
   removeImgFromMoodboard(imgId: number) {
     this.moodboardService.removeImgFromMoodboard(imgId, this.moodboard.id, this.currentUser.jwt);
     this.alert.openAlert('remove Posting from Moodboard');
+    //window.location.reload();
   }
 }
