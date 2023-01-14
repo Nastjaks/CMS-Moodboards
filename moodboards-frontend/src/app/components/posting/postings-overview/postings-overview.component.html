@@ -6,20 +6,20 @@
 
   <div class="categoryContainer">
     <ul class="categoryList">
-      <li id="cat-All" class="" (click)="setActive('cat-All')"><a routerLink="/postings">ALL</a></li>
-      <li id="cat-Color" ><a routerLink="/postings/Color">COLOR</a></li>
-      <li id="cat-Font"><a routerLink="/postings/Font">FONT</a></li>
-      <li id="cat-UI>"><a routerLink="/postings/Ui-Element">UI-ELEMENT</a></li>
-      <li id="cat-Icon"><a routerLink="/postings/Icon">ICON</a></li>
-      <li id="cat-Graphic"><a routerLink="/postings/Graphic">GRAPHIC</a></li>
-      <li id="cat-Wire"><a routerLink="/postings/Wireframe">WIREFRAME</a></li>
-      <li id="cat-Exa"><a routerLink="/postings/Website-Example">WEBSITE-EXAMPLE</a></li>
-      <li id="cat-Oth"><a routerLink="/postings/Other">OTHER</a></li>
+      <li id="cat-All"  routerLink="/postings" > <a>ALL</a></li>
+      <li id="cat-Color"   routerLink="/postings/Color"><a>COLOR</a></li>
+      <li id="cat-Font"  routerLink="/postings/Font"><a>FONT</a></li>
+      <li id="cat-UI>"  routerLink="/postings/UI-Element"><a>UI-ELEMENT</a></li>
+      <li id="cat-Icon"  routerLink="/postings/Icon"><a>ICON</a></li>
+      <li id="cat-Graphic"  routerLink="/postings/Graphic"><a>GRAPHIC</a></li>
+      <li id="cat-Wire"  routerLink="/postings/Wireframe"><a>WIREFRAME</a></li>
+      <li id="cat-Exa"  routerLink="/postings/Website-Example"><a>WEBSITE-EXAMPLE</a></li>
+      <li id="cat-Oth"  routerLink="/postings/Other"><a >OTHER</a></li>
     </ul>
   </div>
 
-  <div class="overviewContainer">
-    <app-single-posting-card class="single-postingCard" *ngFor="let post of posting$ | async" [posting]="post">
+  <div class="overviewContainer-Postings">
+    <app-single-posting-card class="single-postingCard" (showDetailsEvent)="showPostDetails($event)" *ngFor="let post of posting$ | async" [posting]="post">
     </app-single-posting-card>
   </div>
 

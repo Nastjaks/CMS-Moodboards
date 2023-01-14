@@ -83,7 +83,6 @@ import { UserEditDialogComponent } from './components/user/user-edit-dialog/user
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatLegacyChipsModule,
   ],
   providers: [httpInterceptorProviders, Urls],
   bootstrap: [AppComponent]

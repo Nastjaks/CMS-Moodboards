@@ -1,4 +1,4 @@
-<div class="contentContainer pageContainer">
+<div class="contentContainer pageContainer" *ngIf="moodboard">
 
   <div class="fullWidth">
 
@@ -74,8 +74,8 @@
 
 
       <p>Contains {{moodboard.attributes.postings.data.length}} postings</p>
-      <div class="overviewContainer">
-        <div *ngFor="let post of postingsInMoodboard$ | async" class="single-postingCard">
+      <div class="overviewContainer-Postings" >
+        <div *ngFor="let post of postingsInMoodboard$ | async" class="single-postingCard" >
           <div class="postingCard">
             <div>
 

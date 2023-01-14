@@ -28,6 +28,7 @@ li{
   transition: 0.4s;
   text-align: center;
   cursor: pointer;
+  color: #000;
 }
 
 .categoryList:hover li{
@@ -35,6 +36,7 @@ li{
   background: #ee6756;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   transform: scale(1.03);
+  color: #fff;
 }
 
 .categoryList li:active {
@@ -42,7 +44,9 @@ li{
   background: #ee6756;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
   transform: scale(1);
+  color: #fff;
 }
+
 
 .categoryList:hover li:not(:hover), .categoryList:hover li:not(:hover) a {
   background: transparent;
@@ -50,4 +54,5 @@ li{
   box-shadow: none;
   opacity: 0.5;
   transition: 0.4s;
+  color: #000;
 }

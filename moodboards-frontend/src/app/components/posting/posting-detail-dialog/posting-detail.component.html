@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<mat-dialog-content *ngIf="posting">
 
   <div class="postingImgContainer">
     <img alt="Image not working" [src]="posting.attributes.image.data.attributes.url">

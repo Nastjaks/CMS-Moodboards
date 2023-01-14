@@ -61,7 +61,7 @@ export class PostingService {
   }
 
   getAllPostingsByCategory(category: string) {
-    console.log("[POSTING-SERVICE] get all Postings function");
+    console.log("[POSTING-SERVICE] get all Postings by category "+ category);
 
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[tag]=' + category)
       .pipe(

@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {Moodboard} from "../models/moodboard";
 import {catchError, map, Observable} from "rxjs";
 import {Urls} from "../helper/urls";
+import {Location} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoodboardService {
 
-  constructor(private http: HttpClient, private urls: Urls) {
+  constructor(private http: HttpClient, private urls: Urls,  private location: Location) {
   }
 
   //----------Ohne Authentifizierung----------
@@ -40,7 +41,13 @@ export class MoodboardService {
       map((res: any) => {
         return res.data;
       }),
-    )
+    ).pipe(
+      catchError((err) => {
+       console.log("404 - Not found")
+          throw err;
+        }
+      )
+    );
   }
 
   //----------Mit Authentifizierung----------

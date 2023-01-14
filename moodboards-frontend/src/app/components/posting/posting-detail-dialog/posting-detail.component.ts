@@ -19,7 +19,7 @@ import {DeletePostingDialogComponent} from "../posting-delete-dialog/delete-post
   styleUrls: ['./posting-detail.component.css'],
   providers: [NgbModalConfig, NgbModal, AlertComponent],
 })
-export class PostingDetailComponent implements OnInit{
+export class PostingDetailComponent implements OnInit {
 
   posting!: Posting;
   postingID!: number;
@@ -35,40 +35,33 @@ export class PostingDetailComponent implements OnInit{
   currentTag!: string;
 
   constructor(
-              @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              private storageService: StorageService,
-              private userService: UserService,
-              private postingService: PostingService,
-              private moodboardService: MoodboardService,
-              private alert: AlertComponent,
-              public dialogPanel: MatDialog) {
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private storageService: StorageService,
+    private userService: UserService,
+    private postingService: PostingService,
+    private moodboardService: MoodboardService,
+    private alert: AlertComponent,
+    public dialogPanel: MatDialog) {
     this.postingID = this.data.postingID;
-    if (!this.data.postingID){
-      this.posting = this.data.posting;
-    }
-    if (this.data.postingID){
-      this.postingService.getOnePosting(this.postingID).subscribe( posting => {
-        this.posting = posting
-        console.log(this.posting)
-      });
-    }
 
 
   }
 
   ngOnInit(): void {
 
-    this.currentUser = this.storageService.getUser();
-    this.isLoggedIn = this.storageService.isLoggedIn();
+    this.postingService.getOnePosting(this.postingID).subscribe(posting => {
+      this.posting = posting
+      this.currentUser = this.storageService.getUser();
+      this.isLoggedIn = this.storageService.isLoggedIn();
 
-    if (this.isLoggedIn) {
-      this.moodboard$ = this.userService.getAllUserMoodboards(this.currentUser.user.id);
+      if (this.isLoggedIn) {
+        this.moodboard$ = this.userService.getAllUserMoodboards(this.currentUser.user.id);
 
-      if (this.posting.attributes.posting_creator.data.id == this.currentUser.user.id) {
-        this.isOwner = true;
+        if (this.posting.attributes.posting_creator.data.id == this.currentUser.user.id) {
+          this.isOwner = true;
+        }
       }
-    }
-
+    });
   }
 
   addImageToMoodboard(moodboardId: number) {
@@ -105,14 +98,8 @@ export class PostingDetailComponent implements OnInit{
   }
 
   saveChanges() {
-    /*
-    let title = (<HTMLInputElement>document.getElementById("title")).value;
-    let description = (<HTMLInputElement>document.getElementById("description")).value;
-    let tag = (<HTMLInputElement>document.getElementById("tag")).value;
-  */
-
     if (this.currentTitle.length > 0) {
-      this.postingService.editPosting( this.currentTitle, this.currentDescription, this.currentTag, this.posting.id, this.currentUser.jwt)
+      this.postingService.editPosting(this.currentTitle, this.currentDescription, this.currentTag, this.posting.id, this.currentUser.jwt)
         .subscribe({
           next: () => {
             this.postCurrentlyEdit = false;
@@ -126,6 +113,5 @@ export class PostingDetailComponent implements OnInit{
       this.alert.openAlert("You have to add a title");
     }
   }
-
 
 }

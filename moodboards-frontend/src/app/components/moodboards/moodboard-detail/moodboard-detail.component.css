@@ -31,7 +31,7 @@
 /*-------------------Posting Card----------------------------*/
 
 .postingCard {
-  margin: 5px;
+  margin: 10px 0;
   padding: 10px;
   display: flex;
   border-radius: 30px;

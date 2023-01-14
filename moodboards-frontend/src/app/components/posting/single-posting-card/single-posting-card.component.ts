@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Posting} from "../../../models/posting";
 import {PostingDetailComponent} from "../posting-detail-dialog/posting-detail.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -14,12 +14,15 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class SinglePostingCardComponent {
 
   @Input() posting!: Posting;
+  @Output() showDetailsEvent: EventEmitter<number> = new EventEmitter();
 
-  constructor(public dialogPanel: MatDialog, private location: Location, private router: Router) {
+  constructor() {
   }
 
 
   showPostDetails() {
+    this.showDetailsEvent.emit(this.posting.id);
+    /*
     const url = this.router.url
 
     if (this.router.url == "/" || this.router.url == "/#discover") {
@@ -39,7 +42,6 @@ export class SinglePostingCardComponent {
           this.location.go(url)
         }
       }
-    );
+    );*/
   }
-
 }

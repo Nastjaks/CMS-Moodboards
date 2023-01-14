@@ -1,4 +1,4 @@
-<div class="contentContainer pageContainer" xmlns="http://www.w3.org/1999/html">
+<div class="contentContainer pageContainer" xmlns="http://www.w3.org/1999/html" *ngIf="user">
 
   <div class="fullWidth">
 
@@ -66,8 +66,8 @@
     </div>
 
     <!--Users Postings-->
-    <div class="overviewContainer" id="postingsContainer">
-      <app-single-posting-card class="single-postingCard" *ngFor="let post of postings$ | async"
+    <div class="overviewContainer-Postings" id="postingsContainer">
+      <app-single-posting-card class="single-postingCard" (showDetailsEvent)="showPostDetails($event)" *ngFor="let post of postings$ | async"
                                [posting]="post"></app-single-posting-card>
     </div>
 

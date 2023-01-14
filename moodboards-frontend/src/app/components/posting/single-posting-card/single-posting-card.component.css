@@ -1,9 +1,9 @@
 .postingCard{
-  margin: 5px;
   padding: 10px;
   display: flex;
   border-radius: 30px;
   transition: 0.5s;
+  margin: 10px 0;
 }
 
 .postingCard:hover{

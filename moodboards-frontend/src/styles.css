@@ -47,6 +47,10 @@ p {
   flex-wrap: wrap;
 }
 
+.overviewContainer-Postings {
+  column-count: 8;
+}
+
 .contentContainer {
   margin: 90px 2%;
   min-height: calc(100vh - 364px);
@@ -59,7 +63,6 @@ p {
 }
 
 .navigation {
-
   top: 0;
   right: 0;
   left: 0;
@@ -68,30 +71,30 @@ p {
 
 /**--------------posting Card overviwe-----------------*/
 .single-postingCard {
-  width: 12.5%;
+  display: inline-block;
 }
 
 @media screen and (max-width: 1400px) {
-  .single-postingCard {
-    width: 20%;
+  .overviewContainer-Postings {
+    column-count: 5;
   }
 }
 
 @media screen and (max-width: 1130px) {
-  .single-postingCard {
-    width: 33.33%;
+  .overviewContainer-Postings {
+    column-count: 3;
   }
 }
 
 @media screen and (max-width: 900px) {
-  .single-postingCard {
-    width: 50%;
+  .overviewContainer-Postings {
+    column-count: 2;
   }
 }
 
 @media screen and (max-width: 450px) {
-  .single-postingCard {
-    width: 100%;
+  .overviewContainer-Postings {
+    column-count: 1;
   }
 }
 
@@ -258,7 +261,8 @@ label {
   padding: 10px 5px;
   bottom: 125%;
   margin-left: -120px;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .own-Tooltip .own-tooltiptext::after {
