@@ -16,45 +16,101 @@ import {PostingService} from "../../../services/posting.service";
 export class DeleteDialogComponent implements OnInit {
 
   currentUser!: Auth_Model;
-  postings$!: Observable<Posting[]>;
-  moodboards$!: Observable<Moodboard[]>;
+  //postings$!: Observable<Posting[]>;
+  //moodboards$!: Observable<Moodboard[]>;
+  moodboards!: Moodboard[];
+  postings!: Posting[];
 
   constructor(private userService: UserService,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
               private authService: AuthService,
-              private postingService: PostingService) {
+              private postingService: PostingService
+  ) {
     this.currentUser = this.data.user;
   }
 
   ngOnInit(): void {
-    this.postings$ = this.userService.getAllUserPostings(this.currentUser.user.id);
-    this.moodboards$ = this.userService.getAllUserMoodboards(this.currentUser.user.id);
+    this.userService.getAllUserPostings(this.currentUser.user.id).subscribe(
+      postings => {
+        this.postings = postings
+      }
+    );
 
-    console.log(this.moodboards$.subscribe(res => res.length))
+    this.userService.getAllUserMoodboards(this.currentUser.user.id).subscribe(
+      moodboars => {
+        this.moodboards = moodboars
+      }
+    );
   }
 
   deleteUserData() {
-    const id = this.currentUser.user.id;
-    const jwt = this.currentUser.jwt;
 
+    let deletedMood = 0;
+    //wenn der Nutzer Moodboards hat
+    if (this.moodboards.length > 0) {
+      for (let i = 0; i < this.moodboards.length; i++) {
+
+        this.userService.deleteUserMoodboards(this.moodboards[i].id, this.currentUser.jwt).subscribe(() => {
+          deletedMood++
+
+          if (deletedMood == this.moodboards.length) {
+            this.deletAllUserPostings();
+          }
+        });
+      }
+    } else if (this.moodboards.length == 0) {   //wenn der Nutzer keine Moodboards hat
+      this.deletAllUserPostings();
+    }
+
+
+    /*
     this.moodboards$.forEach((moodboard) => {
-      for (const moodboardDetail in moodboard) {
-        let moodboardID = moodboard[moodboardDetail].id
-        this.userService.deleteUserMoodboards(moodboardID, jwt).subscribe(res => console.log(res));
+      for (const mInfo in moodboard) {
+        this.userService.deleteUserMoodboards(moodboard[mInfo].id, this.currentUser.jwt).subscribe(res => console.log(res));
       }
     }).then(() =>
       this.postings$.forEach((posting) => {
-        for (const postingDetail in posting) {
-          let postingID = posting[postingDetail].id;
-          let postingIDImage = posting[postingDetail].attributes.image.data.id;
-          this.postingService.deleteImage(postingIDImage, jwt).subscribe( () => {
-            this.userService.deleteUserPostings(postingID, jwt).subscribe(res => console.log(res));
+        for (const pInfo in posting) {
+          this.postingService.deleteImage(posting[pInfo].attributes.image.data.id, this.currentUser.jwt).subscribe(() => {
+            this.postingService.deletePosting(posting[pInfo].id, this.currentUser.jwt).subscribe(res => console.log(res));
           })
         }
-      }).then(() =>
-        this.userService.deleteUserInformation(id, jwt).subscribe(res => console.log(res))
+      }).then(() => {
+          console.log("done")
+          //this.userService.deleteUserInformation(this.currentUser.user.id, this.currentUser.jwt).subscribe(() =>
+          //this.authService.logout()
+          //)
+        }
       )
-    );
-    this.authService.logout();
+    );*/
+
+  }
+
+  deletAllUserPostings() {
+  //wenn der Nutzer Posings hat
+    if (this.postings.length > 0) {
+      for (let i = 0; i < this.postings.length; i++) {
+
+        let deletedPost = 0;
+        this.postingService.deleteImage(this.postings[i].attributes.image.data.id, this.currentUser.jwt).subscribe(() => {
+          console.log("image");
+          this.postingService.deletePosting(this.postings[i].id, this.currentUser.jwt).subscribe(() => {
+            console.log("posting");
+            deletedPost++
+
+            if (deletedPost == this.postings.length) {
+              this.userService.deleteUserInformation(this.currentUser.user.id, this.currentUser.jwt).subscribe(() =>
+                this.authService.logout()
+              )
+            }
+          });
+        });
+      }
+    } else if (this.postings.length == 0) { //wenn der Nutzer keine Posings hat
+      this.userService.deleteUserInformation(this.currentUser.user.id, this.currentUser.jwt).subscribe(() =>
+        this.authService.logout()
+      )
+    }
   }
 }
+

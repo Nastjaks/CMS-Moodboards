@@ -19,6 +19,7 @@ export class PostingService {
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*')
       .pipe(
         map((res: any) => {
+          console.log(res.meta.pagination.page) //TODO
           return res.data;
         }),
         map((posting: Posting[]) => {

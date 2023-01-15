@@ -1,7 +1,8 @@
 # CMS-Moodboards
 1. [Idee](#idee)
 2. [Features](#features)
-3. [Get started](#get-started)
+3. [Erweiterungen](#features)
+4. [Get started](#get-started)
 
 ## Idee
 Ein Webdesigner möchte einen Blog zum Thema Webdesign führen, um anstrebenden Designer wertvolle Tipps geben zu können. 
@@ -46,6 +47,13 @@ Es soll eine Pintrest ähnliche Plattform entstehen, auf der Nutzer Bilder (Post
 > Blogbeiträge für die Academy können nur über das CMS Backend in Strapi erstellt/bearbeitet/gelöscht werden.
 >
 > Auf der Über die Academyseite sind die Nutzer (auf ohne Konto) eine Übersicht aller Blogbeiträge ansehen. Über den Klick auf einen beliebigen Beitrag erden die Inhalte des Beitrags angezeigt.
+
+## Erweiterungen
+Ideen für Erweiterungen:
+- Infinit Scroll
+- Mehr Filter Möglichkeiten
+- Farbpaletten generator
+- Speichern von Blogbeiträgen
 
 ## Get started
 

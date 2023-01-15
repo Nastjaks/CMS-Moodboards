@@ -122,21 +122,6 @@ export class UserService {
       );
   }
 
-  deleteUserPostings(id: number, jwt: string) {
-    const headers = {
-      'Authorization': 'Bearer ' + jwt,
-    };
-
-    return this.http.delete(this.urls.postings_URL + '/' + id,
-      {'headers': headers})
-      .pipe(
-        catchError((err) => {
-            console.error(err);
-            throw err;
-          }
-        )
-      );
-  }
 
 
 }
