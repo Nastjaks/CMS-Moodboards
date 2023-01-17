@@ -1,8 +1,10 @@
 # CMS-Moodboards
 1. [Idee](#idee)
 2. [Features](#features)
-3. [Erweiterungen](#features)
-4. [Get started](#get-started)
+3. [Toolstack](#toolstack)
+4. [ERD](#erd)
+5. [Erweiterungen](#features)
+6. [Get started](#get-started)
 
 ## Idee
 Ein Webdesigner möchte einen Blog zum Thema Webdesign führen, um anstrebenden Designern wertvolle Tipps geben zu können. 
@@ -47,6 +49,16 @@ Es soll eine Pinterest ähnliche Plattform entstehen, auf der Nutzer Bilder (Pos
 > Blogbeiträge für die Academy können nur über das CMS Backend in Strapi erstellt, bearbeitet und gelöscht werden.
 >
 > Auf der Academyseite sehen die Nutzer (auch nichteingeloggte) eine Übersicht aller Blogbeiträge. Über den Klick auf einen beliebigen Beitrag werden die Inhalte des Beitrags angezeigt.
+
+## Toolstack
+- Angular
+- Angular-Material
+- Strapi
+- REST
+- GitHub
+
+## ERD
+![ERD.jpg](ERD.jpg)
 
 ## Erweiterungen
 Ideen für Erweiterungen:

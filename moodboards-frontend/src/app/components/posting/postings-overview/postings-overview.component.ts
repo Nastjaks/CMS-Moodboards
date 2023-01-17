@@ -23,6 +23,7 @@ export class PostingsOverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.route.params.subscribe((params: any) => {
       if (params.poId != null) {
         this.showPostDetails(params.poId);
