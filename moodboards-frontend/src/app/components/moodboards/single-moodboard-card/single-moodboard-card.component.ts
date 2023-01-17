@@ -15,8 +15,6 @@ export class SingleMoodboardCardComponent {
 
   showMoodboardDetails() {
     this.router.navigateByUrl('/moodboard/' + this.moodboard.id, { state: {moodboard: this.moodboard } });
-    //this.router.navigateByUrl('/moodboard/' + this.moodboard.id);
-    //this.location.go('/moodboard/' + this.moodboard.id);
   }
 
 }

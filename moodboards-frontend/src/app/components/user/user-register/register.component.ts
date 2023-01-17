@@ -50,6 +50,4 @@ export class RegisterComponent  {
       this.alert.openAlert("Please enter Input");
     }
   }
-
-
 }

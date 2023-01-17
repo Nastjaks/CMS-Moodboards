@@ -12,14 +12,14 @@ export class PostingService {
   constructor(private http: HttpClient, private urls: Urls) {
   }
 
-  //----------Ohne Authentifizierung----------
+  //----------without authentication----------
   getAllPostings() {
     console.log("[POSTING-SERVICE] get all Postings function");
 
     return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*')
       .pipe(
         map((res: any) => {
-          console.log(res.meta.pagination.page) //TODO
+          console.log(res.meta.pagination.page)
           return res.data;
         }),
         map((posting: Posting[]) => {
@@ -78,7 +78,7 @@ export class PostingService {
       );
   }
 
-  //----------Mit Authentifizierung----------
+  //----------with authentication----------
   createPosting(posting: any, formData: FormData, jwt: string) {
     console.log("[POSTING-SERVICE] create Postings function");
 

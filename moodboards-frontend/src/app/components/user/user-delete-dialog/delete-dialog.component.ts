@@ -5,7 +5,6 @@ import {AuthService} from "../../../services/auth.service";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {Moodboard} from "../../../models/moodboard";
 import {Posting} from "../../../models/posting";
-import {Observable} from "rxjs";
 import {PostingService} from "../../../services/posting.service";
 
 @Component({
@@ -16,8 +15,6 @@ import {PostingService} from "../../../services/posting.service";
 export class DeleteDialogComponent implements OnInit {
 
   currentUser!: Auth_Model;
-  //postings$!: Observable<Posting[]>;
-  //moodboards$!: Observable<Moodboard[]>;
   moodboards!: Moodboard[];
   postings!: Posting[];
 
@@ -37,8 +34,8 @@ export class DeleteDialogComponent implements OnInit {
     );
 
     this.userService.getAllUserMoodboards(this.currentUser.user.id).subscribe(
-      moodboars => {
-        this.moodboards = moodboars
+      moodboards => {
+        this.moodboards = moodboards
       }
     );
   }
@@ -61,33 +58,10 @@ export class DeleteDialogComponent implements OnInit {
     } else if (this.moodboards.length == 0) {   //wenn der Nutzer keine Moodboards hat
       this.deletAllUserPostings();
     }
-
-
-    /*
-    this.moodboards$.forEach((moodboard) => {
-      for (const mInfo in moodboard) {
-        this.userService.deleteUserMoodboards(moodboard[mInfo].id, this.currentUser.jwt).subscribe(res => console.log(res));
-      }
-    }).then(() =>
-      this.postings$.forEach((posting) => {
-        for (const pInfo in posting) {
-          this.postingService.deleteImage(posting[pInfo].attributes.image.data.id, this.currentUser.jwt).subscribe(() => {
-            this.postingService.deletePosting(posting[pInfo].id, this.currentUser.jwt).subscribe(res => console.log(res));
-          })
-        }
-      }).then(() => {
-          console.log("done")
-          //this.userService.deleteUserInformation(this.currentUser.user.id, this.currentUser.jwt).subscribe(() =>
-          //this.authService.logout()
-          //)
-        }
-      )
-    );*/
-
   }
 
   deletAllUserPostings() {
-  //wenn der Nutzer Posings hat
+  //wenn der Nutzer Postings hat
     if (this.postings.length > 0) {
       for (let i = 0; i < this.postings.length; i++) {
 
@@ -106,7 +80,7 @@ export class DeleteDialogComponent implements OnInit {
           });
         });
       }
-    } else if (this.postings.length == 0) { //wenn der Nutzer keine Posings hat
+    } else if (this.postings.length == 0) { //wenn der Nutzer keine Postings hat
       this.userService.deleteUserInformation(this.currentUser.user.id, this.currentUser.jwt).subscribe(() =>
         this.authService.logout()
       )

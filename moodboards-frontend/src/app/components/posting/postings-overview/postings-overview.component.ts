@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from "rxjs";
 import {Posting} from "../../../models/posting";
 import {PostingService} from "../../../services/posting.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {PostingDetailComponent} from "../posting-detail-dialog/posting-detail.component";
 import {Location} from "@angular/common";
 import {MatDialog} from "@angular/material/dialog";

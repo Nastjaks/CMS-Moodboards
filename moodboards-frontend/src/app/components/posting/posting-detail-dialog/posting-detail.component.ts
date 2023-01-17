@@ -11,6 +11,7 @@ import {MoodboardService} from "../../../services/moodboard.service";
 import {PostingService} from "../../../services/posting.service";
 import {AlertComponent} from "../../general/alert/alert.component";
 import {DeletePostingDialogComponent} from "../posting-delete-dialog/delete-posting-dialog.component";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -41,10 +42,9 @@ export class PostingDetailComponent implements OnInit {
     private postingService: PostingService,
     private moodboardService: MoodboardService,
     private alert: AlertComponent,
+    private router: Router,
     public dialogPanel: MatDialog) {
     this.postingID = this.data.postingID;
-
-
   }
 
   ngOnInit(): void {
@@ -66,8 +66,12 @@ export class PostingDetailComponent implements OnInit {
 
   addImageToMoodboard(moodboardId: number) {
     if (moodboardId) {
-      this.moodboardService.addImgToMoodboard(this.posting.id, moodboardId, this.currentUser.jwt);
-      this.alert.openAlert('add' + this.posting.attributes.title + ' to Moodboard');
+      this.moodboardService.addImgToMoodboard(this.posting.id, moodboardId, this.currentUser.jwt).subscribe(() => {
+        if (this.router.url.startsWith("/profile")) {
+          window.location.reload();
+        }
+        this.alert.openAlert('Added ' + this.posting.attributes.title + ' to Moodboard')
+      })
     } else {
       this.alert.openAlert("You have to select a Moodboard!");
     }
@@ -113,5 +117,4 @@ export class PostingDetailComponent implements OnInit {
       this.alert.openAlert("You have to add a title");
     }
   }
-
 }

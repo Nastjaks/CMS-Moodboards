@@ -41,7 +41,7 @@ export class CreatePostingComponent {
       }
       this.postingService.createPosting(posting, this.formData, this.user.jwt)
     } else {
-      this.alert.openAlert("Image and title required");
+      this.alert.openAlert("Image and title are required");
     }
 
   }

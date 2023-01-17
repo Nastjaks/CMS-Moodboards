@@ -5,16 +5,13 @@ import {Posting} from "../models/posting";
 import {Moodboard} from "../models/moodboard";
 import {User} from "../models/user";
 import {Urls} from "../helper/urls";
-import {StorageService} from "./storage.service";
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-
-  constructor(private http: HttpClient, private urls: Urls, private storageService: StorageService) {
+  constructor(private http: HttpClient, private urls: Urls) {
   }
 
   getAllUserPostings(id: number) {
@@ -52,7 +49,7 @@ export class UserService {
   }
 
   getUserInformation(id: number) {
-    console.log("[USER-SERVICE] get Information from user function " + id); //TODO
+    console.log("[USER-SERVICE] get Information from user function " + id);
 
     return this.http.get<User[]>(this.urls.users_URL + id)
       .pipe(

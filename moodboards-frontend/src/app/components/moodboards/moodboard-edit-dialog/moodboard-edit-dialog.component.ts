@@ -35,7 +35,7 @@ export class MoodboardEditDialogComponent {
       }
 
       this.moodboardService.updateMoodboard(this.data.moodboard.id, moodboard, this.user.jwt)
-      this.alert.openAlert("Save chages");
+      this.alert.openAlert("Saved changes");
       this.dialogRef.close();
 
     } else {

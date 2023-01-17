@@ -1,10 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Posting} from "../../../models/posting";
-import {PostingDetailComponent} from "../posting-detail-dialog/posting-detail.component";
-import {MatDialog} from "@angular/material/dialog";
-import {Location} from "@angular/common";
-import {ActivatedRoute, Router} from "@angular/router";
-
 
 @Component({
   selector: 'app-single-posting-card',
@@ -19,29 +14,7 @@ export class SinglePostingCardComponent {
   constructor() {
   }
 
-
   showPostDetails() {
     this.showDetailsEvent.emit(this.posting.id);
-    /*
-    const url = this.router.url
-
-    if (this.router.url == "/" || this.router.url == "/#discover") {
-      this.location.go('/posting/' + this.posting.id);
-    } else {
-      this.location.go(url + '/posting/' + this.posting.id);
-    }
-
-    this.dialogPanel.open(PostingDetailComponent, {
-      data: {
-        posting: this.posting
-      }
-    }).afterClosed().subscribe(() => {
-        if (this.router.url == "/#discover") {
-          this.location.go('/')
-        } else {
-          this.location.go(url)
-        }
-      }
-    );*/
   }
 }

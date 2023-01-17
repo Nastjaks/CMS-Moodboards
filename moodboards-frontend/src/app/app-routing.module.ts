@@ -13,25 +13,31 @@ import {BlogDetailComponent} from "./components/blog/blog-detail/blog-detail.com
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+
   //Postings
   {path: 'posting/:poId', component: HomeComponent},
   {path: 'postings', component: PostingsOverviewComponent},
   {path: 'postings/posting/:poId', component: PostingsOverviewComponent},
+
   //Postings -- filter
   {path: 'postings/:category/posting/:poId', component: PostingsOverviewComponent},
   {path: 'postings/:category', component: PostingsOverviewComponent},
+
   //Academy
   {path: 'academy', component: BlogOverviewComponent},
   {path: 'academy/:id', component: BlogDetailComponent},
+
   //Moodboards
   {path: 'moodboards', component: MoodboardsOverviewComponent},
   {path: 'moodboard/:id', component: MoodboardDetailComponent},
   {path: 'moodboard/:id/posting/:poId', component: MoodboardDetailComponent},
+
   //User
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'profile/posting/:poId', component: ProfileComponent},
+
   //Error
   { path: '**', pathMatch: 'full', component: PageNotFoundComponent },
 ];

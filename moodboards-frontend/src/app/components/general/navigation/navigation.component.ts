@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {StorageService} from "../../../services/storage.service";
-import {AuthService} from "../../../services/auth.service";
 import {AlertComponent} from "../alert/alert.component";
 
 @Component({

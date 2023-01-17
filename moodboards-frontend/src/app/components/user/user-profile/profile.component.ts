@@ -87,15 +87,15 @@ export class ProfileComponent implements OnInit {
   }
 
   showPostings() {
-    document.getElementById('moodboardContainer')!.classList.add("hiddeContainer");
-    document.getElementById('postingsContainer')!.classList.remove("hiddeContainer");
+    document.getElementById('moodboardContainer')!.classList.add("hideContainer");
+    document.getElementById('postingsContainer')!.classList.remove("hideContainer");
     document.getElementById('postingNav')!.classList.add("active");
     document.getElementById('moodboardNav')!.classList.remove("active");
   }
 
   showMoodboards() {
-    document.getElementById('moodboardContainer')!.classList.remove("hiddeContainer");
-    document.getElementById('postingsContainer')!.classList.add("hiddeContainer");
+    document.getElementById('moodboardContainer')!.classList.remove("hideContainer");
+    document.getElementById('postingsContainer')!.classList.add("hideContainer");
     document.getElementById('moodboardNav')!.classList.add("active");
     document.getElementById('postingNav')!.classList.remove("active");
   }

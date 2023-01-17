@@ -54,6 +54,6 @@ export class AuthService {
 
   logout(): void {
     this.storageService.clean();
-    this.router.navigate(['/']).then(r => window.location.reload());
+    this.router.navigate(['/']).then(() => window.location.reload());
   }
 }

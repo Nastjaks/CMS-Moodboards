@@ -1,19 +1,18 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Moodboard} from "../models/moodboard";
-import {catchError, map, Observable} from "rxjs";
+import {catchError, map} from "rxjs";
 import {Urls} from "../helper/urls";
-import {Location} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoodboardService {
 
-  constructor(private http: HttpClient, private urls: Urls,  private location: Location) {
+  constructor(private http: HttpClient, private urls: Urls) {
   }
 
-  //----------Ohne Authentifizierung----------
+  //----------without authentication----------
   getAllMoodboards() {
     console.log("[MOODBOARD-SERVICE] get all Moodboards function")
     return this.http.get<Moodboard[]>(this.urls.moodboard_URL + '?populate[postings][populate][0]=image&populate[moodboard_creator][populate]&filters[private]=false')
@@ -37,7 +36,8 @@ export class MoodboardService {
   getOneMoodboard(id: number) {
     console.log("[MOODBOARD-SERVICE] get one Moodboard " + id + " function")
 
-    return this.http.get<Moodboard>(this.urls.moodboard_URL + '/' + id + '?populate[postings][populate][0]=image&populate[moodboard_creator][populate]').pipe(
+    return this.http.get<Moodboard>(this.urls.moodboard_URL + '/' + id + '?populate[postings][populate][0]=image&populate[moodboard_creator][populate]')
+      .pipe(
       map((res: any) => {
         return res.data;
       }),
@@ -50,7 +50,7 @@ export class MoodboardService {
     );
   }
 
-  //----------Mit Authentifizierung----------
+  //----------with authentication----------
   createMoodboard(moodboard: any, jwt: string) {
     console.log("[MOODBOARD-SERVICE] create Moodboards function " + moodboard.title);
 
@@ -78,8 +78,9 @@ export class MoodboardService {
 
     let postings: number[] = [];
 
-    this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
-      .subscribe((res: any) => {
+    return this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
+      .pipe(
+        map( (res: any) => {
           for (let i = 0; i < res.data.length; i++) {
             postings.push(res.data[i].id);
           }
@@ -95,7 +96,7 @@ export class MoodboardService {
           });
 
           return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe()
-        }
+        })
       )
   }
 
@@ -110,7 +111,7 @@ export class MoodboardService {
             postings.push(res.data[i].id);
           }
 
-          for (var i = 0; i < postings.length; i++) {
+          for (let i = 0; i < postings.length; i++) {
             if (postings[i] === imgId) {
               postings.splice(i, 1);
             }
