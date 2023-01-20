@@ -1,12 +1,10 @@
-/*
-.contentContainer {
-  background-image: url(https://img.freepik.com/free-vector/white-abstract-background_23-2148806276.jpg?w=2000);
-  background-repeat: no-repeat, repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  margin-right: -2%;
-  margin-left: -2%;
+button {
+  margin-top: 15px;
+  height: 45px
 }
 
-
- */
+.contentContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

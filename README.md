@@ -43,7 +43,7 @@ Es soll eine Pinterest ähnliche Plattform entstehen, auf der Nutzer Bilder (Pos
 >
 > Über den Klick auf ein Moodboard kann sich ein Nutzer weitere Details zum Moodboard ansehen (wie Ersteller, Postings, Beschreibung...).
 > 
-> Ist der eingeloggte Nutzer der Ersteller des Moodboards, kann dieser das Moodboard auf der Deatilseite bearbeiten, löschen und einzelne Postings vom Moodboard entfernen.
+> Ist der eingeloggte Nutzer der Ersteller des Moodboards, kann dieser das Moodboard auf der Detailseite bearbeiten, löschen und einzelne Postings vom Moodboard entfernen.
 
 >### Academy - Blog
 > Blogbeiträge für die Academy können nur über das CMS Backend in Strapi erstellt, bearbeitet und gelöscht werden.
@@ -73,10 +73,10 @@ Ideen für Erweiterungen:
 
 
 2. Für das Backend in [ `moodboards-backend/package.json`](moodboards-backend/package.json) alle Dependencies installieren
-   - Strapi starten mit `develop`
+   - Strapi starten mit `start_strapi`
    - Login mit -> Admin:`admin@cms.de` Passwort: `Admin_01`
 
 
 3. Für das Frontend in [`moodboards-frontend/package.json`](moodboards-frontend/package.json) alle Dependencies installieren 
-   -  Angular starten `start`
+   -  Angular starten `start_angular`
    -  Neu registrieren oder Login mit -> Admin:`test_User_1` Passwort: `Test_1234`

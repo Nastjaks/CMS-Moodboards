@@ -34,10 +34,11 @@ export class MoodboardEditDialogComponent {
         visibilityPrivate: this.newVisibilityPrivate,
       }
 
-      this.moodboardService.updateMoodboard(this.data.moodboard.id, moodboard, this.user.jwt)
-      this.alert.openAlert("Saved changes");
-      this.dialogRef.close();
+      this.moodboardService.updateMoodboard(this.data.moodboard.id, moodboard, this.user.jwt).subscribe(()=>{
+        window.location.reload();
+        this.dialogRef.close();
 
+      })
     } else {
       this.alert.openAlert("Please enter a title");
     }

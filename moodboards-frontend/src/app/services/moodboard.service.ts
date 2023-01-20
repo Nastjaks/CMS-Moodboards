@@ -38,16 +38,16 @@ export class MoodboardService {
 
     return this.http.get<Moodboard>(this.urls.moodboard_URL + '/' + id + '?populate[postings][populate][0]=image&populate[moodboard_creator][populate]')
       .pipe(
-      map((res: any) => {
-        return res.data;
-      }),
-    ).pipe(
-      catchError((err) => {
-       console.log("404 - Not found")
-          throw err;
-        }
-      )
-    );
+        map((res: any) => {
+          return res.data;
+        }),
+      ).pipe(
+        catchError((err) => {
+            console.log("404 - Not found")
+            throw err;
+          }
+        )
+      );
   }
 
   //----------with authentication----------
@@ -67,8 +67,8 @@ export class MoodboardService {
         private: moodboard.visibilityPrivate
       }
     }, {'headers': headers}).subscribe(() => {
-      window.location.reload();
-    }
+        window.location.reload();
+      }
     )
 
   }
@@ -80,7 +80,7 @@ export class MoodboardService {
 
     return this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
       .pipe(
-        map( (res: any) => {
+        map((res: any) => {
           for (let i = 0; i < res.data.length; i++) {
             postings.push(res.data[i].id);
           }
@@ -105,7 +105,7 @@ export class MoodboardService {
 
     let postings: number[] = [];
 
-   this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
+    this.http.get<number[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
       .subscribe((res: any) => {
           for (let i = 0; i < res.data.length; i++) {
             postings.push(res.data[i].id);
@@ -127,7 +127,7 @@ export class MoodboardService {
             data: {postings: postings}
           });
 
-          return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe(()=>{
+          return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe(() => {
             window.location.reload();
           })
         }
@@ -148,8 +148,12 @@ export class MoodboardService {
         description: moodboard.description,
         private: moodboard.visibilityPrivate
       }
-    }, {'headers': headers}).subscribe(
-      res => console.log(res))
+    }, {'headers': headers}).pipe(
+      map((res) => {
+
+      })
+    )
+
   }
 
   deleteMoodboard(moodboardId: number, jwt: string) {
