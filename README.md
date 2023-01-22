@@ -76,9 +76,11 @@ Ideen für Erweiterungen:
 
 2. Für das Backend in [ `moodboards-backend/package.json`](moodboards-backend/package.json) alle Dependencies installieren
    - Strapi starten mit `start_strapi`
+   - <a href="http://localhost:1337/admin/auth/login"> http://localhost:1337/admin/auth/login </a> zum öffnen
    - Login mit -> Admin:`admin@cms.de` Passwort: `Admin_01`
 
 
 3. Für das Frontend in [`moodboards-frontend/package.json`](moodboards-frontend/package.json) alle Dependencies installieren 
    -  Angular starten `start_angular`
+   - <a href="http://localhost:4200/"> http://localhost:4200/ </a> zum öffnen
    -  Neu registrieren oder Login mit -> Admin:`test_User_1` Passwort: `Test_1234`
