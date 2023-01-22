@@ -37,7 +37,6 @@ export class MoodboardEditDialogComponent {
       this.moodboardService.updateMoodboard(this.data.moodboard.id, moodboard, this.user.jwt).subscribe(()=>{
         window.location.reload();
         this.dialogRef.close();
-
       })
     } else {
       this.alert.openAlert("Please enter a title");

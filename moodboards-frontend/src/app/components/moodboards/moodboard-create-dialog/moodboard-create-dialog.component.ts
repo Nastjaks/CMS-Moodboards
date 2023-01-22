@@ -33,9 +33,7 @@ export class MoodboardCreateDialogComponent {
         visibilityPrivate: this.visibility,
         moodboard_creator: this.user.user.id
       }
-
       this.moodboardService.createMoodboard(moodboard, this.user.jwt)
-
     } else {
       this.alert.openAlert("Please enter a title");
     }

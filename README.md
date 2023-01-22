@@ -66,6 +66,8 @@ Ideen für Erweiterungen:
 - Mehr Filtermöglichkeiten
 - Farbpaletten-Generator
 - Speichern von Blogbeiträgen
+- Gemeinsames Bearbeiten von Moodboards
+- Ändern der Reihnfolge der Postings im Moodboard per drag and drop
 
 ## Get started
 

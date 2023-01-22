@@ -56,7 +56,6 @@
                   <span class="own-tooltiptext">Moodboard is private</span>
                 </div>
               </div>
-
             </div>
 
 
@@ -67,8 +66,6 @@
 
           <p class="alignTextCenter">{{moodboard.attributes.description}}</p>
 
-
-
         </div>
       </div>
 
@@ -76,9 +73,9 @@
       <p>Contains {{moodboard.attributes.postings.data.length}} postings</p>
       <div class="overviewContainer-Postings" >
         <div *ngFor="let post of postingsInMoodboard$ | async" class="single-postingCard" >
+
           <div class="postingCard">
             <div>
-
               <div class="removeFromMood-Container" *ngIf="isLoggedIn && isOwner" >
 
                 <div class="own-Tooltip">
