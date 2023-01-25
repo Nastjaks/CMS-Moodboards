@@ -2,8 +2,11 @@
 
   <div class="fullWidth">
 
-    <div class="sidebar" *ngIf="isLoggedIn && isOwner">
-      <button class="sidebarBtn" (click)="openEditMoodboardDialog()">
+    <div class="headerWithSidebar">
+
+    <!-- sidebar-->
+    <div class="sidebar" *ngIf="isLoggedIn && isOwner || isLoggedIn && isCoCreator">
+      <button class="sidebarBtn" (click)="openEditMoodboardDialog()" *ngIf="isLoggedIn && isOwner">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
              viewBox="0 0 16 16">
           <path
@@ -11,7 +14,7 @@
         </svg>
         EDIT MOODBOARD
       </button>
-      <button class="sidebarBtn" (click)="openDeleteDialog()">
+      <button class="sidebarBtn" (click)="openDeleteDialog()" *ngIf="isLoggedIn && isOwner">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3"
              viewBox="0 0 16 16">
           <path
@@ -20,10 +23,28 @@
         DELETE MOODBOARD
       </button>
 
+      <div  class="addCoCreator-cont" *ngIf=" isOwner">
+
+        <div class="displayAsColumn">
+          <label>Add Co -Creator</label>
+          <div>
+            <input class="addCoCreator-inp" [(ngModel)]="this.userToAdd" type="text" name="username"/>
+            <button class="addCoCreator-btn" (click)="addCoCreator()">+</button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button class="sidebarBtn" (click)="removeCoCreator(this.currentUser.user.id)" *ngIf="isLoggedIn && isCoCreator">
+        <fa-icon [icon]="faPersonThroughWindow"></fa-icon>
+        LEAVE MOODBOARD
+      </button>
     </div>
 
-    <div>
-
+      <!--moodboard zeug-->
       <div class="center">
         <div class="moodboardInfo">
 
@@ -57,30 +78,56 @@
                 </div>
               </div>
             </div>
-
-
           </div>
 
           <p class="alignTextCenter moodboardInfo-user">Moodboard by
             @{{moodboard.attributes.moodboard_creator.data.attributes.username}}</p>
 
-          <p class="alignTextCenter">{{moodboard.attributes.description}}</p>
+          <!--moodboard owner-->
+          <div class="coCreators" *ngIf="coCreators.length > 0 && isOwner">
+            <p>Co Creators:
+              <span *ngFor="let coCreator of coCreators">
+                <span class="co-creator removeCreator" (click)="removeCoCreator(coCreator.id)" >
+                  {{coCreator.attributes.username}}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                       class="bi bi-person-dash" viewBox="0 0 16 16">
+                    <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM11 12h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1Zm0-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+                    <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+                  </svg>
 
+                </span>
+              </span></p>
+          </div>
+
+          <!--moodboard co creator-->
+          <div class="coCreators" *ngIf="coCreators.length > 0 && !isOwner">
+            <p>Co Creators:
+              <span *ngFor="let coCreator of coCreators">
+                <span class="co-creator">
+                 @{{coCreator.attributes.username}}
+                </span>
+              </span></p>
+          </div>
+
+          <p class="alignTextCenter">{{moodboard.attributes.description}} </p>
         </div>
       </div>
+    </div>
 
 
+
+    <div>
       <p>Contains {{moodboard.attributes.postings.data.length}} postings</p>
-      <div class="overviewContainer-Postings" >
-        <div *ngFor="let post of postingsInMoodboard$ | async" class="single-postingCard" >
+      <div class="overviewContainer-Postings">
+        <div *ngFor="let post of postingsInMoodboard$ | async" class="single-postingCard">
 
           <div class="postingCard">
             <div>
-              <div class="removeFromMood-Container" *ngIf="isLoggedIn && isOwner" >
+              <div class="removeFromMood-Container" *ngIf="isLoggedIn && isOwner || isLoggedIn && isCoCreator">
 
                 <div class="own-Tooltip">
                   <span class="removeFromMood-Icon" (click)="removeImgFromMoodboard(post.id)">-</span>
-                  <span class="own-tooltiptext">remove Post from Moodboard</span>
+                  <span class="own-tooltiptext removeImg-ToolTip">remove Post from Moodboard</span>
                 </div>
               </div>
 

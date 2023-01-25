@@ -29,7 +29,7 @@ export class PostingsOverviewComponent implements OnInit {
         this.showPostDetails(params.poId);
       }
       if (params.category != null) {
-        this.posting$ = this.postingService.getAllPostingsByCategory(params.category);
+        this.posting$ = this.postingService.getPostingsByCategory(params.category);
       } else if (params.category == null) {
         this.posting$ = this.postingService.getAllPostings();
       }

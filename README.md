@@ -17,7 +17,7 @@ Es soll eine Pinterest ähnliche Plattform entstehen, auf der Nutzer Bilder (Pos
 ## Features
 
 >### Nutzer
-> Ein Nutzer kann sich registrieren und sich mit seinen Informationen auf der Plattform einloggen.
+> Ein Nutzer kann sich registrieren und sich mit seinen Informationen auf der Plattform einloggen. (Nach der Registrierung wird der Nutzer automatisch eingeloggt)
 > 
 > Auf der Profilseite kann der Nutzer seine Informationen bearbeiten, eine Beschreibung hinzufügen und sein Profil löschen. Beim Löschen werden die Nutzerinformationen gelöscht, so wie die erstellten Postings und Moodboards.
 
@@ -43,7 +43,20 @@ Es soll eine Pinterest ähnliche Plattform entstehen, auf der Nutzer Bilder (Pos
 >
 > Über den Klick auf ein Moodboard kann sich ein Nutzer weitere Details zum Moodboard ansehen (wie Ersteller, Postings, Beschreibung...).
 > 
-> Ist der eingeloggte Nutzer der Ersteller des Moodboards, kann dieser das Moodboard auf der Detailseite bearbeiten, löschen und einzelne Postings vom Moodboard entfernen.
+> Ist der eingeloggte Nutzer der Ersteller des Moodboards, kann dieser das Moodboard auf der Detailseite bearbeiten, löschen und einzelne Postings vom Moodboard entfernen. 
+
+
+>### Moodboard - Co-Creator
+> Der Besitzer kann Co-Creator hinzufügen und entfernen.
+> 
+> Beim Hinzufügen wird geprüft, ob der Nutzer existiert oder bereits Co-Creator ist.
+>
+> Nutzer, die als Co Creator hinzugefügt wurden, können Postings zu dem jeweiligen Moodboard hinzufügen und entfernen.
+>
+> Zugeteilte Nutzer können das Moodboard als Co-Creator verlassen.
+
+
+
 
 >### Academy - Blog
 > Blogbeiträge für die Academy können nur über das CMS Backend in Strapi erstellt, bearbeitet und gelöscht werden.
@@ -58,16 +71,15 @@ Es soll eine Pinterest ähnliche Plattform entstehen, auf der Nutzer Bilder (Pos
 - GitHub
 
 ## ERD
-![ERD.jpg](ERD.jpg)
-
+![ERD.png](ERD.png)
 ## Erweiterungen
 Ideen für Erweiterungen:
 - Infinite Scroll
 - Mehr Filtermöglichkeiten
 - Farbpaletten-Generator
 - Speichern von Blogbeiträgen
-- Gemeinsames Bearbeiten von Moodboards
-- Ändern der Reihnfolge der Postings im Moodboard per drag and drop
+- Ändern der Reihenfolge der Postings im Moodboard per drag and drop
+- Socket.io  für das collaborative Arbeiten
 
 ## Get started
 
@@ -76,11 +88,11 @@ Ideen für Erweiterungen:
 
 2. Für das Backend in [ `moodboards-backend/package.json`](moodboards-backend/package.json) alle Dependencies installieren
    - Strapi starten mit `start_strapi`
-   - <a href="http://localhost:1337/admin/auth/login"> http://localhost:1337/admin/auth/login </a> zum öffnen
+   - <a href="http://localhost:1337/admin/auth/login"> http://localhost:1337/admin/auth/login </a> zum öffnen (vorzugsweise mit Firefox)
    - Login mit -> Admin:`admin@cms.de` Passwort: `Admin_01`
 
 
 3. Für das Frontend in [`moodboards-frontend/package.json`](moodboards-frontend/package.json) alle Dependencies installieren 
    -  Angular starten `start_angular`
-   - <a href="http://localhost:4200/"> http://localhost:4200/ </a> zum öffnen
+   - <a href="http://localhost:4200/"> http://localhost:4200/ </a> zum öffnen (vorzugsweise mit Firefox)
    -  Neu registrieren oder Login mit -> Admin:`test_User_1` Passwort: `Test_1234`

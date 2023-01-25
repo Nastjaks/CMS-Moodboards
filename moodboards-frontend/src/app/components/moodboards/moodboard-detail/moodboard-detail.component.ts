@@ -13,6 +13,7 @@ import {DeleteMoodboardDialogComponent} from "../moodboard-delete-dialog/delete-
 import {MoodboardEditDialogComponent} from "../moodboard-edit-dialog/moodboard-edit-dialog.component";
 import {PostingDetailComponent} from "../../posting/posting-detail-dialog/posting-detail.component";
 import {AlertComponent} from "../../general/alert/alert.component";
+import { faPersonThroughWindow, faUserMinus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-moodboard-detail',
@@ -21,13 +22,18 @@ import {AlertComponent} from "../../general/alert/alert.component";
   providers: [AlertComponent],
 })
 export class MoodboardDetailComponent implements OnInit {
+  faPersonThroughWindow = faPersonThroughWindow;
+  faUserMinus = faUserMinus;
+  userToAdd: string = "";
 
   currentUser!: Auth_Model;
   moodboard!: Moodboard;
   postingsInMoodboard$!: Observable<Posting[]>;
+  coCreators!: any[];
   isLoggedIn = false;
   isOwner = false;
-  moodboardCreatorId: number = 1;
+  isCoCreator = false;
+  moodboardCreatorId!: number;
   dialogConfig = new MatDialogConfig();
   moodboard_Id!: number;
 
@@ -37,7 +43,8 @@ export class MoodboardDetailComponent implements OnInit {
               private postingService: PostingService,
               private moodboardService: MoodboardService,
               public dialogPanel: MatDialog,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private alert: AlertComponent,) {
 
   }
 
@@ -51,12 +58,25 @@ export class MoodboardDetailComponent implements OnInit {
         moodboard => {
           this.moodboard = moodboard
           this.moodboardCreatorId = this.moodboard.attributes.moodboard_creator.data.id;
-          this.postingsInMoodboard$ = this.postingService.getAllPostingsInMoodboard(this.moodboard.id);
+          this.postingsInMoodboard$ = this.postingService.getPostingsInMoodboard(this.moodboard.id);
+          this.moodboardService.getAllCoCreators(this.moodboard.id).subscribe(coCreator => {
+            this.coCreators = coCreator
+
+            if (coCreator.length > 0) {
+              for (let i = 0; i < this.coCreators.length; i++) {
+                if (this.coCreators[i].id == this.currentUser.user.id){
+                  this.isCoCreator = true;
+                }
+              }
+            }
+          })
 
           if (this.isLoggedIn) {
             if (this.moodboardCreatorId == this.currentUser.user.id) {
               this.isOwner = true;
             }
+
+
           }
           if (params.id != null) {
             this.moodboard_Id = params.id;
@@ -87,7 +107,43 @@ export class MoodboardDetailComponent implements OnInit {
   }
 
   removeImgFromMoodboard(imgId: number) {
-    this.moodboardService.removeImgFromMoodboard(imgId, this.moodboard.id, this.currentUser.jwt)
+    this.moodboardService.removeImgFromMoodboard(imgId, this.moodboard.id, this.currentUser.jwt).subscribe(() =>{
+      this.postingsInMoodboard$ = this.postingService.getPostingsInMoodboard(this.moodboard.id)
+      this.alert.openAlert("Posting removed from Moodboard") //TODO: subscribe
+    })
+  }
+
+  removeCoCreator(coCreator: number) {
+    this.moodboardService.removeCoCreator(coCreator, this.moodboard.id, this.currentUser.jwt)
+  }
+
+  addCoCreator() {
+
+    let userInArray: boolean = false;
+    if (this.userToAdd.trim().length >= 3){
+      if (this.userToAdd != this.currentUser.user.username){
+
+        for (let i = 0; i < this.coCreators.length; i++) {
+          if (this.coCreators[i].attributes.username == this.userToAdd){
+            userInArray = true
+            this.alert.openAlert("User is already a co-creator")
+          }
+        }
+        if (!userInArray){
+          this.moodboardService.addCoCreator(this.userToAdd, this.moodboard.id, this.currentUser.jwt).subscribe( res => {
+            if (res == "User not found"){
+              this.alert.openAlert("User not found")
+            }
+          })
+        }
+
+      } else {
+        this.alert.openAlert("You can't add yourself")
+      }
+
+    } else {
+      this.alert.openAlert("Username is to short")
+    }
   }
 
   openDeleteDialog() {

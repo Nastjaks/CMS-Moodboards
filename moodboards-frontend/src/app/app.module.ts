@@ -38,6 +38,7 @@ import {HomeComponent} from './components/general/home/home.component';
 import {BlogOverviewComponent} from './components/blog/blog-overview/blog-overview.component';
 import {BlogDetailComponent} from './components/blog/blog-detail/blog-detail.component';
 import {UserEditDialogComponent} from './components/user/user-edit-dialog/user-edit-dialog.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import {UserEditDialogComponent} from './components/user/user-edit-dialog/user-e
     MatIconModule,
     MatFormFieldModule,
     MatSelectModule,
+    FontAwesomeModule,
   ],
   providers: [httpInterceptorProviders, Urls],
   bootstrap: [AppComponent]

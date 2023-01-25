@@ -12,9 +12,12 @@ export class BlogpostService {
 
   constructor(private http: HttpClient, private urls: Urls) { }
 
+  /**
+   * GET ALL ACADEMY POSTS
+   */
   getAllBlogposts(){
     console.log("[BLOGPOST-SERVICE] get all Blogposts function");
-    return this.http.get<Blogpost[]>(this.urls.blogposts_URL + '?populate=*').pipe(
+    return this.http.get<Blogpost[]>(this.urls.blogposts_URL + '?populate=*&sort[0]=id%3Adesc').pipe(
         map((res: any) => {
           return res.data;
         }),
@@ -27,6 +30,10 @@ export class BlogpostService {
       );
   }
 
+  /**
+   * GET ONE ACADEMY POSTS BY ID
+   * @param blogId - ID of the wanted post
+   */
   getOneBlogposts(blogId: number){
     console.log("[BLOGPOST-SERVICE] get one Blogposts function " + blogId);
 

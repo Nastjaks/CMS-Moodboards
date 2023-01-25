@@ -244,6 +244,7 @@ label {
 
 /*----------------------Tooltip------------------------*/
 .own-Tooltip {
+  z-index: 1000;
   position: relative;
   display: inline-block;
 }
@@ -254,13 +255,13 @@ label {
   opacity: 0;
   z-index: 1;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 20px;
   color: #fff;
-  background-color: #555;
+  background-color: #ee6756;
   width: 200px;
   padding: 10px 5px;
   bottom: 125%;
-  margin-left: -120px;
+  margin-left: -122px;
   font-size: 13px;
   font-weight: 400;
 }
@@ -271,9 +272,9 @@ label {
   top: 100%;
   left: 50%;
   margin-left: -5px;
-  border-width: 5px;
+  border-width: 7px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: #ee6756 transparent transparent transparent;
 }
 
 
@@ -332,3 +333,38 @@ label {
   color: #fff;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
+
+/*----------------------Alert-----------------------*/
+.mdc-snackbar__surface {
+  border-radius: 30px  !important;
+  background: linear-gradient(130deg, rgba(238,103,86,1) 30%, rgba(238,146,86,1) 60%);
+  animation: gradient 3s ease infinite;
+  background-size: 400% 400%;
+  background-attachment: fixed;
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+  }
+
+.mdc-button__label {
+  color: #fff;
+}
+.mat-mdc-snack-bar-label.mdc-snackbar__label {
+  font-weight: 500 !important;
+  font-size: 16px !important;
+  letter-spacing: 1.2px !important;
+  color: #fff !important;
+}
+.mat-mdc-simple-snack-bar {
+  padding: 7px;
+}
+
+

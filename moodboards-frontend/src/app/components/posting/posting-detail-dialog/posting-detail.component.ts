@@ -55,7 +55,7 @@ export class PostingDetailComponent implements OnInit {
       this.isLoggedIn = this.storageService.isLoggedIn();
 
       if (this.isLoggedIn) {
-        this.moodboard$ = this.userService.getAllUserMoodboards(this.currentUser.user.id);
+        this.moodboard$ = this.userService.getAccessableMoodboards(this.currentUser.user.id);
 
         if (this.posting.attributes.posting_creator.data.id == this.currentUser.user.id) {
           this.isOwner = true;

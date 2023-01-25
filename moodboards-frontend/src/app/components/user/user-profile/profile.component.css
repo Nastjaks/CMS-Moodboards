@@ -3,13 +3,10 @@
 }
 
 
-#postingNav {
+#postingNav, #moodboardNav, #coCreatorNav  {
   cursor: pointer;
 }
 
-#moodboardNav {
-  cursor: pointer;
-}
 
 .profileNavi {
   display: flex;

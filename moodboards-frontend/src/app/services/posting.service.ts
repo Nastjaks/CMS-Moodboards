@@ -12,14 +12,16 @@ export class PostingService {
   constructor(private http: HttpClient, private urls: Urls) {
   }
 
-  //----------without authentication----------
+  //----------without authentication----------//
+  /**
+   * GET ALL POSTINGS
+   */
   getAllPostings() {
     console.log("[POSTING-SERVICE] get all Postings function");
 
-    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*')
+    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&sort[0]=id%3Adesc')
       .pipe(
         map((res: any) => {
-          console.log(res.meta.pagination.page)
           return res.data;
         }),
         map((posting: Posting[]) => {
@@ -31,10 +33,14 @@ export class PostingService {
       );
   }
 
-  getOnePosting(Id: number) {
+  /**
+   * GET ONE POSTING
+   * @param postId ID of the wanted posting
+   */
+  getOnePosting(postId: number) {
     console.log("[POSTING-SERVICE] get one Postings function");
 
-    return this.http.get<Posting>(this.urls.postings_URL + '/' + Id + '?populate=*').pipe(
+    return this.http.get<Posting>(this.urls.postings_URL + '/' + postId + '?populate=*').pipe(
       map((res: any) => {
         return res.data
       }),
@@ -45,10 +51,14 @@ export class PostingService {
     )
   }
 
-  getAllPostingsInMoodboard(moodboardId: number) {
+  /**
+   * GET ALL POSTINGS FROM A MOODBOARD TODO: WHY & MOVE
+   * @param moodboardId ID of the moodboard from which the images are to be fetched.
+   */
+  getPostingsInMoodboard(moodboardId: number) {
     console.log("[POSTING-SERVICE] get all Postings in moodboard function");
 
-    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId)
+    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[moodboards][id]=' + moodboardId + '&sort[0]=id%3Adesc')
       .pipe(
         map((res: any) => {
           return res.data;
@@ -61,10 +71,14 @@ export class PostingService {
         }));
   }
 
-  getAllPostingsByCategory(category: string) {
+  /**
+   * GET POSTINGS BY CATEGORY
+   * @param category Category from which the postings are to be fetched
+   */
+  getPostingsByCategory(category: string) {
     console.log("[POSTING-SERVICE] get all Postings by category "+ category);
 
-    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[tag]=' + category)
+    return this.http.get<Posting[]>(this.urls.postings_URL + '?populate=*&filters[tag]=' + category + '&sort[0]=id%3Adesc')
       .pipe(
         map((res: any) => {
           return res.data;
@@ -78,7 +92,15 @@ export class PostingService {
       );
   }
 
-  //----------with authentication----------
+
+  //----------with authentication----------//
+
+  /**
+   * CREATE POSTING
+   * @param posting Information of th posting to be created
+   * @param formData image that souls be uploaded and connected to the posting
+   * @param jwt JWT if the user who create the posting
+   */
   createPosting(posting: any, formData: FormData, jwt: string) {
     console.log("[POSTING-SERVICE] create Postings function");
 
@@ -92,24 +114,33 @@ export class PostingService {
     };
 
     return this.http.post<any>(this.urls.upload_URL, formData, {'headers': headersImg})
-      .subscribe(res => {
-          const body = JSON.stringify({
-            data: {
-              title: posting.title,
-              description: posting.description,
-              posting_creator: posting.posting_creator,
-              tag: posting.tag,
-              image: res[0].id
-            }
-          });
+      .pipe(
+        map((res => {
+            const body = JSON.stringify({
+              data: {
+                title: posting.title,
+                description: posting.description,
+                posting_creator: posting.posting_creator,
+                tag: posting.tag,
+                image: res[0].id
+              }
+            });
 
-          return this.http.post<any>(this.urls.postings_URL, body, {'headers': headers}).subscribe(() => {
-            window.location.reload();
-          })
-        }
+            return this.http.post<any>(this.urls.postings_URL, body, {'headers': headers}).subscribe(() => {
+            })
+          }
+        ))
       );
   }
 
+  /**
+   * EDIT POSTING TODO: Shorter
+   * @param title posting title
+   * @param description posting description
+   * @param tag posting tag
+   * @param id posting id
+   * @param jwt JWT of user who edit the posting
+   */
   editPosting(title: string, description: string, tag: string, id: number, jwt: string) {
     console.log("[POSTING-SERVICE] update Postings function")
     const headers = {
@@ -135,14 +166,18 @@ export class PostingService {
       );
   }
 
-  deletePosting(id: number, jwt: string) {
+  /** DELETE POSTING
+   * @param id ID of posing to delete
+   * @param jwt JWT of user who delete the posting
+   */
+  deletePosting(postId: number, jwt: string) {
     console.log("[POSTING-SERVICE] delete Postings function")
 
     const headers = {
       'Authorization': 'Bearer ' + jwt,
     };
 
-    return this.http.delete(this.urls.postings_URL + '/' + id,
+    return this.http.delete(this.urls.postings_URL + '/' + postId,
       {'headers': headers})
       .pipe(
         catchError((err) => {
@@ -153,14 +188,19 @@ export class PostingService {
       );
   }
 
-  deleteImage(id: number, jwt: string) {
-    console.log("[POSTING-SERVICE] delete image Postings function")
+  /**
+   * DELETE IMAGE
+   * @param imageId ID of image to delete
+   * @param jwt JWT of user who delete the posting
+   */
+  deleteImage(imageId: number, jwt: string) {
+    console.log("[POSTING-SERVICE] DELETE IMAGE")
 
     const headersImg = {
       'Authorization': 'Bearer ' + jwt,
     };
 
-    return this.http.delete(this.urls.upload_URL + '/files/' + id, {'headers': headersImg})
+    return this.http.delete(this.urls.upload_URL + '/files/' + imageId, {'headers': headersImg})
       .pipe(
         catchError((err) => {
             console.error(err);
@@ -169,5 +209,4 @@ export class PostingService {
         )
       );
   }
-
 }

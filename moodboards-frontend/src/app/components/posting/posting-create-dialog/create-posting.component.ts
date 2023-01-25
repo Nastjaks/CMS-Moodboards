@@ -1,5 +1,5 @@
 import {Component, Inject, Optional} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {PostingService} from "../../../services/posting.service";
 import {Auth_Model} from "../../../models/auth_Model";
 import {Router} from "@angular/router";
@@ -25,7 +25,8 @@ export class CreatePostingComponent {
   constructor(private postingService: PostingService,
               private alert: AlertComponent,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-              private router: Router) {
+              private router: Router,
+              public dialogPanel:  MatDialogRef<CreatePostingComponent>) {
     this.user = data.user;
   }
 
@@ -39,7 +40,10 @@ export class CreatePostingComponent {
         tag: this.tag,
         posting_creator: this.user.user.id
       }
-      this.postingService.createPosting(posting, this.formData, this.user.jwt)
+      this.postingService.createPosting(posting, this.formData, this.user.jwt).subscribe(()=>{
+        this.dialogPanel.close();
+        this.alert.openAlert("Added new posting");
+      })
     } else {
       this.alert.openAlert("Image and title are required");
     }

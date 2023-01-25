@@ -53,7 +53,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::moodboard.moodboard",
-      "inversedBy": "postings"
+      "mappedBy": "postings"
     }
   }
 }

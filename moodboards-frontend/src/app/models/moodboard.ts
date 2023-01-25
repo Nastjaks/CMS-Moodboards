@@ -12,11 +12,20 @@ export interface Attributes {
   publishedAt: Date;
   postings: Postings;
   moodboard_creator: MoodboardCreator;
+  co_creator: Co_Creators;
 }
 /*--------------*/
 
 export interface MoodboardCreator{
   data: Data2;
+}
+
+export interface Co_Creators{
+  data: Datum2[];
+}
+export interface Datum2 {
+  id: number;
+  attributes: Attributes4;
 }
 export interface Data2 {
   id: number;

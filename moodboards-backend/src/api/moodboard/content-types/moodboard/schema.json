@@ -4,7 +4,8 @@
   "info": {
     "singularName": "moodboard",
     "pluralName": "moodboards",
-    "displayName": "Moodboard"
+    "displayName": "Moodboard",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -34,6 +35,12 @@
     "private": {
       "type": "boolean",
       "default": false
+    },
+    "co_creators": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "moodboard"
     }
   }
 }

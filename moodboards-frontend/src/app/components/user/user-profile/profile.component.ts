@@ -24,8 +24,9 @@ import {Location} from "@angular/common";
 export class ProfileComponent implements OnInit {
 
   currentUser!: Auth_Model;
-  postings$!: Observable<Posting[]>;
-  moodboards$!: Observable<Moodboard[]>;
+  postings!: Posting[];
+  moodboards!: Moodboard[];
+  coMoodboards!: Moodboard[];
   user!: User;
 
   constructor(private fb: FormBuilder,
@@ -46,8 +47,9 @@ export class ProfileComponent implements OnInit {
     this.currentUser = this.storageService.getUser();
     this.userService.getUserInformation(this.currentUser.user.id).subscribe(user => this.user = user);
 
-    this.postings$ = this.userService.getAllUserPostings(this.currentUser.user.id);
-    this.moodboards$ = this.userService.getAllUserMoodboards(this.currentUser.user.id);
+    this.userService.getAllUserPostings(this.currentUser.user.id).subscribe(postings => this.postings = postings);
+    this.userService.getAllUserMoodboards(this.currentUser.user.id).subscribe(moodboards => this.moodboards = moodboards);
+    this.userService.getAllCoMoodboards(this.currentUser.user.id).subscribe(moodboards => this.coMoodboards = moodboards);
   }
 
   showPostDetails(poId: number) {
@@ -75,6 +77,8 @@ export class ProfileComponent implements OnInit {
       data: {
         user: this.currentUser,
       }
+    }).afterClosed().subscribe(()=>{
+      this.userService.getAllUserPostings(this.currentUser.user.id).subscribe(postings => this.postings = postings);
     })
   }
 
@@ -88,19 +92,42 @@ export class ProfileComponent implements OnInit {
 
   showPostings() {
     document.getElementById('moodboardContainer')!.classList.add("hideContainer");
-    document.getElementById('postingsContainer')!.classList.remove("hideContainer");
-    document.getElementById('postingNav')!.classList.add("active");
     document.getElementById('moodboardNav')!.classList.remove("active");
+
+    document.getElementById('coCreatorContainer')!.classList.add("hideContainer");
+    document.getElementById('coCreatorNav')!.classList.remove("active");
+
+    document.getElementById('postingNav')!.classList.add("active");
+    document.getElementById('postingsContainer')!.classList.remove("hideContainer");
   }
 
   showMoodboards() {
-    document.getElementById('moodboardContainer')!.classList.remove("hideContainer");
+
     document.getElementById('postingsContainer')!.classList.add("hideContainer");
-    document.getElementById('moodboardNav')!.classList.add("active");
     document.getElementById('postingNav')!.classList.remove("active");
+
+    document.getElementById('coCreatorContainer')!.classList.add("hideContainer");
+    document.getElementById('coCreatorNav')!.classList.remove("active");
+
+    document.getElementById('moodboardNav')!.classList.add("active");
+    document.getElementById('moodboardContainer')!.classList.remove("hideContainer");
+  }
+
+  showCoCreatorNav() {
+
+    document.getElementById('moodboardContainer')!.classList.add("hideContainer");
+    document.getElementById('moodboardNav')!.classList.remove("active");
+
+    document.getElementById('postingsContainer')!.classList.add("hideContainer");
+    document.getElementById('postingNav')!.classList.remove("active");
+
+    document.getElementById('coCreatorNav')!.classList.add("active");
+    document.getElementById('coCreatorContainer')!.classList.remove("hideContainer");
   }
 
   logout() {
     this.authService.logout();
   }
+
+
 }

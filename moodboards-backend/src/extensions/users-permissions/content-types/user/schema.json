@@ -77,6 +77,12 @@
       "relation": "oneToMany",
       "target": "api::moodboard.moodboard",
       "mappedBy": "moodboard_creator"
+    },
+    "moodboard": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::moodboard.moodboard",
+      "inversedBy": "co_creators"
     }
   }
 }
