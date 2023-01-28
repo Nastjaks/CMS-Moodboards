@@ -1,6 +1,9 @@
 <nav>
 
-  <a class="logo" routerLink="/">Moodboards<span class="dott">.</span></a>
+  <a class="logo" routerLink="/">
+    Moodboards<span class="dott">.</span>
+    <p class="userLogo" *ngIf="isLoggedIn"><span class="dott">hay</span> {{currentUser.user.username}}</p>
+  </a>
 
   <input type="checkbox" id="burgerMenu">
   <label for="burgerMenu">|||</label>

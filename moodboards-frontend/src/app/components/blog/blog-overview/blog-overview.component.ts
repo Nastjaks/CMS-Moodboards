@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
 import {Blogpost} from "../../../models/blogpost";
 import {BlogpostService} from "../../../services/blogpost.service";
 import {Router} from "@angular/router";
@@ -11,12 +10,14 @@ import {Router} from "@angular/router";
 })
 export class BlogOverviewComponent implements OnInit{
 
-  blogpost$!: Observable<Blogpost[]>;
+  blogpost$!: Blogpost[];
 
   constructor(private blogpostService: BlogpostService, private router: Router) {}
 
   ngOnInit(): void {
-    this.blogpost$ = this.blogpostService.getAllBlogposts();
+    this.blogpostService.getAllBlogposts().subscribe((res)=>{
+      this.blogpost$ = res;
+    });
   }
 
   showDetails(Id: number) {

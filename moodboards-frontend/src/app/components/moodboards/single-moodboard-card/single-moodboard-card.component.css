@@ -16,8 +16,19 @@
 
 .singleCardInfo{
   margin-left: 7px;
+  margin-right: 17px;
   margin-top: 7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
+.singleCardInfo svg{
+  width: 20px;
+  height: 20px;
+  color: gray;
+}
+
 
 .singleCardTag{
   font-size: 14px;
@@ -37,6 +48,10 @@ img {
   overflow: hidden;
 }
 
+.iconInfo{
+  display: flex !important;
+  gap: 15px;
+}
 /**-----------------------------------------------**/
 .oneImg img {
   width: 100%;

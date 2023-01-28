@@ -1,5 +1,4 @@
 footer{
-  background-color: #002541;
   background: linear-gradient(130deg, rgba(0,37,65,1) 30%, rgb(0, 50, 87) 60%);
   padding: 30px 100px;
 }
@@ -8,8 +7,4 @@ p {
   color: #fff;
   text-transform: uppercase;
   margin-right: 50px;
-}
-
-.footerContent{
-  display: flex;
 }

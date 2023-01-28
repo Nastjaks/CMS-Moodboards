@@ -10,12 +10,14 @@ import {MoodboardService} from "../../../services/moodboard.service";
 })
 export class MoodboardsOverviewComponent implements OnInit {
 
-  moodboard$!: Observable<Moodboard[]>;
+  moodboards!: Moodboard[];
 
   constructor(private moodboardService: MoodboardService) {  }
 
   ngOnInit(): void {
-    this.moodboard$ = this.moodboardService.getAllMoodboards();
+    this.moodboardService.getAllMoodboards().subscribe((res)=>{
+      this.moodboards = res;
+    });
   }
 
 }

@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
+      this.router.navigate(['/profile']).then(() =>  {
+
+      } );
     }
   }
 
@@ -39,8 +42,10 @@ export class LoginComponent implements OnInit {
           next: () => {
             this.isLoginFailed = false;
             this.isLoggedIn = true;
-            this.router.navigate(['/profile']).then(() =>
+            this.router.navigate(['/profile']).then(() => {
               window.location.reload()
+              }
+
             );
           },
           error: err => {

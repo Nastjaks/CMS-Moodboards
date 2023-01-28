@@ -26,13 +26,13 @@ export class CreatePostingComponent {
               private alert: AlertComponent,
               @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
               private router: Router,
-              public dialogPanel:  MatDialogRef<CreatePostingComponent>) {
+              public dialogPanel: MatDialogRef<CreatePostingComponent>) {
     this.user = data.user;
   }
 
   addPosting(): void {
 
-    if (this.title && this.imageFile){
+    if (this.title && this.imageFile) {
 
       const posting: {} = {
         title: this.title,
@@ -40,7 +40,7 @@ export class CreatePostingComponent {
         tag: this.tag,
         posting_creator: this.user.user.id
       }
-      this.postingService.createPosting(posting, this.formData, this.user.jwt).subscribe(()=>{
+      this.postingService.createPosting(posting, this.formData, this.user.jwt).subscribe(() => {
         this.dialogPanel.close();
         this.alert.openAlert("Added new posting");
       })
@@ -56,7 +56,7 @@ export class CreatePostingComponent {
     this.formData.append('files', this.imageFile, this.imageFile.name);
 
     const preview = document.getElementById('preview') as HTMLImageElement;
-    preview!.src = URL.createObjectURL( this.imageFile);
+    preview!.src = URL.createObjectURL(this.imageFile);
   }
 
   close() {

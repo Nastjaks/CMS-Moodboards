@@ -4,7 +4,6 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 20px 100px;
-  background-color: #002541;
   background: linear-gradient(130deg, rgba(0,37,65,1) 30%, rgb(0, 50, 87) 60%);
 }
 
@@ -73,6 +72,11 @@ label{
 }
 .dott{
   color: #ee6756;
+}
+
+.userLogo{
+  font-size: 14px;
+  margin-top: -15px
 }
 
 @media screen and (max-width: 1130px) {

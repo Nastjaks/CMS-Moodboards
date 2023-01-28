@@ -45,9 +45,10 @@ Es soll eine Pinterest ähnliche Plattform entstehen, auf der Nutzer Bilder (Pos
 > 
 > Ist der eingeloggte Nutzer der Ersteller des Moodboards, kann dieser das Moodboard auf der Detailseite bearbeiten, löschen und einzelne Postings vom Moodboard entfernen. 
 
-
 >### Moodboard - Co-Creator
 > Der Besitzer kann Co-Creator hinzufügen und entfernen.
+> 
+> Ist der Nutzer ein Co-Creator, erscheint im Profil ein weiterer Tab unterdem sie die Moodboards sehen können
 > 
 > Beim Hinzufügen wird geprüft, ob der Nutzer existiert oder bereits Co-Creator ist.
 >
@@ -55,13 +56,11 @@ Es soll eine Pinterest ähnliche Plattform entstehen, auf der Nutzer Bilder (Pos
 >
 > Zugeteilte Nutzer können das Moodboard als Co-Creator verlassen.
 
-
-
-
 >### Academy - Blog
 > Blogbeiträge für die Academy können nur über das CMS Backend in Strapi erstellt, bearbeitet und gelöscht werden.
 >
 > Auf der Academyseite sehen die Nutzer (auch nichteingeloggte) eine Übersicht aller Blogbeiträge. Über den Klick auf einen beliebigen Beitrag werden die Inhalte des Beitrags angezeigt.
+
 
 ## Toolstack
 - Angular
@@ -96,3 +95,4 @@ Ideen für Erweiterungen:
    -  Angular starten `start_angular`
    - <a href="http://localhost:4200/"> http://localhost:4200/ </a> zum öffnen (vorzugsweise mit Firefox)
    -  Neu registrieren oder Login mit -> Admin:`test_User_1` Passwort: `Test_1234`
+

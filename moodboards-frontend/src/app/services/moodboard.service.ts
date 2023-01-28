@@ -59,7 +59,7 @@ export class MoodboardService {
   }
 
   /**
-   * GET ALL CO-CREATORS OF A MOODBOARD TODO:WHY
+   * GET ALL CO-CREATORS OF A MOODBOARD TODO: add co creator to model to remove the get
    * @param moodboardId ID of the moodboard from which the co-creators are retrieved.
    */
   getAllCoCreators(moodboardId: number) {
@@ -95,9 +95,9 @@ export class MoodboardService {
         moodboard_creator: moodboard.moodboard_creator,
         private: moodboard.visibilityPrivate
       }
-    }, {'headers': headers}).subscribe(() => {
-        window.location.reload(); //TODO
-      }
+    }, {'headers': headers}).pipe(
+      map(() => {
+      })
     )
 
   }
@@ -226,42 +226,41 @@ export class MoodboardService {
 
   /**
    * ADD A CO-CREATOR TO A MOODBOARD
-   * @param coCreatorName name of the user to be add as co-creator to the moodboard
+   * @param coCreatorName name of the user to be added as co-creator to the moodboard
    * @param moodboardId ID of the moodboard to which the user should be added
    * @param jwt JWT of the user who add the co-creator
    */
   addCoCreator(coCreatorName: string, moodboardId: number, jwt: string) {
     console.log("[MOODBOARD-SERVICE] add Co-Creators Moodboards  " + moodboardId);
 
-    return this.userservice.getUserByName(coCreatorName).pipe( map ((resUserId) => {
+    return this.userservice.getUserByName(coCreatorName).pipe(map((resUserId) => {
 
-        if(resUserId == "User not found"){
-          return resUserId
-        }
-        else {
-          let coCreators: number[] = [];
+      if (resUserId == "User not found") {
+        return resUserId
+      } else {
+        let coCreators: number[] = [];
 
-          this.getAllCoCreators(moodboardId).subscribe(coCreator => {
+        this.getAllCoCreators(moodboardId).subscribe(coCreator => {
 
-            for (let i = 0; i < coCreator.length; i++) {
-              coCreators.push(coCreator[i].id)
-            }
+          for (let i = 0; i < coCreator.length; i++) {
+            coCreators.push(coCreator[i].id)
+          }
 
-            coCreators.push(resUserId)
+          coCreators.push(resUserId)
 
-            const headers = {
-              'content-type': 'application/json',
-              'Authorization': 'Bearer ' + jwt,
-            };
+          const headers = {
+            'content-type': 'application/json',
+            'Authorization': 'Bearer ' + jwt,
+          };
 
-            const body = JSON.stringify({
-              data: {co_creators: coCreators}
-            });
+          const body = JSON.stringify({
+            data: {co_creators: coCreators}
+          });
 
-            return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe(() => {
-              window.location.reload(); //TODO
-            })
+          return this.http.put<Moodboard>(this.urls.moodboard_URL + '/' + moodboardId, body, {'headers': headers}).subscribe(() => {
+            window.location.reload();
           })
+        })
       }
     }))
   }
@@ -281,7 +280,7 @@ export class MoodboardService {
     this.getAllCoCreators(moodboardId).subscribe(coCreator => {
 
       for (let i = 0; i < coCreator.length; i++) {
-        if(coCreatorId != coCreator[i].id){
+        if (coCreatorId != coCreator[i].id) {
           coCreators.push(coCreator[i].id)
         }
       }

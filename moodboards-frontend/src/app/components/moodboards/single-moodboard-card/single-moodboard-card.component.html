@@ -1,38 +1,62 @@
 <div class="moodboardCard" (click)="showMoodboardDetails()">
-<div>
-  <div class="ImgContainer">
-    <div>
-      <div class="oneImg" *ngIf="moodboard.attributes.postings.data.length == 1">
-        <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
-      </div>
-
-      <div class="twoImg" *ngIf="moodboard.attributes.postings.data.length == 2">
-        <img class="twoImg_one" alt="postingImg"
-             [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
-        <img class="twoImg_two" alt="postingImg"
-             [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
-      </div>
-
-      <div class="threeImg" *ngIf="moodboard.attributes.postings.data.length >= 3">
-
-        <div class="imageContainer">
-          <img class="threeImg_one" alt="postingImg"
-               [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+  <div>
+    <div class="ImgContainer">
+      <div>
+        <div class="oneImg" *ngIf="moodboard.attributes.postings.data.length == 1">
+          <img alt="postingImg" [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
         </div>
 
-        <div class="imageContainer secondCont">
-          <img class="threeImg_two" alt="postingImg"
+        <div class="twoImg" *ngIf="moodboard.attributes.postings.data.length == 2">
+          <img class="twoImg_one" alt="postingImg"
+               [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+          <img class="twoImg_two" alt="postingImg"
                [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
-          <img class="threeImg_three" alt="postingImg"
-               [src]="moodboard.attributes.postings.data[2].attributes.image.data.attributes.url">
+        </div>
+
+        <div class="threeImg" *ngIf="moodboard.attributes.postings.data.length >= 3">
+
+          <div class="imageContainer">
+            <img class="threeImg_one" alt="postingImg"
+                 [src]="moodboard.attributes.postings.data[0].attributes.image.data.attributes.url">
+          </div>
+
+          <div class="imageContainer secondCont">
+            <img class="threeImg_two" alt="postingImg"
+                 [src]="moodboard.attributes.postings.data[1].attributes.image.data.attributes.url">
+            <img class="threeImg_three" alt="postingImg"
+                 [src]="moodboard.attributes.postings.data[2].attributes.image.data.attributes.url">
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="singleCardInfo">
-      <p><b>{{moodboard.attributes.title}}</b></p>
-      <p class="singleCardTag">Contains {{moodboard.attributes.postings.data.length}} Postings</p>
+    <div class="singleCardInfo">
+      <div>
+        <p><b>{{moodboard.attributes.title}}</b></p>
+        <p class="singleCardTag">Contains {{moodboard.attributes.postings.data.length}} Postings</p>
+      </div>
+
+      <div class="iconInfo">
+        <div *ngIf="isLoggedIn && hasCoCreator && (isCoCreator || isOwner ) ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people" viewBox="0 0 16 16">
+            <path
+              d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+          </svg>
+        </div>
+
+        <div *ngIf="isLoggedIn && isOwner && isPrivate">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+               class="visible_Icon bi bi-eye-slash" viewBox="0 0 16 16">
+            <path
+              d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+            <path
+              d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+            <path
+              d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
   </div>
-</div>
 </div>

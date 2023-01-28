@@ -2,9 +2,11 @@
   margin-top: -40px;
   display: flex;
 }
+
 h1{
   margin: 20px;
 }
+
 .textContainer{
   width: 60%;
 }
@@ -13,12 +15,14 @@ h1{
   display: flex;
   margin: 20px;
 }
+
 .imgContainer{
   width: 40%;
   display: flex;
   justify-content: end;
   margin: 0 0 20px 50px;
 }
+
 .blogcontent img{
   display: flex;
   max-width: 100%;
@@ -27,6 +31,7 @@ h1{
   border: 1px solid #f6f6f6;
   border-radius: 30px;
 }
+
 .contentContainer {
   margin-left: 10%;
   margin-right: 10%;

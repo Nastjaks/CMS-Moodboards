@@ -25,6 +25,8 @@ export class PostingsOverviewComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.params.subscribe((params: any) => {
+
+
       if (params.poId != null) {
         this.showPostDetails(params.poId);
       }
@@ -39,6 +41,7 @@ export class PostingsOverviewComponent implements OnInit {
   showPostDetails(poId: number) {
 
     this.route.params.subscribe((params: any) => {
+
       if (params.category != null) {
         this.location.go('postings/' + params.category + '/posting/' + poId)
       } else {
@@ -50,13 +53,14 @@ export class PostingsOverviewComponent implements OnInit {
           postingID: poId
         }
       }).afterClosed().subscribe(() => {
+
         if (params.category != null) {
           this.location.go('postings/' + params.category)
         } else {
           this.location.go('postings/')
         }
       });
-    })
+    }).unsubscribe()
   }
 
 

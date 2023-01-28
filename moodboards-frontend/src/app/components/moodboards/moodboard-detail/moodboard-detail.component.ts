@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from "@angular/common";
 import {Observable} from "rxjs";
@@ -13,7 +13,7 @@ import {DeleteMoodboardDialogComponent} from "../moodboard-delete-dialog/delete-
 import {MoodboardEditDialogComponent} from "../moodboard-edit-dialog/moodboard-edit-dialog.component";
 import {PostingDetailComponent} from "../../posting/posting-detail-dialog/posting-detail.component";
 import {AlertComponent} from "../../general/alert/alert.component";
-import { faPersonThroughWindow, faUserMinus } from '@fortawesome/free-solid-svg-icons';
+import {faPersonThroughWindow, faUserMinus} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-moodboard-detail',
@@ -21,9 +21,10 @@ import { faPersonThroughWindow, faUserMinus } from '@fortawesome/free-solid-svg-
   styleUrls: ['./moodboard-detail.component.css'],
   providers: [AlertComponent],
 })
-export class MoodboardDetailComponent implements OnInit {
+export class MoodboardDetailComponent implements OnInit, AfterViewInit {
   faPersonThroughWindow = faPersonThroughWindow;
   faUserMinus = faUserMinus;
+
   userToAdd: string = "";
 
   currentUser!: Auth_Model;
@@ -44,7 +45,7 @@ export class MoodboardDetailComponent implements OnInit {
               private moodboardService: MoodboardService,
               public dialogPanel: MatDialog,
               private route: ActivatedRoute,
-              private alert: AlertComponent,) {
+              private alert: AlertComponent) {
 
   }
 
@@ -59,12 +60,13 @@ export class MoodboardDetailComponent implements OnInit {
           this.moodboard = moodboard
           this.moodboardCreatorId = this.moodboard.attributes.moodboard_creator.data.id;
           this.postingsInMoodboard$ = this.postingService.getPostingsInMoodboard(this.moodboard.id);
+
           this.moodboardService.getAllCoCreators(this.moodboard.id).subscribe(coCreator => {
             this.coCreators = coCreator
 
             if (coCreator.length > 0) {
               for (let i = 0; i < this.coCreators.length; i++) {
-                if (this.coCreators[i].id == this.currentUser.user.id){
+                if (this.coCreators[i].id == this.currentUser.user.id) {
                   this.isCoCreator = true;
                 }
               }
@@ -75,9 +77,8 @@ export class MoodboardDetailComponent implements OnInit {
             if (this.moodboardCreatorId == this.currentUser.user.id) {
               this.isOwner = true;
             }
-
-
           }
+
           if (params.id != null) {
             this.moodboard_Id = params.id;
           }
@@ -87,7 +88,22 @@ export class MoodboardDetailComponent implements OnInit {
         }
       );
     })
+
   }
+
+
+  ngAfterViewInit(): void {
+
+      setTimeout(() => {
+        if (this.isCoCreator){
+        let id = "co_" + this.currentUser.user.username;
+        document.getElementById(id)!.classList.add("userHigh");
+      }
+
+      }, 100);
+
+  }
+
 
   showPostDetails(poId: number) {
     this.location.go("/moodboard/" + this.moodboard_Id + '/posting/' + poId)
@@ -107,9 +123,9 @@ export class MoodboardDetailComponent implements OnInit {
   }
 
   removeImgFromMoodboard(imgId: number) {
-    this.moodboardService.removeImgFromMoodboard(imgId, this.moodboard.id, this.currentUser.jwt).subscribe(() =>{
+    this.moodboardService.removeImgFromMoodboard(imgId, this.moodboard.id, this.currentUser.jwt).subscribe(() => {
       this.postingsInMoodboard$ = this.postingService.getPostingsInMoodboard(this.moodboard.id)
-      this.alert.openAlert("Posting removed from Moodboard") //TODO: subscribe
+      this.alert.openAlert("Posting removed from Moodboard")
     })
   }
 
@@ -120,19 +136,21 @@ export class MoodboardDetailComponent implements OnInit {
   addCoCreator() {
 
     let userInArray: boolean = false;
-    if (this.userToAdd.trim().length >= 3){
-      if (this.userToAdd != this.currentUser.user.username){
+    if (this.userToAdd.trim().length >= 3) {
+      if (this.userToAdd != this.currentUser.user.username) {
 
         for (let i = 0; i < this.coCreators.length; i++) {
-          if (this.coCreators[i].attributes.username == this.userToAdd){
+          if (this.coCreators[i].attributes.username == this.userToAdd) {
             userInArray = true
-            this.alert.openAlert("User is already a co-creator")
+            this.alert.openAlert(this.userToAdd + " is already a co-creator")
           }
         }
-        if (!userInArray){
-          this.moodboardService.addCoCreator(this.userToAdd, this.moodboard.id, this.currentUser.jwt).subscribe( res => {
-            if (res == "User not found"){
+        if (!userInArray) {
+          this.moodboardService.addCoCreator(this.userToAdd, this.moodboard.id, this.currentUser.jwt).subscribe(res => {
+            if (res == "User not found") {
               this.alert.openAlert("User not found")
+            } else {
+              this.alert.openAlert(this.userToAdd + " is now Co-Creator of " + this.moodboard.attributes.title)
             }
           })
         }

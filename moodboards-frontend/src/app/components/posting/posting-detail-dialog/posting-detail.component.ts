@@ -48,7 +48,10 @@ export class PostingDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getPosting();
+  }
 
+  getPosting(){
     this.postingService.getOnePosting(this.postingID).subscribe(posting => {
       this.posting = posting
       this.currentUser = this.storageService.getUser();
@@ -67,9 +70,9 @@ export class PostingDetailComponent implements OnInit {
   addImageToMoodboard(moodboardId: number) {
     if (moodboardId) {
       this.moodboardService.addImgToMoodboard(this.posting.id, moodboardId, this.currentUser.jwt).subscribe(() => {
-        if (this.router.url.startsWith("/profile")) {
-          window.location.reload();
-        }
+        // if (this.router.url.startsWith("/profile")) {
+        //   window.location.reload();
+        // }
         this.alert.openAlert('Added ' + this.posting.attributes.title + ' to Moodboard')
       })
     } else {
@@ -107,7 +110,8 @@ export class PostingDetailComponent implements OnInit {
         .subscribe({
           next: () => {
             this.postCurrentlyEdit = false;
-            window.location.reload();
+            this.getPosting();
+            this.alert.openAlert("Saved changes");
           },
           error: err => {
             console.log(err.error.message);

@@ -81,7 +81,7 @@ export class UserService {
    */
   getAllCoMoodboards(userId: number) {
     console.log("[USER-SERVICE] get all Moodboards from user function");
-    return this.http.get<Moodboard[]>(this.urls.moodboard_URL + '?populate[postings][populate][0]=image&populate[co_creator][populate]&filters[co_creators][id]=' + userId + '&sort[0]=id%3Adesc')
+    return this.http.get<Moodboard[]>(this.urls.moodboard_URL + '?populate[postings][populate][0]=image&populate[moodboard_creator][populate]&populate[co_creator][populate]&filters[co_creators][id]=' + userId + '&sort[0]=id%3Adesc')
       .pipe(
         map((res: any) => {
           return res.data;

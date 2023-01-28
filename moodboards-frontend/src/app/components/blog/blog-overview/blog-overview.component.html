@@ -4,7 +4,7 @@
     <h1>ACADEMY</h1>
   </div>
   <div class="overviewContainer">
-    <div *ngFor="let blogpost of blogpost$ | async" class="giveWi">
+    <div *ngFor="let blogpost of blogpost$" class="giveWi">
       <div class="blogpost-container" (click)="showDetails(blogpost.id)">
 
         <div class="img-gradient">

@@ -4,45 +4,48 @@
 
     <div class="headerWithSidebar">
 
-    <!-- sidebar-->
-    <div class="sidebar" *ngIf="isLoggedIn && isOwner || isLoggedIn && isCoCreator">
-      <button class="sidebarBtn" (click)="openEditMoodboardDialog()" *ngIf="isLoggedIn && isOwner">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
-             viewBox="0 0 16 16">
-          <path
-            d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
-        </svg>
-        EDIT MOODBOARD
-      </button>
-      <button class="sidebarBtn" (click)="openDeleteDialog()" *ngIf="isLoggedIn && isOwner">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3"
-             viewBox="0 0 16 16">
-          <path
-            d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-        </svg>
-        DELETE MOODBOARD
-      </button>
+      <!-- sidebar-->
+      <div class="sidebar" *ngIf="isLoggedIn && isOwner || isLoggedIn && isCoCreator">
+        <button class="sidebarBtn" (click)="openEditMoodboardDialog()" *ngIf="isLoggedIn && isOwner">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
+               viewBox="0 0 16 16">
+            <path
+              d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+          </svg>
+          EDIT MOODBOARD
+        </button>
+        <button class="sidebarBtn" (click)="openDeleteDialog()" *ngIf="isLoggedIn && isOwner">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3"
+               viewBox="0 0 16 16">
+            <path
+              d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+          </svg>
+          DELETE MOODBOARD
+        </button>
 
-      <div  class="addCoCreator-cont" *ngIf=" isOwner">
+        <div class="addCoCreator-cont" *ngIf=" isOwner">
 
-        <div class="displayAsColumn">
-          <label>Add Co -Creator</label>
-          <div>
-            <input class="addCoCreator-inp" [(ngModel)]="this.userToAdd" type="text" name="username"/>
-            <button class="addCoCreator-btn" (click)="addCoCreator()">+</button>
+          <div class="displayAsColumn">
+            <label>Add Co -Creator</label>
+            <div>
+              <input class="addCoCreator-inp" [(ngModel)]="this.userToAdd" type="text" name="username"/>
+              <button class="addCoCreator-btn" (click)="addCoCreator()">+</button>
+
+            </div>
 
           </div>
 
         </div>
 
+        <div *ngIf="isLoggedIn && isCoCreator">
+          <p> You are a Co-Creator.</p>
+          <button class="sidebarBtn" (click)="removeCoCreator(this.currentUser.user.id)" >
+            <fa-icon [icon]="faPersonThroughWindow"></fa-icon>
+            LEAVE MOODBOARD
+          </button>
+        </div>
+
       </div>
-
-
-      <button class="sidebarBtn" (click)="removeCoCreator(this.currentUser.user.id)" *ngIf="isLoggedIn && isCoCreator">
-        <fa-icon [icon]="faPersonThroughWindow"></fa-icon>
-        LEAVE MOODBOARD
-      </button>
-    </div>
 
       <!--moodboard zeug-->
       <div class="center">
@@ -84,10 +87,10 @@
             @{{moodboard.attributes.moodboard_creator.data.attributes.username}}</p>
 
           <!--moodboard owner-->
-          <div class="coCreators" *ngIf="coCreators.length > 0 && isOwner">
+          <div class="coCreators" *ngIf="coCreators && coCreators.length > 0 && isOwner">
             <p>Co Creators:
               <span *ngFor="let coCreator of coCreators">
-                <span class="co-creator removeCreator" (click)="removeCoCreator(coCreator.id)" >
+                <span class="co-creator removeCreator" (click)="removeCoCreator(coCreator.id)">
                   {{coCreator.attributes.username}}
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                        class="bi bi-person-dash" viewBox="0 0 16 16">
@@ -100,10 +103,10 @@
           </div>
 
           <!--moodboard co creator-->
-          <div class="coCreators" *ngIf="coCreators.length > 0 && !isOwner">
+          <div class="coCreators" *ngIf="coCreators && coCreators.length > 0 && !isOwner" >
             <p>Co Creators:
               <span *ngFor="let coCreator of coCreators">
-                <span class="co-creator">
+                <span class="co-creator" id="co_{{coCreator.attributes.username}}">
                  @{{coCreator.attributes.username}}
                 </span>
               </span></p>
@@ -115,9 +118,8 @@
     </div>
 
 
-
     <div>
-      <p>Contains {{moodboard.attributes.postings.data.length}} postings</p>
+      <p class="amount">Contains {{moodboard.attributes.postings.data.length}} postings</p>
       <div class="overviewContainer-Postings">
         <div *ngFor="let post of postingsInMoodboard$ | async" class="single-postingCard">
 
@@ -153,3 +155,4 @@
   </div>
 
 </div>
+
