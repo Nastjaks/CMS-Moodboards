@@ -15,5 +15,4 @@ export class AlertComponent {
     this._snackBar.open(message, 'X',{duration: 5000});
   }
 
-
 }
