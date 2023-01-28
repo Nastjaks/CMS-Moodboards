@@ -25,3 +25,6 @@
 .hideContainer{
   display: none !important;
 }
+.noContent{
+  text-align: center;
+}

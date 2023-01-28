@@ -159,6 +159,15 @@ button:hover, .cBtn:hover {
 
 .mdc-button {
   border-radius: 30px !important;
+  color: #fff !important;
+  background-color: #cccccc !important;
+}
+
+.mdc-button:hover {
+  border-radius: 30px !important;
+  color: #fff !important;
+  background-color: #ee6756 !important;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px !important;
 }
 
 /*-----------------------Dialog------------------------*/
@@ -336,12 +345,13 @@ label {
 
 /*----------------------Alert-----------------------*/
 .mdc-snackbar__surface {
-  border-radius: 30px  !important;
-  background: linear-gradient(130deg, rgba(238,103,86,1) 30%, rgba(238,146,86,1) 60%);
+  border-radius: 30px !important;
+  background: linear-gradient(130deg, rgba(238, 103, 86, 1) 30%, rgba(238, 146, 86, 1) 60%);
   animation: gradient 3s ease infinite;
   background-size: 400% 400%;
   background-attachment: fixed;
 }
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -352,17 +362,19 @@ label {
   100% {
     background-position: 0% 50%;
   }
-  }
-
-.mdc-button__label {
-  color: #fff;
 }
+
+.mat-mdc-snack-bar-action.mdc-snackbar__action.mdc-button.mat-mdc-button.mat-unthemed.mat-mdc-button-base{
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
 .mat-mdc-snack-bar-label.mdc-snackbar__label {
   font-weight: 500 !important;
   font-size: 16px !important;
   letter-spacing: 1.2px !important;
-  color: #fff !important;
+  color: rgb(255, 255, 255) !important;
 }
+
 .mat-mdc-simple-snack-bar {
   padding: 7px;
 }

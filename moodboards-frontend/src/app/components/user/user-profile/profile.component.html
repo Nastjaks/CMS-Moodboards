@@ -66,29 +66,32 @@
     <div class="profileNavi">
       <h3 id="postingNav" (click)="showPostings();" class="active">YOUR POSTINGS</h3>
       <h3 id="moodboardNav" (click)="showMoodboards();">YOUR MOODBOARDS</h3>
-      <span id="coCreatorNav" style="margin-bottom: 7px"> <h3 (click)="showCoCreatorNav();"
-                                                              *ngIf="coMoodboards && coMoodboards.length > 0" style="margin-bottom: 0"> CO CREATOR</h3></span>
+      <span id="coCreatorNav" style="margin-bottom: 7px"> <h3 (click)="showCoCreatorNav();" *ngIf="coMoodboards && coMoodboards.length > 0" style="margin-bottom: 0"> CO CREATOR</h3></span>
     </div>
 
     <!--Users Postings-->
-    <div class="overviewContainer-Postings"  id="postingsContainer">
-      <p *ngIf="postings && postings.length == 0">You have not created any Postings</p>
-      <app-single-posting-card class="single-postingCard" (showDetailsEvent)="showPostDetails($event)"
-                               *ngFor="let post of postings" [posting]="post"></app-single-posting-card>
+    <div id="postingsContainer">
+    <p class="noContent" *ngIf="postings && postings.length == 0">You have not created any Postings</p>
+    <div class="overviewContainer-Postings" >
+      <app-single-posting-card class="single-postingCard" (showDetailsEvent)="showPostDetails($event)" *ngFor="let post of postings" [posting]="post"></app-single-posting-card>
     </div>
-
+  </div>
     <!--Users Moodboards-->
-    <div class="overviewContainer hideContainer" id="moodboardContainer">
-      <p *ngIf="moodboards && moodboards.length == 0">You have not created any Moodboards</p>
-      <app-single-moodboard-card *ngFor="let moodboard of moodboards" [moodboard]="moodboard"></app-single-moodboard-card>
-
+    <div class=" hideContainer" id="moodboardContainer">
+      <p class="noContent" *ngIf="moodboards && moodboards.length == 0">You have not created any Moodboards</p>
+      <div class="overviewContainer">
+        <app-single-moodboard-card *ngFor="let moodboard of moodboards" [moodboard]="moodboard"></app-single-moodboard-card>
+      </div>
     </div>
 
     <!--Users CoCreator-->
-    <div class="overviewContainer hideContainer" id="coCreatorContainer">
-      <p *ngIf="coMoodboards && coMoodboards.length == 0">You are not a co-creator on any mooodboard</p>
-      <app-single-moodboard-card *ngFor="let moodboard of coMoodboards" [moodboard]="moodboard"></app-single-moodboard-card>
+    <div class="hideContainer" id="coCreatorContainer">
+      <p class="noContent" *ngIf="coMoodboards && coMoodboards.length == 0">You are not a co-creator on any mooodboard</p>
+      <div class="overviewContainer">
+        <app-single-moodboard-card *ngFor="let moodboard of coMoodboards" [moodboard]="moodboard"></app-single-moodboard-card>
+      </div>
     </div>
+
   </div>
 
 </div>

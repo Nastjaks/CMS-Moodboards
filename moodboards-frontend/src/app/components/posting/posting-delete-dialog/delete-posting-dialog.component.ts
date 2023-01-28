@@ -18,7 +18,8 @@ export class DeletePostingDialogComponent {
   posting!: Posting;
 
   constructor(private userService: UserService, private postingService: PostingService,
-              @Optional() @Inject(MAT_DIALOG_DATA) public data: any, private router: Router,
+              @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+              private router: Router,
               private dialogPanel: MatDialog) {
     this.currentUser = this.data.user;
     this.posting = this.data.posting;
@@ -35,8 +36,9 @@ export class DeletePostingDialogComponent {
   close() {
     this.dialogPanel.open(PostingDetailComponent, {
       data: {
-        posting: this.posting
+        posting_Id: this.posting.id
       }
     });
   }
+
 }
